@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6272419462C6B49928FA858D /* Pods_SocketIO_Chat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91E1E9DA42774CBBFE6EA544 /* Pods_SocketIO_Chat.framework */; };
 		B83AEAB61F4FDF24003CDDD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83AEAB51F4FDF24003CDDD9 /* AppDelegate.swift */; };
 		B83AEAB81F4FDF24003CDDD9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83AEAB71F4FDF24003CDDD9 /* ViewController.swift */; };
 		B83AEABB1F4FDF24003CDDD9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B83AEAB91F4FDF24003CDDD9 /* Main.storyboard */; };
@@ -15,6 +16,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1BE08134BDDE1168D86016CA /* Pods-SocketIO Chat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocketIO Chat.release.xcconfig"; path = "Pods/Target Support Files/Pods-SocketIO Chat/Pods-SocketIO Chat.release.xcconfig"; sourceTree = "<group>"; };
+		36D45EA26BC25B0CE3CBBD04 /* Pods-SocketIO Chat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocketIO Chat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SocketIO Chat/Pods-SocketIO Chat.debug.xcconfig"; sourceTree = "<group>"; };
+		91E1E9DA42774CBBFE6EA544 /* Pods_SocketIO_Chat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SocketIO_Chat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B83AEAB21F4FDF24003CDDD9 /* SocketIO Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SocketIO Chat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B83AEAB51F4FDF24003CDDD9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B83AEAB71F4FDF24003CDDD9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -29,17 +33,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6272419462C6B49928FA858D /* Pods_SocketIO_Chat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		58F013C76CA956AD2A98AA9D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				36D45EA26BC25B0CE3CBBD04 /* Pods-SocketIO Chat.debug.xcconfig */,
+				1BE08134BDDE1168D86016CA /* Pods-SocketIO Chat.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		B83AEAA91F4FDF24003CDDD9 = {
 			isa = PBXGroup;
 			children = (
 				B83AEAB41F4FDF24003CDDD9 /* SocketIO Chat */,
 				B83AEAB31F4FDF24003CDDD9 /* Products */,
+				58F013C76CA956AD2A98AA9D /* Pods */,
+				D0EEC99381FC5CA829A5C41A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +80,14 @@
 			path = "SocketIO Chat";
 			sourceTree = "<group>";
 		};
+		D0EEC99381FC5CA829A5C41A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				91E1E9DA42774CBBFE6EA544 /* Pods_SocketIO_Chat.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B83AEAC41F4FDF24003CDDD9 /* Build configuration list for PBXNativeTarget "SocketIO Chat" */;
 			buildPhases = (
+				160E81596048A77F9068AC27 /* [CP] Check Pods Manifest.lock */,
 				B83AEAAE1F4FDF24003CDDD9 /* Sources */,
 				B83AEAAF1F4FDF24003CDDD9 /* Frameworks */,
 				B83AEAB01F4FDF24003CDDD9 /* Resources */,
+				C2227C4A21344E3AE6A83638 /* [CP] Embed Pods Frameworks */,
+				6B1389CDE569F88A38609577 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -129,6 +156,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		160E81596048A77F9068AC27 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6B1389CDE569F88A38609577 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SocketIO Chat/Pods-SocketIO Chat-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C2227C4A21344E3AE6A83638 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SocketIO Chat/Pods-SocketIO Chat-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B83AEAAE1F4FDF24003CDDD9 /* Sources */ = {
@@ -271,6 +346,7 @@
 		};
 		B83AEAC51F4FDF24003CDDD9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 36D45EA26BC25B0CE3CBBD04 /* Pods-SocketIO Chat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = BQ9WNW24Z8;
@@ -285,6 +361,7 @@
 		};
 		B83AEAC61F4FDF24003CDDD9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1BE08134BDDE1168D86016CA /* Pods-SocketIO Chat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = BQ9WNW24Z8;
