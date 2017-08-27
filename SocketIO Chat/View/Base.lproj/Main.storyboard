@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--ChatVC-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ChatVC" customModule="SocketIO_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fDE-Uk-h36" customClass="MenuView" customModule="SocketIO_Chat" customModuleProvider="target">
+                                <rect key="frame" x="-280" y="0.0" width="280" height="667"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="280" id="Vb3-Dm-8E0"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KIF-EF-c3D" customClass="GradientView" customModule="SocketIO_Chat" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="77"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VkI-2d-p7L">
+                                        <rect key="frame" x="12" y="47" width="24" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="DDj-Ik-Ne9"/>
+                                            <constraint firstAttribute="height" constant="18" id="wSZ-R0-bAs"/>
+                                        </constraints>
+                                        <state key="normal" image="smackBurger"/>
+                                        <connections>
+                                            <action selector="menuPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xkE-Lx-RiH"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chat APP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLb-rl-z5L">
+                                        <rect key="frame" x="132" y="32.5" width="111.5" height="32.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32.5" id="f1N-re-GJX"/>
+                                            <constraint firstAttribute="width" constant="111.5" id="v4e-ot-U8N"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="77" id="HZL-k0-42B"/>
+                                    <constraint firstItem="bLb-rl-z5L" firstAttribute="leading" secondItem="VkI-2d-p7L" secondAttribute="trailing" constant="96" id="OFz-b7-f5r"/>
+                                    <constraint firstAttribute="bottom" secondItem="VkI-2d-p7L" secondAttribute="bottom" constant="12" id="YAY-48-UbU"/>
+                                    <constraint firstItem="VkI-2d-p7L" firstAttribute="leading" secondItem="KIF-EF-c3D" secondAttribute="leading" constant="12" id="pGg-DX-PIv"/>
+                                    <constraint firstItem="bLb-rl-z5L" firstAttribute="centerY" secondItem="KIF-EF-c3D" secondAttribute="centerY" constant="10" id="vmN-ea-frA"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VbG-J3-rkb">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="VbG-J3-rkb" secondAttribute="bottom" id="1Lg-LG-fno"/>
+                            <constraint firstItem="KIF-EF-c3D" firstAttribute="leading" secondItem="fDE-Uk-h36" secondAttribute="trailing" id="6iv-ut-a7e"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="VbG-J3-rkb" secondAttribute="trailing" id="E1a-u4-y4E"/>
+                            <constraint firstAttribute="bottom" secondItem="fDE-Uk-h36" secondAttribute="bottom" id="Eu3-JX-2BR"/>
+                            <constraint firstItem="KIF-EF-c3D" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="FQY-8G-Gl5"/>
+                            <constraint firstItem="VbG-J3-rkb" firstAttribute="leading" secondItem="fDE-Uk-h36" secondAttribute="trailing" id="PsZ-Yi-fzm"/>
+                            <constraint firstItem="fDE-Uk-h36" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="-280" id="Vcx-E2-pfZ"/>
+                            <constraint firstItem="fDE-Uk-h36" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="blL-6E-QrQ"/>
+                            <constraint firstItem="KIF-EF-c3D" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="hvG-WZ-7UU"/>
+                            <constraint firstItem="VbG-J3-rkb" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="z4w-Zl-TWK"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="VbG-J3-rkb"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="ChatVC" id="ir7-Hh-n3T"/>
+                    <connections>
+                        <outlet property="blurButton" destination="VbG-J3-rkb" id="RA4-pZ-8NV"/>
+                        <outlet property="menuView" destination="fDE-Uk-h36" id="jEY-LB-oZD"/>
+                        <outlet property="menuViewLeadingConstraint" destination="Vcx-E2-pfZ" id="wcq-Hy-8de"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="479.19999999999999" y="169.56521739130437"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="smackBurger" width="40" height="40"/>
+    </resources>
+</document>
