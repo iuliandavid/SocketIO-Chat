@@ -15,6 +15,8 @@
 		B83AEABB1F4FDF24003CDDD9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B83AEAB91F4FDF24003CDDD9 /* Main.storyboard */; };
 		B83AEABD1F4FDF24003CDDD9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B83AEABC1F4FDF24003CDDD9 /* Assets.xcassets */; };
 		B83AEAC01F4FDF24003CDDD9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B83AEABE1F4FDF24003CDDD9 /* LaunchScreen.storyboard */; };
+		B8624B881F5317CA00E8B5D6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8624B871F5317CA00E8B5D6 /* Constants.swift */; };
+		B8624B8A1F531D3800E8B5D6 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8624B891F531D3800E8B5D6 /* LoginVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		B83AEABC1F4FDF24003CDDD9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B83AEABF1F4FDF24003CDDD9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B83AEAC11F4FDF24003CDDD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B8624B871F5317CA00E8B5D6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B8624B891F531D3800E8B5D6 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginVC.swift; path = "SocketIO Chat/Controller/LoginVC.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +78,7 @@
 		B83AEAB41F4FDF24003CDDD9 /* SocketIO Chat */ = {
 			isa = PBXGroup;
 			children = (
+				B8624B861F5317B700E8B5D6 /* Utilities */,
 				B83AEAC91F51579A003CDDD9 /* View */,
 				B83AEAC81F515794003CDDD9 /* ViewModel */,
 				B83AEAC71F515788003CDDD9 /* Controller */,
@@ -87,6 +92,7 @@
 		B83AEAC71F515788003CDDD9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B8624B891F531D3800E8B5D6 /* LoginVC.swift */,
 				B813674B1F5158EF00289A5B /* ChatVC.swift */,
 			);
 			path = Controller;
@@ -116,6 +122,14 @@
 				B83AEAC11F4FDF24003CDDD9 /* Info.plist */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B8624B861F5317B700E8B5D6 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B8624B871F5317CA00E8B5D6 /* Constants.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		D0EEC99381FC5CA829A5C41A /* Frameworks */ = {
@@ -248,7 +262,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8624B881F5317CA00E8B5D6 /* Constants.swift in Sources */,
 				B813674C1F5158EF00289A5B /* ChatVC.swift in Sources */,
+				B8624B8A1F531D3800E8B5D6 /* LoginVC.swift in Sources */,
 				B81367501F51598200289A5B /* MenuView.swift in Sources */,
 				B83AEAB61F4FDF24003CDDD9 /* AppDelegate.swift in Sources */,
 				B833231B1F51E8690079E26B /* GradientView.swift in Sources */,

@@ -10,12 +10,15 @@ import UIKit
 
 class ChatVC: UIViewController {
 
+    //MARK: - Outlets
     @IBOutlet weak var menuViewLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var menuView: MenuView!
     
     //a button to appear when the menu is shown
     @IBOutlet weak var blurButton: UIButton!
     var menuShown = false
+    
+    @IBOutlet weak var loginBtn: UIButton!
     
     
     
@@ -25,10 +28,15 @@ class ChatVC: UIViewController {
         menuView.customViewWidth = menuViewLeadingConstraint
         blurButton.addTarget(self, action: #selector(handleShowMenu), for: .touchUpInside)
     }
+    
+    //MARK: - Actions
     @IBAction func menuPressed(_ sender: Any) {
         handleShowMenu()
     }
     
+    @IBAction func btnLoginPressed(_ sender: Any) {
+        performSegue(withIdentifier: Constants.Segues.TO_LOGIN, sender: nil)
+    }
     
 }
 
