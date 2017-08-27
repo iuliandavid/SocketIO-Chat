@@ -20,6 +20,9 @@ class ChatVC: UIViewController {
     
     @IBOutlet weak var loginBtn: UIButton!
     
+    //unwind segue
+    @IBAction func prepareForUnwind(segue: UIStoryboardSegue){}
+    
     
     
     override func viewDidLoad() {

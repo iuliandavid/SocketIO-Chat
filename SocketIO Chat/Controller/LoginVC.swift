@@ -18,6 +18,9 @@ class LoginVC: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func createAccount(_ sender: Any) {
+        performSegue(withIdentifier: Constants.Segues.TO_CREATE_ACCOUNT, sender: nil)
+    }
     /*
     // MARK: - Navigation
 

@@ -17,6 +17,7 @@
 		B83AEAC01F4FDF24003CDDD9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B83AEABE1F4FDF24003CDDD9 /* LaunchScreen.storyboard */; };
 		B8624B881F5317CA00E8B5D6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8624B871F5317CA00E8B5D6 /* Constants.swift */; };
 		B8624B8A1F531D3800E8B5D6 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8624B891F531D3800E8B5D6 /* LoginVC.swift */; };
+		B8624B8C1F531EC900E8B5D6 /* CreateAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8624B8B1F531EC900E8B5D6 /* CreateAccountVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		B83AEAC11F4FDF24003CDDD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8624B871F5317CA00E8B5D6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B8624B891F531D3800E8B5D6 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginVC.swift; path = "SocketIO Chat/Controller/LoginVC.swift"; sourceTree = SOURCE_ROOT; };
+		B8624B8B1F531EC900E8B5D6 /* CreateAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateAccountVC.swift; path = "SocketIO Chat/Controller/CreateAccountVC.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 			children = (
 				B8624B891F531D3800E8B5D6 /* LoginVC.swift */,
 				B813674B1F5158EF00289A5B /* ChatVC.swift */,
+				B8624B8B1F531EC900E8B5D6 /* CreateAccountVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				B813674C1F5158EF00289A5B /* ChatVC.swift in Sources */,
 				B8624B8A1F531D3800E8B5D6 /* LoginVC.swift in Sources */,
 				B81367501F51598200289A5B /* MenuView.swift in Sources */,
+				B8624B8C1F531EC900E8B5D6 /* CreateAccountVC.swift in Sources */,
 				B83AEAB61F4FDF24003CDDD9 /* AppDelegate.swift in Sources */,
 				B833231B1F51E8690079E26B /* GradientView.swift in Sources */,
 			);
