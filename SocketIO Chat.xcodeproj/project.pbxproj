@@ -18,6 +18,8 @@
 		B8624B881F5317CA00E8B5D6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8624B871F5317CA00E8B5D6 /* Constants.swift */; };
 		B8624B8A1F531D3800E8B5D6 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8624B891F531D3800E8B5D6 /* LoginVC.swift */; };
 		B8624B8C1F531EC900E8B5D6 /* CreateAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8624B8B1F531EC900E8B5D6 /* CreateAccountVC.swift */; };
+		B8624B8F1F53CCA700E8B5D6 /* AuthServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8624B8E1F53CCA700E8B5D6 /* AuthServiceClient.swift */; };
+		B8624B911F53CEE400E8B5D6 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8624B901F53CEE400E8B5D6 /* AuthService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		B8624B871F5317CA00E8B5D6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B8624B891F531D3800E8B5D6 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginVC.swift; path = "SocketIO Chat/Controller/LoginVC.swift"; sourceTree = SOURCE_ROOT; };
 		B8624B8B1F531EC900E8B5D6 /* CreateAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateAccountVC.swift; path = "SocketIO Chat/Controller/CreateAccountVC.swift"; sourceTree = SOURCE_ROOT; };
+		B8624B8E1F53CCA700E8B5D6 /* AuthServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceClient.swift; sourceTree = "<group>"; };
+		B8624B901F53CEE400E8B5D6 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +84,7 @@
 		B83AEAB41F4FDF24003CDDD9 /* SocketIO Chat */ = {
 			isa = PBXGroup;
 			children = (
+				B8624B8D1F53CC9300E8B5D6 /* Services */,
 				B8624B861F5317B700E8B5D6 /* Utilities */,
 				B83AEAC91F51579A003CDDD9 /* View */,
 				B83AEAC81F515794003CDDD9 /* ViewModel */,
@@ -133,6 +138,15 @@
 				B8624B871F5317CA00E8B5D6 /* Constants.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		B8624B8D1F53CC9300E8B5D6 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B8624B8E1F53CCA700E8B5D6 /* AuthServiceClient.swift */,
+				B8624B901F53CEE400E8B5D6 /* AuthService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		D0EEC99381FC5CA829A5C41A /* Frameworks */ = {
@@ -268,10 +282,12 @@
 				B8624B881F5317CA00E8B5D6 /* Constants.swift in Sources */,
 				B813674C1F5158EF00289A5B /* ChatVC.swift in Sources */,
 				B8624B8A1F531D3800E8B5D6 /* LoginVC.swift in Sources */,
+				B8624B911F53CEE400E8B5D6 /* AuthService.swift in Sources */,
 				B81367501F51598200289A5B /* MenuView.swift in Sources */,
 				B8624B8C1F531EC900E8B5D6 /* CreateAccountVC.swift in Sources */,
 				B83AEAB61F4FDF24003CDDD9 /* AppDelegate.swift in Sources */,
 				B833231B1F51E8690079E26B /* GradientView.swift in Sources */,
+				B8624B8F1F53CCA700E8B5D6 /* AuthServiceClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
