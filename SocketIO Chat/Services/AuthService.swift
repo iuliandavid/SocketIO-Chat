@@ -21,13 +21,25 @@ protocol AuthService {
     
     func registerUser(email: String, password: String, completion: @escaping CompletionHandler)
     
+    func loginUser(email: String, password: String, completion: @escaping CompletionHandler)
+    
     func getRegistrationUrl(_ baseURL: String?) -> URL
+    
+    func getLoginUrl(_ baseURL: String?) -> URL
 }
 
 extension AuthService {
     func getRegistrationUrl(_ baseURL: String? = Constants.UrlConstants.BASE_URL) -> URL {
         guard let baseURL = baseURL, let url = URL(string: "\(baseURL)\(Constants.UrlConstants.REGISTER_ENDPOINT)") else {
            fatalError()
+        }
+        
+        return url
+    }
+    
+    func getLoginUrl(_ baseURL: String? = Constants.UrlConstants.BASE_URL) -> URL {
+        guard let baseURL = baseURL, let url = URL(string: "\(baseURL)\(Constants.UrlConstants.LOGIN_ENDPOINT)") else {
+            fatalError()
         }
         
         return url

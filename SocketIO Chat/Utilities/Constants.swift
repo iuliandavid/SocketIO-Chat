@@ -26,5 +26,9 @@ struct Constants {
     struct UrlConstants {
         static let BASE_URL = "https://socketiochatchat.herokuapp.com/v1/"
         static let REGISTER_ENDPOINT = "account/register"
+        static let LOGIN_ENDPOINT = "account/login"
+        static let header = [
+            "Content-Type": "application/json; charset=utf-8"
+        ]
     }
 }
