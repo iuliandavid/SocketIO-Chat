@@ -53,7 +53,7 @@ final class AuthServiceClient: AuthService {
         let lowerCaseEmail = email.lowercased()
         
         let header = [
-            "Content-Type": "application/json; charset:utf-8"
+            "Content-Type": "application/json; charset=utf-8"
         ]
         
         let body: [String: Any] = [
@@ -62,11 +62,25 @@ final class AuthServiceClient: AuthService {
         ]
         
         Alamofire.request(getRegistrationUrl(), method: .post, parameters: body, encoding: JSONEncoding.default, headers: header).responseString { (response) in
-            if response.error == nil {
-                completion(true)
+            print(response.result.value as Any)
+            
+            guard let resultCode = response.response?.statusCode else {
+                completion(false, "cannot connect to server")
+                return
+            }
+            if response.error == nil && (200..<300).contains(resultCode)   {
+                
+                print(response.result.value as Any)
+                completion(true, nil)
             } else {
-                completion(false)
-                debugPrint(response.error.debugDescription as? Any)
+                //The server may return Success even if there is an error
+                guard let result = response.result.value else {
+                    completion(false, "unhandled error")
+                    return
+                }
+                
+                completion(false, result)
+                debugPrint(response.error.debugDescription)
             }
         }
     }

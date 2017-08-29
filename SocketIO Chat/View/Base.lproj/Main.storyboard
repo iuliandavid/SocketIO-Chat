@@ -386,10 +386,16 @@
                                     <constraint firstAttribute="height" constant="130" id="cqX-It-oO6"/>
                                 </constraints>
                                 <state key="normal" title="Choose avatar"/>
+                                <connections>
+                                    <action selector="pickAvatarPressed:" destination="vam-1c-tpe" eventType="touchUpInside" id="AVm-6Z-5c9"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NXO-Jj-GiJ">
                                 <rect key="frame" x="93.5" y="453" width="188" height="30"/>
                                 <state key="normal" title="Generate background color"/>
+                                <connections>
+                                    <action selector="pickBGColorPressed:" destination="vam-1c-tpe" eventType="touchUpInside" id="SHI-J9-VnU"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rzO-Yv-qRy">
                                 <rect key="frame" x="62.5" y="597" width="250" height="50"/>
@@ -402,6 +408,9 @@
                                 <state key="normal" title="Create Account">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="createAccountPressed:" destination="vam-1c-tpe" eventType="touchUpInside" id="AiZ-va-6Vf"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -425,6 +434,10 @@
                         <viewLayoutGuide key="safeArea" id="hdG-WP-G4J"/>
                     </view>
                     <connections>
+                        <outlet property="emailTxtField" destination="ori-Ob-J2Q" id="mtP-Bq-GOr"/>
+                        <outlet property="passwordTxtField" destination="Q6V-d1-aNQ" id="XVb-Kk-Oov"/>
+                        <outlet property="userImg" destination="lPX-Hg-aFH" id="dnH-pM-bS1"/>
+                        <outlet property="usernameTxtField" destination="ori-Ob-J2Q" id="o76-1D-S9B"/>
                         <segue destination="Uw4-sf-qQF" kind="unwind" identifier="unwindToChannel" unwindAction="prepareForUnwindWithSegue:" id="Ode-do-gSb"/>
                     </connections>
                 </viewController>

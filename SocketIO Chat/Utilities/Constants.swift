@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias CompletionHandler = (_ Success: Bool) -> ()
+typealias CompletionHandler = (_ Success: Bool, _ errorMessage: String?) -> ()
 
 struct Constants {
     struct Segues {
