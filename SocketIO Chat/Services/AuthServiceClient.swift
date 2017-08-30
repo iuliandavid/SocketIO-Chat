@@ -125,4 +125,46 @@ final class AuthServiceClient: AuthService {
             }
         }
     }
+    
+    func createUser(name: String, email: String, avatarColor: String, avatarName: String, completion: @escaping CompletionHandler)  {
+        
+        guard let authToken = AuthServiceClient.sharedInstance.authToken else {
+            return
+        }
+        
+        let body = UserDataService.instance.buildUserData(email: email, name: name, avatarName: avatarName, color: avatarColor)
+
+        
+        var header:[String: String] = [
+            "Authorization": "Bearer \(authToken)"
+        ]
+        Constants.UrlConstants.header.forEach { header[$0] = $1 }
+        Alamofire.request(getAddUserUrl(), method: .post, parameters: body, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+            
+            guard let resultCode = response.response?.statusCode else {
+                completion(false, "cannot connect to server")
+                return
+            }
+            
+            if response.result.error == nil && (200..<300).contains(resultCode)   {
+                
+                //SwiftyJSON
+                guard let data = response.data else {
+                    return
+                }
+                let json = JSON(data: data)
+                UserDataService.instance.setUserData(json: json)
+                
+                completion(true, nil)
+            } else {
+                //The server may return Success even if there is an error
+                guard let result = response.result.value else {
+                    completion(false, "unhandled error")
+                    return
+                }
+                debugPrint(result)
+                completion(false, "cannot login")
+            }
+        }
+    }
 }

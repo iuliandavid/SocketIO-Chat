@@ -18,6 +18,11 @@ class CreateAccountVC: UIViewController {
     //objects
     private let authService:AuthService = AuthServiceClient.sharedInstance
     
+    //variables
+    var avatarName = "profileDefault"
+    var avatarColor = "[0.5, 0.5, 0.5, 1]"
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,25 +34,37 @@ class CreateAccountVC: UIViewController {
     
     
     @IBAction func createAccountPressed(_ sender: Any) {
-        guard let email = emailTxtField.text, !email.isEmpty, let pass = passwordTxtField.text, !pass.isEmpty else {
+        guard let email = emailTxtField.text, !email.isEmpty,
+            let pass = passwordTxtField.text, !pass.isEmpty,
+            let name = usernameTxtField.text, !name.isEmpty
+            else {
             return
             
         }
         
-        authService.registerUser(email: email, password: pass) { [unowned self] (success, error) in
+        authService.registerUser(email: email, password: pass) { [weak self] (success, error) in
             if success {
-                self.authService.loginUser(email: email, password: pass, completion: { [unowned self] (success, error) in
+                self?.authService.loginUser(email: email, password: pass, completion: { [weak self]  (success, error) in
                     if success {
-                        print("Token: \(self.authService.authToken as Any)")
-//                        self.performSegue(withIdentifier: Constants.Segues.UNWIND, sender: nil)
+                        print("Token: \(self?.authService.authToken as Any)")
+                        guard let strongSelf = self else { return }
+                        strongSelf.authService.createUser(name: name, email: email, avatarColor: strongSelf.avatarColor, avatarName: strongSelf.avatarName, completion: { [weak self]  (success, errorMessage) in
+                            if success {
+                                self?.performSegue(withIdentifier: Constants.Segues.UNWIND, sender: nil)
+                            } else {
+                                let errMessage = errorMessage!
+                                self?.showErrorMessage(errMessage)
+                            }
+                        })
+//
                     } else {
                         let errMessage = error!
-                        self.showErrorMessage(errMessage)
+                        self?.showErrorMessage(errMessage)
                     }
                 })
             } else {
                 let errMessage = error!
-                self.showErrorMessage(errMessage)
+                self?.showErrorMessage(errMessage)
             }
         }
     }
