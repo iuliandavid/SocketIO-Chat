@@ -447,7 +447,7 @@
                         <outlet property="emailTxtField" destination="ori-Ob-J2Q" id="mtP-Bq-GOr"/>
                         <outlet property="passwordTxtField" destination="Q6V-d1-aNQ" id="XVb-Kk-Oov"/>
                         <outlet property="userImg" destination="lPX-Hg-aFH" id="dnH-pM-bS1"/>
-                        <outlet property="usernameTxtField" destination="ori-Ob-J2Q" id="o76-1D-S9B"/>
+                        <outlet property="usernameTxtField" destination="rha-bc-uU3" id="LJW-By-z3J"/>
                         <segue destination="Uw4-sf-qQF" kind="unwind" identifier="unwindToChannel" unwindAction="prepareForUnwindWithSegue:" id="Ode-do-gSb"/>
                     </connections>
                 </viewController>

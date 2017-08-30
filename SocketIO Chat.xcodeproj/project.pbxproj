@@ -11,6 +11,7 @@
 		B813674C1F5158EF00289A5B /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B813674B1F5158EF00289A5B /* ChatVC.swift */; };
 		B81367501F51598200289A5B /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B813674F1F51598200289A5B /* MenuView.swift */; };
 		B823495E1F551D1D0038C32D /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823495D1F551D1D0038C32D /* RoundedButton.swift */; };
+		B82349601F552AE90038C32D /* UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823495F1F552AE90038C32D /* UserDataService.swift */; };
 		B833231B1F51E8690079E26B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B833231A1F51E8690079E26B /* GradientView.swift */; };
 		B83AEAB61F4FDF24003CDDD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83AEAB51F4FDF24003CDDD9 /* AppDelegate.swift */; };
 		B83AEABB1F4FDF24003CDDD9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B83AEAB91F4FDF24003CDDD9 /* Main.storyboard */; };
@@ -30,6 +31,7 @@
 		B813674B1F5158EF00289A5B /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		B813674F1F51598200289A5B /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		B823495D1F551D1D0038C32D /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		B823495F1F552AE90038C32D /* UserDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataService.swift; sourceTree = "<group>"; };
 		B833231A1F51E8690079E26B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		B83AEAB21F4FDF24003CDDD9 /* SocketIO Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SocketIO Chat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B83AEAB51F4FDF24003CDDD9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			children = (
 				B8624B8E1F53CCA700E8B5D6 /* AuthServiceClient.swift */,
 				B8624B901F53CEE400E8B5D6 /* AuthService.swift */,
+				B823495F1F552AE90038C32D /* UserDataService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				B8624B881F5317CA00E8B5D6 /* Constants.swift in Sources */,
 				B823495E1F551D1D0038C32D /* RoundedButton.swift in Sources */,
 				B813674C1F5158EF00289A5B /* ChatVC.swift in Sources */,
+				B82349601F552AE90038C32D /* UserDataService.swift in Sources */,
 				B8624B8A1F531D3800E8B5D6 /* LoginVC.swift in Sources */,
 				B8624B911F53CEE400E8B5D6 /* AuthService.swift in Sources */,
 				B81367501F51598200289A5B /* MenuView.swift in Sources */,
