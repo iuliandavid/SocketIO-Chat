@@ -28,6 +28,16 @@ class CreateAccountVC: UIViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        guard !UserDataService.instance.avatarName.isEmpty else {
+            return
+        }
+        avatarName = UserDataService.instance.avatarName
+        userImg.image = UIImage(named: avatarName)
+    }
+    
     @IBAction func closeBtnPressed(_ sender: Any) {
         performSegue(withIdentifier: Constants.Segues.UNWIND, sender: nil)
     }

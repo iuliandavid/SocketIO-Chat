@@ -39,7 +39,11 @@ class AvatarPickerVC: UIViewController {
 }
 
 extension AvatarPickerVC: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //save avatar name to UserDefaults
+        UserDataService.instance.setAvatarName(avatarName: viewModel.avatars[indexPath.item])
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 extension AvatarPickerVC: UICollectionViewDataSource {
@@ -62,6 +66,22 @@ extension AvatarPickerVC: UICollectionViewDataSource {
         
     }
 }
+
 extension AvatarPickerVC: UICollectionViewDelegateFlowLayout {
-    
+    //number of cells based on device screen size
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        var numOfColumns: CGFloat = 3
+        
+        if UIScreen.main.bounds.width > 320 {
+            numOfColumns = 4
+        }
+        
+        let spaceBetweenCells: CGFloat = 10
+        let padding: CGFloat = 40
+        
+        let cellDimension = ((collectionView.bounds.width - padding) - (numOfColumns - 1) * spaceBetweenCells) / numOfColumns
+        
+        return CGSize(width: cellDimension, height: cellDimension)
+    }
 }
