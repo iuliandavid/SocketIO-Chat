@@ -7,10 +7,17 @@
 //
 
 import Foundation
+import UIKit
 
 typealias CompletionHandler = (_ Success: Bool, _ errorMessage: String?) -> ()
 
 struct Constants {
+    //Colors
+    static let textPlaceholderColor = #colorLiteral(red: 0.2588235294, green: 0.3294117647, blue: 0.7254901961, alpha: 0.5)
+    
+    //Notifications
+    static let NOTIF_DATA_DID_CHANGE = Notification.Name("notifDataChanged")
+    
     struct Segues {
         static let TO_LOGIN = "toLogin"
         static let TO_CREATE_ACCOUNT = "toCreateAccount"

@@ -43,7 +43,7 @@
                                         <rect key="frame" x="230" y="94" width="22" height="22"/>
                                         <state key="normal" image="addChannelButton"/>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menuProfileIcon" translatesAutoresizingMaskIntoConstraints="NO" id="iNU-yJ-hQV">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menuProfileIcon" translatesAutoresizingMaskIntoConstraints="NO" id="iNU-yJ-hQV" customClass="CircleImage" customModule="SocketIO_Chat" customModuleProvider="target">
                                         <rect key="frame" x="8" y="564" width="75" height="75"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="75" id="9id-9M-hXe"/>
@@ -378,7 +378,7 @@
                                     <action selector="closeBtnPressed:" destination="Plf-7E-o3s" eventType="touchUpInside" id="H2N-EI-grU"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profileDefault" translatesAutoresizingMaskIntoConstraints="NO" id="lPX-Hg-aFH">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profileDefault" translatesAutoresizingMaskIntoConstraints="NO" id="lPX-Hg-aFH" customClass="CircleImage" customModule="SocketIO_Chat" customModuleProvider="target">
                                 <rect key="frame" x="137.5" y="319" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="MXH-od-cWA"/>
@@ -422,30 +422,48 @@
                                     <action selector="createAccountPressed:" destination="vam-1c-tpe" eventType="touchUpInside" id="AiZ-va-6Vf"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xjf-0W-eaj">
+                                <rect key="frame" x="8" y="0.0" width="359" height="667"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.2388806939" green="0.7293094993" blue="0.97495538000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="hcr-3S-ydU">
+                                <rect key="frame" x="169" y="215" width="37" height="37"/>
+                                <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="YK9-I4-o6b" firstAttribute="width" secondItem="lPX-Hg-aFH" secondAttribute="width" id="1kG-on-4Du"/>
+                            <constraint firstItem="hcr-3S-ydU" firstAttribute="centerX" secondItem="5jM-KN-udT" secondAttribute="centerX" id="2AW-19-LrJ"/>
                             <constraint firstItem="Jan-Wp-sd1" firstAttribute="top" secondItem="oh2-8e-w24" secondAttribute="bottom" constant="40" id="3dd-d0-SLP"/>
                             <constraint firstItem="NXO-Jj-GiJ" firstAttribute="centerX" secondItem="5jM-KN-udT" secondAttribute="centerX" id="4si-cO-iVR"/>
                             <constraint firstItem="hdG-WP-G4J" firstAttribute="bottom" secondItem="rzO-Yv-qRy" secondAttribute="bottom" constant="20" id="7da-0Z-wJC"/>
                             <constraint firstItem="YK9-I4-o6b" firstAttribute="top" secondItem="lPX-Hg-aFH" secondAttribute="top" id="D6B-ke-CNc"/>
                             <constraint firstItem="lPX-Hg-aFH" firstAttribute="top" secondItem="Jan-Wp-sd1" secondAttribute="bottom" constant="40" id="E3n-RF-lLc"/>
+                            <constraint firstItem="xjf-0W-eaj" firstAttribute="top" secondItem="5jM-KN-udT" secondAttribute="top" id="Foa-Lv-bWj"/>
+                            <constraint firstItem="xjf-0W-eaj" firstAttribute="leading" secondItem="hdG-WP-G4J" secondAttribute="leading" constant="8" id="KBt-UT-Oks"/>
                             <constraint firstItem="oh2-8e-w24" firstAttribute="centerX" secondItem="5jM-KN-udT" secondAttribute="centerX" id="M2q-Rf-Zee"/>
                             <constraint firstItem="rzO-Yv-qRy" firstAttribute="centerX" secondItem="5jM-KN-udT" secondAttribute="centerX" id="NoW-H1-pJh"/>
                             <constraint firstItem="Jan-Wp-sd1" firstAttribute="centerX" secondItem="5jM-KN-udT" secondAttribute="centerX" id="QS3-5u-kkt"/>
+                            <constraint firstItem="xjf-0W-eaj" firstAttribute="bottom" secondItem="hdG-WP-G4J" secondAttribute="bottom" id="gY0-hb-ehh"/>
                             <constraint firstItem="NXO-Jj-GiJ" firstAttribute="top" secondItem="YK9-I4-o6b" secondAttribute="bottom" constant="4" id="hEQ-1c-1ws"/>
                             <constraint firstItem="lPX-Hg-aFH" firstAttribute="centerX" secondItem="5jM-KN-udT" secondAttribute="centerX" id="kej-cb-Jed"/>
                             <constraint firstItem="oh2-8e-w24" firstAttribute="top" secondItem="hdG-WP-G4J" secondAttribute="top" constant="60" id="lgC-0i-Xrb"/>
                             <constraint firstItem="cQU-3Z-PRv" firstAttribute="trailing" secondItem="hdG-WP-G4J" secondAttribute="trailing" constant="-8" id="mgv-kM-b42"/>
+                            <constraint firstItem="hdG-WP-G4J" firstAttribute="trailing" secondItem="xjf-0W-eaj" secondAttribute="trailing" constant="8" id="t6d-kE-vHu"/>
+                            <constraint firstItem="hcr-3S-ydU" firstAttribute="centerY" secondItem="5jM-KN-udT" secondAttribute="centerY" constant="-100" id="tqW-9o-wdM"/>
                             <constraint firstItem="YK9-I4-o6b" firstAttribute="centerX" secondItem="5jM-KN-udT" secondAttribute="centerX" id="wvF-Pw-G5s"/>
                             <constraint firstItem="cQU-3Z-PRv" firstAttribute="top" secondItem="hdG-WP-G4J" secondAttribute="top" constant="8" id="yXg-Il-kvj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hdG-WP-G4J"/>
                     </view>
                     <connections>
+                        <outlet property="blurButton" destination="xjf-0W-eaj" id="d1v-Ib-yar"/>
                         <outlet property="emailTxtField" destination="ori-Ob-J2Q" id="mtP-Bq-GOr"/>
                         <outlet property="passwordTxtField" destination="Q6V-d1-aNQ" id="XVb-Kk-Oov"/>
+                        <outlet property="spinner" destination="hcr-3S-ydU" id="6hf-C1-d8b"/>
                         <outlet property="userImg" destination="lPX-Hg-aFH" id="dnH-pM-bS1"/>
                         <outlet property="usernameTxtField" destination="rha-bc-uU3" id="LJW-By-z3J"/>
                         <segue destination="Uw4-sf-qQF" kind="unwind" identifier="unwindToChannel" unwindAction="prepareForUnwindWithSegue:" id="Ode-do-gSb"/>
@@ -455,7 +473,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="56x-IB-LQv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Uw4-sf-qQF" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2014" y="170"/>
+            <point key="canvasLocation" x="2013.5999999999999" y="169.56521739130437"/>
         </scene>
         <!--Avatar PickerVC-->
         <scene sceneID="xi8-kS-efw">

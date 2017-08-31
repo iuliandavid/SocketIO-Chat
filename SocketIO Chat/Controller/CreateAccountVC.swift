@@ -15,27 +15,26 @@ class CreateAccountVC: UIViewController {
     @IBOutlet weak var passwordTxtField: UITextField!
     @IBOutlet weak var userImg: UIImageView!
     
+    @IBOutlet weak var blurButton: UIButton!
+    @IBOutlet weak var spinner : UIActivityIndicatorView!
     //objects
-    private let authService:AuthService = AuthServiceClient.sharedInstance
-    
-    //variables
-    var avatarName = "profileDefault"
-    var avatarColor = "[0.5, 0.5, 0.5, 1]"
-    
+    private let viewModel = CreateAccountViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        usernameTxtField.delegate = self
+        emailTxtField.delegate = self
+        passwordTxtField.delegate = self
         
+        setupView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        guard !UserDataService.instance.avatarName.isEmpty else {
-            return
-        }
-        avatarName = UserDataService.instance.avatarName
-        userImg.image = UIImage(named: avatarName)
+        userImg.image = UIImage(named: viewModel.avatarName)
+        userImg.backgroundColor = viewModel.getBackgroundColor()
+        
     }
     
     @IBAction func closeBtnPressed(_ sender: Any) {
@@ -44,45 +43,35 @@ class CreateAccountVC: UIViewController {
     
     
     @IBAction func createAccountPressed(_ sender: Any) {
-        guard let email = emailTxtField.text, !email.isEmpty,
-            let pass = passwordTxtField.text, !pass.isEmpty,
-            let name = usernameTxtField.text, !name.isEmpty
-            else {
-            return
-            
+        UIView.animate(withDuration: 0.3) {[weak self] in
+            self?.blurButton.alpha = 0.1
+            self?.spinner.startAnimating()
         }
         
-        authService.registerUser(email: email, password: pass) { [weak self] (success, error) in
+        viewModel.registerUser { [weak self] (success, error) in
+            UIView.animate(withDuration: 0.3, animations: {
+                [weak self] in
+                self?.blurButton.alpha = 0.0
+                self?.spinner.stopAnimating()
+            })
             if success {
-                self?.authService.loginUser(email: email, password: pass, completion: { [weak self]  (success, error) in
-                    if success {
-                        print("Token: \(self?.authService.authToken as Any)")
-                        guard let strongSelf = self else { return }
-                        strongSelf.authService.createUser(name: name, email: email, avatarColor: strongSelf.avatarColor, avatarName: strongSelf.avatarName, completion: { [weak self]  (success, errorMessage) in
-                            if success {
-                                self?.performSegue(withIdentifier: Constants.Segues.UNWIND, sender: nil)
-                            } else {
-                                let errMessage = errorMessage!
-                                self?.showErrorMessage(errMessage)
-                            }
-                        })
-//
-                    } else {
-                        let errMessage = error!
-                        self?.showErrorMessage(errMessage)
-                    }
-                })
+                self?.performSegue(withIdentifier: Constants.Segues.UNWIND, sender: nil)
             } else {
                 let errMessage = error!
                 self?.showErrorMessage(errMessage)
             }
         }
     }
+    
     @IBAction func pickAvatarPressed(_ sender: Any) {
         performSegue(withIdentifier: Constants.Segues.TO_AVATAR_PICKER, sender: nil)
     }
     
     @IBAction func pickBGColorPressed(_ sender: Any) {
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.userImg.backgroundColor = self?.viewModel.generateRandomColor()
+        }
+        
     }
     
     
@@ -91,5 +80,53 @@ class CreateAccountVC: UIViewController {
         let action = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
+    }
+}
+
+extension CreateAccountVC: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let newString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) else {
+            return true
+        }
+        if textField == usernameTxtField {
+            viewModel.updateUser(newValue: newString)
+        } else if textField == passwordTxtField {
+            viewModel.updatePassword(newValue: newString)
+        } else if textField == emailTxtField {
+            viewModel.updateEmail(newValue: newString)
+        }
+        
+        return true
+    }
+}
+
+//UI finest
+extension CreateAccountVC {
+    func setupView() {
+        usernameTxtField.attributedText = "username".getCustomAttributedText()
+        passwordTxtField.attributedText = "password".getCustomAttributedText()
+        emailTxtField.attributedText = getAttributtedText(text: "email")
+        
+        let tap = UIGestureRecognizer(target: self, action: #selector(forceHideKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc private func forceHideKeyboard() {
+        view.endEditing(true)
+    }
+    
+    // first case
+    private func getAttributtedText(text: String, foregroundColor: UIColor? = Constants.textPlaceholderColor) -> NSAttributedString {
+        let attrs = [NSAttributedStringKey.foregroundColor: foregroundColor as Any] as [NSAttributedStringKey : Any]
+        return NSAttributedString(string: text, attributes: attrs)
+    }
+}
+
+//MARK - String extension for returning custom color NSAttributedString
+extension String {
+    func getCustomAttributedText(foregroundColor: UIColor? = Constants.textPlaceholderColor) -> NSAttributedString {
+        let attrs = [NSAttributedStringKey.foregroundColor: foregroundColor as Any] as [NSAttributedStringKey : Any]
+        
+        return NSAttributedString(string: self, attributes: attrs)
     }
 }
