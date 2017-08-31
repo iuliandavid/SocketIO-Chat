@@ -15,6 +15,7 @@ struct Constants {
         static let TO_LOGIN = "toLogin"
         static let TO_CREATE_ACCOUNT = "toCreateAccount"
         static let UNWIND = "unwindToChannel"
+        static let TO_AVATAR_PICKER = "toAvatarPicker"
     }
     
     struct Authentication {
@@ -32,5 +33,9 @@ struct Constants {
         static let REGISTER_ENDPOINT = "account/register"
         static let LOGIN_ENDPOINT = "account/login"
         static let USER_ADD_ENDPOINT = "user/add"
+    }
+    
+    struct CellIdentifiers {
+        static let AVATAR_CELL_IDENTIFIER = "avatarCell"
     }
 }
