@@ -112,7 +112,7 @@ final class AuthServiceClient: AuthService {
                 let json = JSON(data: data)
                 self.userEmail = json["user"].stringValue
                 self.authToken = json["token"].stringValue
-                
+                self.isLoggedIn = true
                 completion(true, nil)
             } else {
                 //The server may return Success even if there is an error
