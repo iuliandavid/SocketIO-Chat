@@ -39,4 +39,8 @@ class ChannelViewModel {
         }
         bgColor = UserDataService.instance.returnUIColor(components: UserDataService.instance.avatarColor)
     }
+    
+    func isLoggedIn() -> Bool {
+        return authService.isLoggedIn
+    }
 }

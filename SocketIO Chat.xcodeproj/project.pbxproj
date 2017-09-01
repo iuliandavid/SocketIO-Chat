@@ -15,6 +15,8 @@
 		B82349621F567DF30038C32D /* AvatarPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82349611F567DF30038C32D /* AvatarPickerVC.swift */; };
 		B82349641F57C3E80038C32D /* AvatarsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82349631F57C3E80038C32D /* AvatarsViewModel.swift */; };
 		B833231B1F51E8690079E26B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B833231A1F51E8690079E26B /* GradientView.swift */; };
+		B8354BCC1F5986C600948ADD /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8354BCA1F5986C600948ADD /* ProfileVC.swift */; };
+		B8354BCD1F5986C600948ADD /* ProfileVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8354BCB1F5986C600948ADD /* ProfileVC.xib */; };
 		B83AEAB61F4FDF24003CDDD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83AEAB51F4FDF24003CDDD9 /* AppDelegate.swift */; };
 		B83AEABB1F4FDF24003CDDD9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B83AEAB91F4FDF24003CDDD9 /* Main.storyboard */; };
 		B83AEABD1F4FDF24003CDDD9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B83AEABC1F4FDF24003CDDD9 /* Assets.xcassets */; };
@@ -41,6 +43,8 @@
 		B82349611F567DF30038C32D /* AvatarPickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarPickerVC.swift; sourceTree = "<group>"; };
 		B82349631F57C3E80038C32D /* AvatarsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarsViewModel.swift; sourceTree = "<group>"; };
 		B833231A1F51E8690079E26B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		B8354BCA1F5986C600948ADD /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		B8354BCB1F5986C600948ADD /* ProfileVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileVC.xib; sourceTree = "<group>"; };
 		B83AEAB21F4FDF24003CDDD9 /* SocketIO Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SocketIO Chat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B83AEAB51F4FDF24003CDDD9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B83AEABA1F4FDF24003CDDD9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -77,6 +81,14 @@
 				1BE08134BDDE1168D86016CA /* Pods-SocketIO Chat.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		B8354BCE1F5986F700948ADD /* XIBs */ = {
+			isa = PBXGroup;
+			children = (
+				B8354BCB1F5986C600948ADD /* ProfileVC.xib */,
+			);
+			path = XIBs;
 			sourceTree = "<group>";
 		};
 		B83AEAA91F4FDF24003CDDD9 = {
@@ -119,6 +131,7 @@
 				B813674B1F5158EF00289A5B /* ChatVC.swift */,
 				B8624B8B1F531EC900E8B5D6 /* CreateAccountVC.swift */,
 				B82349611F567DF30038C32D /* AvatarPickerVC.swift */,
+				B8354BCA1F5986C600948ADD /* ProfileVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -136,6 +149,7 @@
 		B83AEAC91F51579A003CDDD9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B8354BCE1F5986F700948ADD /* XIBs */,
 				B83AEAB91F4FDF24003CDDD9 /* Main.storyboard */,
 				B83AEABE1F4FDF24003CDDD9 /* LaunchScreen.storyboard */,
 				B813674F1F51598200289A5B /* MenuView.swift */,
@@ -242,6 +256,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8354BCD1F5986C600948ADD /* ProfileVC.xib in Resources */,
 				B83AEAC01F4FDF24003CDDD9 /* LaunchScreen.storyboard in Resources */,
 				B83AEABD1F4FDF24003CDDD9 /* Assets.xcassets in Resources */,
 				B83AEABB1F4FDF24003CDDD9 /* Main.storyboard in Resources */,
@@ -315,6 +330,7 @@
 				B8624B8A1F531D3800E8B5D6 /* LoginVC.swift in Sources */,
 				B8624B911F53CEE400E8B5D6 /* AuthService.swift in Sources */,
 				B81367501F51598200289A5B /* MenuView.swift in Sources */,
+				B8354BCC1F5986C600948ADD /* ProfileVC.swift in Sources */,
 				B8624B8C1F531EC900E8B5D6 /* CreateAccountVC.swift in Sources */,
 				B83AEAB61F4FDF24003CDDD9 /* AppDelegate.swift in Sources */,
 				B833231B1F51E8690079E26B /* GradientView.swift in Sources */,

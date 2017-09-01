@@ -39,7 +39,14 @@ class MenuView: GradientView {
     }
     
     @IBAction func loginPressed(_ sender: Any) {
-        chatVC?.performSegue(withIdentifier: Constants.Segues.TO_LOGIN, sender: nil)
+        if channelViewModel.isLoggedIn() {
+            // Show Profile Page
+            let profile = ProfileVC()
+            profile.modalPresentationStyle = .custom
+            chatVC?.present(profile, animated: true, completion: nil)
+        } else {
+            chatVC?.performSegue(withIdentifier: Constants.Segues.TO_LOGIN, sender: nil)
+        }
        
     }
     
