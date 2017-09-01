@@ -102,16 +102,22 @@ extension CreateAccountVC: UITextFieldDelegate {
         textField.endEditing(true)
         return true
     }
-}
-
-//UI finest
-extension CreateAccountVC {
+    
     func setupView() {
         usernameTxtField.attributedPlaceholder = "username".getCustomAttributedText()
         passwordTxtField.attributedPlaceholder = "password".getCustomAttributedText()
         emailTxtField.attributedPlaceholder = getAttributtedText(text: "email")
-        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        view.addGestureRecognizer(tap)
     }
+    
+    @objc func handleTap() {
+        view.endEditing(true)
+    }
+}
+
+//UI finest
+extension CreateAccountVC {
     
     // first case
     private func getAttributtedText(text: String, foregroundColor: UIColor? = Constants.textPlaceholderColor) -> NSAttributedString {
