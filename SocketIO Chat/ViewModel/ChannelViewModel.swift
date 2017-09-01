@@ -8,6 +8,7 @@
 //
 
 import Foundation
+import UIKit
 
 class ChannelViewModel {
     
@@ -16,6 +17,8 @@ class ChannelViewModel {
     public private(set) var loginTitle:String = ""
     
     public private(set) var imageName = Constants.DEFAULT_PROFILE_IMAGE
+    
+    public private(set) var bgColor:UIColor?
     
     init(authService: AuthService? = AuthServiceClient.sharedInstance ) {
         guard authService != nil else {
@@ -29,9 +32,11 @@ class ChannelViewModel {
         if authService.isLoggedIn {
             loginTitle = UserDataService.instance.name
             imageName = UserDataService.instance.avatarName
+            
         } else {
             loginTitle = "Login"
             imageName = Constants.DEFAULT_PROFILE_IMAGE
         }
+        bgColor = UserDataService.instance.returnUIColor(components: UserDataService.instance.avatarColor)
     }
 }

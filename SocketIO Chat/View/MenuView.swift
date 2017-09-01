@@ -17,7 +17,7 @@ class MenuView: GradientView {
     //objects
     var startPosition: CGPoint?
     var originalWidth: CGFloat = 0
-    var customViewWidth: NSLayoutConstraint!
+    var customViewWidth: NSLayoutConstraint! 
 
     private var channelViewModel = ChannelViewModel()
     
@@ -26,6 +26,7 @@ class MenuView: GradientView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         NotificationCenter.default.addObserver(self, selector: #selector(userDataChanged), name: Constants.NOTIF_DATA_DID_CHANGE, object: nil)
+        
     }
     
     deinit {
@@ -56,5 +57,6 @@ class MenuView: GradientView {
         channelViewModel.userDataChanged()
         loginBtn.setTitle(channelViewModel.loginTitle, for: .normal)
         profileImage.image = UIImage(named: channelViewModel.imageName)
+        profileImage.backgroundColor = channelViewModel.bgColor
     }
 }
