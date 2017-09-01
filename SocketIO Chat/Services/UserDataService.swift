@@ -79,9 +79,9 @@ class UserDataService {
         
         let defaultColor = UIColor.lightGray
         guard let rUnwrapped = r, let gUnwrapped = g,
-        let bUnwrapped = b, let aUnwrapped = a
-        else {
-            return defaultColor
+            let bUnwrapped = b, let aUnwrapped = a
+            else {
+                return defaultColor
         }
         
         let rFloat: CGFloat = CGFloat(rUnwrapped.doubleValue)
@@ -101,5 +101,17 @@ class UserDataService {
         AuthServiceClient.sharedInstance.isLoggedIn = false
         AuthServiceClient.sharedInstance.userEmail = ""
         AuthServiceClient.sharedInstance.authToken = ""
+    }
+    
+    func getUserInfo(completion: @escaping UserProfileInfoHandler) {
+        // if data is not yet available
+        if name == "" {
+            AuthServiceClient.sharedInstance.findUserByEmail(completion: { [weak self] (success, error) in
+                guard let strongSelf = self else { fatalError()}
+                completion(strongSelf.name, strongSelf.avatarName, strongSelf.returnUIColor(components: strongSelf.avatarColor))
+            })
+        } else {
+            completion(strongSelf.name, strongSelf.avatarName, strongSelf.returnUIColor(components: strongSelf.avatarColor))
+        }
     }
 }

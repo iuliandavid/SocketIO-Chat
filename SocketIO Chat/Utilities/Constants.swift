@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 typealias CompletionHandler = (_ Success: Bool, _ errorMessage: String?) -> ()
+typealias UserProfileInfoHandler = (_ loginTitle: String, _ imageName: String, _ bgColor: UIColor?) -> ()
 
 struct Constants {
     //Colors

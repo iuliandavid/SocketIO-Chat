@@ -11,20 +11,22 @@ import UIKit
 @IBDesignable
 class RoundedButton: UIButton {
 
-    @IBInspectable var cornerRadius: CGFloat = 0.0 {
+    @IBInspectable var cornerRadius: CGFloat = 3.0 {
         didSet {
-          setupView()
+            self.layer.cornerRadius = cornerRadius
         }
     }
-
     
-    override func draw(_ rect: CGRect) {
-        setupView()
+    override func awakeFromNib() {
+        self.setupView()
     }
     
+    override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        self.setupView()
+    }
     
-    private func setupView() {
-        layer.cornerRadius = cornerRadius
-        clipsToBounds = true
+    func setupView() {
+        self.layer.cornerRadius = cornerRadius
     }
 }

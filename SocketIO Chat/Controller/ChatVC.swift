@@ -29,6 +29,13 @@ class ChatVC: UIViewController {
         menuView.chatVC = self
         menuView.customViewWidth = menuViewLeadingConstraint
         blurButton.addTarget(self, action: #selector(handleShowMenu), for: .touchUpInside)
+        if AuthServiceClient.sharedInstance.isLoggedIn {
+            AuthServiceClient.sharedInstance.findUserByEmail(completion: { (success, err) in
+                if success {
+                    NotificationCenter.default.post(name: Constants.NOTIF_DATA_DID_CHANGE, object: nil)
+                }
+            })
+        }
     }
     
     //MARK: - Actions
@@ -63,6 +70,7 @@ extension ChatVC {
             menuViewLeadingConstraint.constant = 0
             menuView.layer.shadowOpacity = 1
             menuView.layer.shadowOpacity = 10
+            menuView.userDataChanged()
         }
         animateLayout()
     }

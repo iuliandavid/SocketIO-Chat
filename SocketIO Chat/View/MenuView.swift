@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MenuView: GradientView {
+class MenuView: UIView {
 
     //Outlets
     @IBOutlet weak var loginBtn: UIButton!
@@ -26,10 +26,7 @@ class MenuView: GradientView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         NotificationCenter.default.addObserver(self, selector: #selector(userDataChanged), name: Constants.NOTIF_DATA_DID_CHANGE, object: nil)
-        
     }
-    
-    
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -65,9 +62,12 @@ class MenuView: GradientView {
     }
     
     @objc func userDataChanged() {
-        channelViewModel.userDataChanged()
-        loginBtn.setTitle(channelViewModel.loginTitle, for: .normal)
-        profileImage.image = UIImage(named: channelViewModel.imageName)
-        profileImage.backgroundColor = channelViewModel.bgColor
+        //wait for the data to be obtained
+        channelViewModel.userDataChanged {[weak self] (loginTitle, imageName, bgColor) in
+            self?.loginBtn.setTitle(loginTitle, for: .normal)
+            self?.profileImage.image = UIImage(named: imageName)
+            self?.profileImage.backgroundColor = bgColor
+        }
+        
     }
 }

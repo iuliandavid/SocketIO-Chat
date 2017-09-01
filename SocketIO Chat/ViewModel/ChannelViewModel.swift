@@ -28,16 +28,23 @@ class ChannelViewModel {
         self.authService = authService!
     }
     
-    func userDataChanged() {
+    func userDataChanged(completion: @escaping UserProfileInfoHandler) {
         if authService.isLoggedIn {
-            loginTitle = UserDataService.instance.name
-            imageName = UserDataService.instance.avatarName
-            
+            UserDataService.instance.getUserInfo(completion: {[weak self] (name, avatarName, bgColor) in
+                guard let strongSelf = self else { fatalError() }
+                strongSelf.loginTitle = UserDataService.instance.name
+                strongSelf.imageName = UserDataService.instance.avatarName
+                strongSelf.bgColor = UserDataService.instance.returnUIColor(components: UserDataService.instance.avatarColor)
+                
+                completion(strongSelf.loginTitle, strongSelf.imageName, strongSelf.bgColor)
+            })
         } else {
             loginTitle = "Login"
             imageName = Constants.DEFAULT_PROFILE_IMAGE
+            bgColor = UserDataService.instance.returnUIColor(components: UserDataService.instance.avatarColor)
+            completion(loginTitle, imageName, bgColor)
         }
-        bgColor = UserDataService.instance.returnUIColor(components: UserDataService.instance.avatarColor)
+        
     }
     
     func isLoggedIn() -> Bool {
