@@ -36,6 +36,10 @@ class AvatarPickerVC: UIViewController {
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    deinit {
+        print("No Avatar Controller View")
+    }
 }
 
 extension AvatarPickerVC: UICollectionViewDelegate {

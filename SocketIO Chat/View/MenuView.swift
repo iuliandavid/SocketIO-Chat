@@ -10,15 +10,36 @@ import UIKit
 
 class MenuView: GradientView {
 
+    //Outlets
+    @IBOutlet weak var loginBtn: UIButton!
+    @IBOutlet weak var profileImage: UIImageView!
+    
+    //objects
     var startPosition: CGPoint?
     var originalWidth: CGFloat = 0
     var customViewWidth: NSLayoutConstraint!
 
+    private var channelViewModel = ChannelViewModel()
     
+    var chatVC: ChatVC?
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        NotificationCenter.default.addObserver(self, selector: #selector(userDataChanged), name: Constants.NOTIF_DATA_DID_CHANGE, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
         startPosition = touch?.location(in: self)
         originalWidth = customViewWidth.constant
+    }
+    
+    @IBAction func loginPressed(_ sender: Any) {
+        chatVC?.performSegue(withIdentifier: Constants.Segues.TO_LOGIN, sender: nil)
+       
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -30,5 +51,10 @@ class MenuView: GradientView {
             self.layoutSubviews()
         }
     }
-
+    
+    @objc func userDataChanged() {
+        channelViewModel.userDataChanged()
+        loginBtn.setTitle(channelViewModel.loginTitle, for: .normal)
+        profileImage.image = UIImage(named: channelViewModel.imageName)
+    }
 }

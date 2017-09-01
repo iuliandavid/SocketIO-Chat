@@ -18,8 +18,6 @@ class ChatVC: UIViewController {
     @IBOutlet weak var blurButton: UIButton!
     var menuShown = false
     
-    @IBOutlet weak var loginBtn: UIButton!
-    
     //unwind segue
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue){}
     
@@ -27,7 +25,8 @@ class ChatVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        menuView.chatVC = self
         menuView.customViewWidth = menuViewLeadingConstraint
         blurButton.addTarget(self, action: #selector(handleShowMenu), for: .touchUpInside)
     }
@@ -37,10 +36,19 @@ class ChatVC: UIViewController {
         handleShowMenu()
     }
     
-    @IBAction func btnLoginPressed(_ sender: Any) {
-        performSegue(withIdentifier: Constants.Segues.TO_LOGIN, sender: nil)
+    
+    @objc func userDataDidChange(_ notification: Notification) {
+        menuView.userDataChanged()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    deinit {
+        print("Deinit ChatVC")
+        NotificationCenter.default.removeObserver(self)
+    }
 }
 
 //MARK: - Slide Menu related methods
@@ -60,8 +68,8 @@ extension ChatVC {
     }
     
     fileprivate func animateLayout() {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.view.layoutIfNeeded()
+        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+            self?.view.layoutIfNeeded()
         })
         menuShown = !menuShown
     }

@@ -15,8 +15,8 @@ class CreateAccountVC: UIViewController {
     @IBOutlet weak var passwordTxtField: UITextField!
     @IBOutlet weak var userImg: UIImageView!
     
-    @IBOutlet weak var blurButton: UIButton!
     @IBOutlet weak var spinner : UIActivityIndicatorView!
+    @IBOutlet weak var blurButton: UIButton!
     //objects
     private let viewModel = CreateAccountViewModel()
     
@@ -43,15 +43,14 @@ class CreateAccountVC: UIViewController {
     
     
     @IBAction func createAccountPressed(_ sender: Any) {
-        UIView.animate(withDuration: 0.3) {[weak self] in
-            self?.blurButton.alpha = 0.1
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.blurButton.alpha = 0.2
             self?.spinner.startAnimating()
         }
         
         viewModel.registerUser { [weak self] (success, error) in
             UIView.animate(withDuration: 0.3, animations: {
-                [weak self] in
-                self?.blurButton.alpha = 0.0
+                self?.blurButton.alpha = 0
                 self?.spinner.stopAnimating()
             })
             if success {
@@ -98,21 +97,20 @@ extension CreateAccountVC: UITextFieldDelegate {
         
         return true
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true)
+        return true
+    }
 }
 
 //UI finest
 extension CreateAccountVC {
     func setupView() {
-        usernameTxtField.attributedText = "username".getCustomAttributedText()
-        passwordTxtField.attributedText = "password".getCustomAttributedText()
-        emailTxtField.attributedText = getAttributtedText(text: "email")
+        usernameTxtField.attributedPlaceholder = "username".getCustomAttributedText()
+        passwordTxtField.attributedPlaceholder = "password".getCustomAttributedText()
+        emailTxtField.attributedPlaceholder = getAttributtedText(text: "email")
         
-        let tap = UIGestureRecognizer(target: self, action: #selector(forceHideKeyboard))
-        view.addGestureRecognizer(tap)
-    }
-    
-    @objc private func forceHideKeyboard() {
-        view.endEditing(true)
     }
     
     // first case

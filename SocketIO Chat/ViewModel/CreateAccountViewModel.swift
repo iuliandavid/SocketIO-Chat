@@ -42,12 +42,12 @@ class CreateAccountViewModel {
             if success {
                 self?.authService.loginUser(email: email, password: password, completion: { [weak self]  (success, error) in
                     if success {
-                        print("Token: \(self?.authService.authToken as Any)")
                         guard let strongSelf = self else { return }
                         strongSelf.authService.createUser(name: name, email: email, avatarColor: strongSelf.avatarColor, avatarName: strongSelf.avatarName, completion: { (success, errorMessage) in
-                            completion(success, errorMessage)
-                            //announce that something changed
+                            //announce that user was created
                             NotificationCenter.default.post(name: Constants.NOTIF_DATA_DID_CHANGE, object: nil)
+                            completion(success, errorMessage)
+                            
                         })
                     } else {
                         completion(success, error)

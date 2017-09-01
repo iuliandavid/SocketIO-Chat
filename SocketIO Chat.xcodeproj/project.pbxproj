@@ -22,6 +22,7 @@
 		B84CD1EF1F57C880001D517D /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84CD1EE1F57C880001D517D /* AvatarCell.swift */; };
 		B84CD1F11F580B6C001D517D /* CreateAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84CD1F01F580B6C001D517D /* CreateAccountViewModel.swift */; };
 		B84CD1F31F58448E001D517D /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84CD1F21F58448E001D517D /* CircleImage.swift */; };
+		B84CD1F51F585A1C001D517D /* ChannelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84CD1F41F585A1C001D517D /* ChannelViewModel.swift */; };
 		B8624B881F5317CA00E8B5D6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8624B871F5317CA00E8B5D6 /* Constants.swift */; };
 		B8624B8A1F531D3800E8B5D6 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8624B891F531D3800E8B5D6 /* LoginVC.swift */; };
 		B8624B8C1F531EC900E8B5D6 /* CreateAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8624B8B1F531EC900E8B5D6 /* CreateAccountVC.swift */; };
@@ -49,6 +50,7 @@
 		B84CD1EE1F57C880001D517D /* AvatarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCell.swift; sourceTree = "<group>"; };
 		B84CD1F01F580B6C001D517D /* CreateAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewModel.swift; sourceTree = "<group>"; };
 		B84CD1F21F58448E001D517D /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
+		B84CD1F41F585A1C001D517D /* ChannelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelViewModel.swift; sourceTree = "<group>"; };
 		B8624B871F5317CA00E8B5D6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B8624B891F531D3800E8B5D6 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginVC.swift; path = "SocketIO Chat/Controller/LoginVC.swift"; sourceTree = SOURCE_ROOT; };
 		B8624B8B1F531EC900E8B5D6 /* CreateAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateAccountVC.swift; path = "SocketIO Chat/Controller/CreateAccountVC.swift"; sourceTree = SOURCE_ROOT; };
@@ -126,6 +128,7 @@
 			children = (
 				B82349631F57C3E80038C32D /* AvatarsViewModel.swift */,
 				B84CD1F01F580B6C001D517D /* CreateAccountViewModel.swift */,
+				B84CD1F41F585A1C001D517D /* ChannelViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B84CD1F51F585A1C001D517D /* ChannelViewModel.swift in Sources */,
 				B8624B881F5317CA00E8B5D6 /* Constants.swift in Sources */,
 				B84CD1F31F58448E001D517D /* CircleImage.swift in Sources */,
 				B84CD1F11F580B6C001D517D /* CreateAccountViewModel.swift in Sources */,
@@ -442,6 +446,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;

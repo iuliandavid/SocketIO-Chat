@@ -84,7 +84,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="btnLoginPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TN6-fG-sjb"/>
+                                            <action selector="loginPressed:" destination="fDE-Uk-h36" eventType="touchUpInside" id="O0j-St-dqm"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -106,6 +106,10 @@
                                     <constraint firstItem="hVB-Ro-Xpl" firstAttribute="centerY" secondItem="iNU-yJ-hQV" secondAttribute="centerY" id="pkm-cB-MnG"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="NHs-dg-YTw" secondAttribute="trailing" constant="20" id="vdH-nL-7yS"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="loginBtn" destination="hVB-Ro-Xpl" id="4rl-gZ-EBy"/>
+                                    <outlet property="profileImage" destination="iNU-yJ-hQV" id="Ksd-ye-KXc"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KIF-EF-c3D" customClass="GradientView" customModule="SocketIO_Chat" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="77"/>
@@ -164,7 +168,6 @@
                     <navigationItem key="navigationItem" title="ChatVC" id="ir7-Hh-n3T"/>
                     <connections>
                         <outlet property="blurButton" destination="VbG-J3-rkb" id="RA4-pZ-8NV"/>
-                        <outlet property="loginBtn" destination="hVB-Ro-Xpl" id="kak-Y5-7Xs"/>
                         <outlet property="menuView" destination="fDE-Uk-h36" id="jEY-LB-oZD"/>
                         <outlet property="menuViewLeadingConstraint" destination="Vcx-E2-pfZ" id="wcq-Hy-8de"/>
                         <segue destination="Plf-7E-o3s" kind="show" identifier="toLogin" id="m1l-3F-dYm"/>
@@ -370,14 +373,6 @@
                                     </view>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cQU-3Z-PRv">
-                                <rect key="frame" x="339" y="28" width="28" height="28"/>
-                                <state key="normal" image="closeButton"/>
-                                <connections>
-                                    <action selector="closeBtnPressed:" destination="vam-1c-tpe" eventType="touchUpInside" id="EJz-TT-G8E"/>
-                                    <action selector="closeBtnPressed:" destination="Plf-7E-o3s" eventType="touchUpInside" id="H2N-EI-grU"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profileDefault" translatesAutoresizingMaskIntoConstraints="NO" id="lPX-Hg-aFH" customClass="CircleImage" customModule="SocketIO_Chat" customModuleProvider="target">
                                 <rect key="frame" x="137.5" y="319" width="100" height="100"/>
                                 <constraints>
@@ -422,11 +417,16 @@
                                     <action selector="createAccountPressed:" destination="vam-1c-tpe" eventType="touchUpInside" id="AiZ-va-6Vf"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xjf-0W-eaj">
-                                <rect key="frame" x="8" y="0.0" width="359" height="667"/>
-                                <state key="normal">
-                                    <color key="titleColor" red="0.2388806939" green="0.7293094993" blue="0.97495538000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xba-pW-8Ic">
+                                <rect key="frame" x="339" y="28" width="28" height="28"/>
+                                <state key="normal" image="closeButton"/>
+                                <connections>
+                                    <action selector="closeBtnPressed:" destination="vam-1c-tpe" eventType="touchUpInside" id="XEh-ca-OUf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ON6-fl-kdw">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" red="0.25882352939999997" green="0.3294117647" blue="0.72549019609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="hcr-3S-ydU">
                                 <rect key="frame" x="169" y="215" width="37" height="37"/>
@@ -435,6 +435,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="hdG-WP-G4J" firstAttribute="trailing" secondItem="Xba-pW-8Ic" secondAttribute="trailing" constant="8" id="0ig-QU-i4o"/>
                             <constraint firstItem="YK9-I4-o6b" firstAttribute="width" secondItem="lPX-Hg-aFH" secondAttribute="width" id="1kG-on-4Du"/>
                             <constraint firstItem="hcr-3S-ydU" firstAttribute="centerX" secondItem="5jM-KN-udT" secondAttribute="centerX" id="2AW-19-LrJ"/>
                             <constraint firstItem="Jan-Wp-sd1" firstAttribute="top" secondItem="oh2-8e-w24" secondAttribute="bottom" constant="40" id="3dd-d0-SLP"/>
@@ -442,25 +443,24 @@
                             <constraint firstItem="hdG-WP-G4J" firstAttribute="bottom" secondItem="rzO-Yv-qRy" secondAttribute="bottom" constant="20" id="7da-0Z-wJC"/>
                             <constraint firstItem="YK9-I4-o6b" firstAttribute="top" secondItem="lPX-Hg-aFH" secondAttribute="top" id="D6B-ke-CNc"/>
                             <constraint firstItem="lPX-Hg-aFH" firstAttribute="top" secondItem="Jan-Wp-sd1" secondAttribute="bottom" constant="40" id="E3n-RF-lLc"/>
-                            <constraint firstItem="xjf-0W-eaj" firstAttribute="top" secondItem="5jM-KN-udT" secondAttribute="top" id="Foa-Lv-bWj"/>
-                            <constraint firstItem="xjf-0W-eaj" firstAttribute="leading" secondItem="hdG-WP-G4J" secondAttribute="leading" constant="8" id="KBt-UT-Oks"/>
+                            <constraint firstItem="Xba-pW-8Ic" firstAttribute="top" secondItem="hdG-WP-G4J" secondAttribute="top" constant="8" id="GYj-EF-bPO"/>
                             <constraint firstItem="oh2-8e-w24" firstAttribute="centerX" secondItem="5jM-KN-udT" secondAttribute="centerX" id="M2q-Rf-Zee"/>
                             <constraint firstItem="rzO-Yv-qRy" firstAttribute="centerX" secondItem="5jM-KN-udT" secondAttribute="centerX" id="NoW-H1-pJh"/>
                             <constraint firstItem="Jan-Wp-sd1" firstAttribute="centerX" secondItem="5jM-KN-udT" secondAttribute="centerX" id="QS3-5u-kkt"/>
-                            <constraint firstItem="xjf-0W-eaj" firstAttribute="bottom" secondItem="hdG-WP-G4J" secondAttribute="bottom" id="gY0-hb-ehh"/>
+                            <constraint firstItem="hdG-WP-G4J" firstAttribute="trailing" secondItem="ON6-fl-kdw" secondAttribute="trailing" id="aby-Sm-bNZ"/>
+                            <constraint firstItem="hdG-WP-G4J" firstAttribute="bottom" secondItem="ON6-fl-kdw" secondAttribute="bottom" id="eRR-Kd-dkS"/>
+                            <constraint firstItem="ON6-fl-kdw" firstAttribute="leading" secondItem="hdG-WP-G4J" secondAttribute="leading" id="etJ-Gs-JGy"/>
                             <constraint firstItem="NXO-Jj-GiJ" firstAttribute="top" secondItem="YK9-I4-o6b" secondAttribute="bottom" constant="4" id="hEQ-1c-1ws"/>
                             <constraint firstItem="lPX-Hg-aFH" firstAttribute="centerX" secondItem="5jM-KN-udT" secondAttribute="centerX" id="kej-cb-Jed"/>
                             <constraint firstItem="oh2-8e-w24" firstAttribute="top" secondItem="hdG-WP-G4J" secondAttribute="top" constant="60" id="lgC-0i-Xrb"/>
-                            <constraint firstItem="cQU-3Z-PRv" firstAttribute="trailing" secondItem="hdG-WP-G4J" secondAttribute="trailing" constant="-8" id="mgv-kM-b42"/>
-                            <constraint firstItem="hdG-WP-G4J" firstAttribute="trailing" secondItem="xjf-0W-eaj" secondAttribute="trailing" constant="8" id="t6d-kE-vHu"/>
+                            <constraint firstItem="ON6-fl-kdw" firstAttribute="top" secondItem="hdG-WP-G4J" secondAttribute="top" id="sTV-Ty-rqB"/>
                             <constraint firstItem="hcr-3S-ydU" firstAttribute="centerY" secondItem="5jM-KN-udT" secondAttribute="centerY" constant="-100" id="tqW-9o-wdM"/>
                             <constraint firstItem="YK9-I4-o6b" firstAttribute="centerX" secondItem="5jM-KN-udT" secondAttribute="centerX" id="wvF-Pw-G5s"/>
-                            <constraint firstItem="cQU-3Z-PRv" firstAttribute="top" secondItem="hdG-WP-G4J" secondAttribute="top" constant="8" id="yXg-Il-kvj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hdG-WP-G4J"/>
                     </view>
                     <connections>
-                        <outlet property="blurButton" destination="xjf-0W-eaj" id="d1v-Ib-yar"/>
+                        <outlet property="blurButton" destination="ON6-fl-kdw" id="YUO-KD-osD"/>
                         <outlet property="emailTxtField" destination="ori-Ob-J2Q" id="mtP-Bq-GOr"/>
                         <outlet property="passwordTxtField" destination="Q6V-d1-aNQ" id="XVb-Kk-Oov"/>
                         <outlet property="spinner" destination="hcr-3S-ydU" id="6hf-C1-d8b"/>
@@ -473,7 +473,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="56x-IB-LQv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Uw4-sf-qQF" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2013.5999999999999" y="169.56521739130437"/>
+            <point key="canvasLocation" x="2012" y="175"/>
         </scene>
         <!--Avatar PickerVC-->
         <scene sceneID="xi8-kS-efw">
