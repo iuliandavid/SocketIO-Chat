@@ -12,12 +12,18 @@ import SwiftyJSON
 
 final class AuthServiceClient: AuthService {
     
+    
+    
 //    var instance: AuthService {
 //        return AuthServiceClient.sharedInstance
 //    }
     
     
     static let sharedInstance = AuthServiceClient()
+    
+    private init() {
+        
+    }
     
     //for user and token persistence
     let defaults = UserDefaults.standard
@@ -166,5 +172,44 @@ final class AuthServiceClient: AuthService {
                 completion(false, "cannot login")
             }
         }
+    }
+    
+    func findUserByEmail(completion: @escaping CompletionHandler) {
+        
+        let header: [String: String] = getAuthHeader {( success,error ) in
+            if error != nil {
+                completion(success, error!)
+                return
+            }
+        }
+        
+        guard let userEmail = userEmail else {
+            return
+        }
+        
+        Alamofire.request(getUserByEmailUrl(userEmail: userEmail), method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+            //SwiftyJSON
+            guard let data = response.data else {
+                return
+            }
+            let json = JSON(data: data)
+            UserDataService.instance.setUserData(json: json)
+            
+            completion(true, nil)
+        }
+    }
+    
+    private func getAuthHeader(completion: @escaping CompletionHandler) -> [String: String] {
+        guard let authToken = AuthServiceClient.sharedInstance.authToken else {
+            completion(false, "invalid credentials")
+            return [:]
+        }
+        
+        
+        var header:[String: String] = [
+            "Authorization": "Bearer \(authToken)"
+        ]
+        Constants.UrlConstants.header.forEach { header[$0] = $1 }
+        return header
     }
 }

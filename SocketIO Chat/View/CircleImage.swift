@@ -20,8 +20,4 @@ class CircleImage: UIImageView {
         self.clipsToBounds = true
     }
     
-    override func prepareForInterfaceBuilder() {
-        super.prepareForInterfaceBuilder()
-        setupView()
-    }
 }

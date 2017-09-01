@@ -17,6 +17,12 @@ class RoundedButton: UIButton {
         }
     }
 
+    
+    override func draw(_ rect: CGRect) {
+        setupView()
+    }
+    
+    
     private func setupView() {
         layer.cornerRadius = cornerRadius
         clipsToBounds = true

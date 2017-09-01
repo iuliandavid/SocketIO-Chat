@@ -40,6 +40,7 @@ struct Constants {
         static let REGISTER_ENDPOINT = "account/register"
         static let LOGIN_ENDPOINT = "account/login"
         static let USER_ADD_ENDPOINT = "user/add"
+        static let USER_BY_EMAIL_ENDPOINT = "user/byEmail/"
     }
     
     struct CellIdentifiers {

@@ -29,9 +29,13 @@ class MenuView: GradientView {
         
     }
     
+    
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+    
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
         startPosition = touch?.location(in: self)

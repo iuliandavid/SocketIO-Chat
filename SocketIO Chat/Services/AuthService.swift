@@ -30,6 +30,9 @@ protocol AuthService {
     func createUser(name: String, email: String, avatarColor: String, avatarName: String, completion: @escaping CompletionHandler)
     
     func getAddUserUrl(_ baseURL: String?) -> URL
+    
+    func findUserByEmail(completion: @escaping CompletionHandler)
+    func getUserByEmailUrl(_ baseURL: String?, userEmail: String) -> URL
 }
 
 extension AuthService {
@@ -51,6 +54,14 @@ extension AuthService {
     
     func getAddUserUrl(_ baseURL: String? = Constants.UrlConstants.BASE_URL) -> URL {
         guard let baseURL = baseURL, let url = URL(string: "\(baseURL)\(Constants.UrlConstants.USER_ADD_ENDPOINT)") else {
+            fatalError()
+        }
+        
+        return url
+    }
+    
+    func getUserByEmailUrl(_ baseURL: String? = Constants.UrlConstants.BASE_URL, userEmail: String) -> URL {
+        guard let baseURL = baseURL, let url = URL(string: "\(baseURL)\(Constants.UrlConstants.USER_BY_EMAIL_ENDPOINT)\(userEmail)") else {
             fatalError()
         }
         
