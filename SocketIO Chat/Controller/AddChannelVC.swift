@@ -9,7 +9,7 @@
 import UIKit
 
 class AddChannelVC: UIViewController {
-
+    
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var nameTxt: UITextField!
     @IBOutlet weak var descriptionTxt: UITextField!
@@ -18,11 +18,11 @@ class AddChannelVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.messageService = MessageServiceClient.instance
         setupView()
     }
-
+    
     
     fileprivate func setupView() {
         nameTxt.attributedPlaceholder = "Name".getCustomAttributedText()
@@ -42,6 +42,15 @@ class AddChannelVC: UIViewController {
     }
     
     @IBAction func createChannelPressed(_ sender: Any) {
+        guard let name = nameTxt.text, name != "",
+            let description = descriptionTxt.text else {
+                return
+        }
+        messageService.addChannel(channelName: name, channelDescription: description) { [weak self] (success, error) in
+            if success {
+                self?.dismiss(animated: true, completion: nil)
+            }
+        }
     }
     
 }

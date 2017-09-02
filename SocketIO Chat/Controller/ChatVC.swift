@@ -14,6 +14,8 @@ class ChatVC: UIViewController {
     @IBOutlet weak var menuViewLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var menuView: MenuView!
     
+    @IBOutlet weak var channelNameLbl: UILabel!
+    
     //a button to appear when the menu is shown
     @IBOutlet weak var blurButton: UIButton!
     var menuShown = false
@@ -29,12 +31,20 @@ class ChatVC: UIViewController {
         menuView.chatVC = self
         menuView.customViewWidth = menuViewLeadingConstraint
         blurButton.addTarget(self, action: #selector(handleShowMenu), for: .touchUpInside)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(userDataDidChange(_:)), name: Constants.NOTIF_DATA_DID_CHANGE, object: nil)
+        
         if AuthServiceClient.sharedInstance.isLoggedIn {
             AuthServiceClient.sharedInstance.findUserByEmail(completion: { (success, err) in
                 if success {
                     NotificationCenter.default.post(name: Constants.NOTIF_DATA_DID_CHANGE, object: nil)
                 }
             })
+        }
+        
+        MessageServiceClient.instance.selectedChannel.bind { [unowned self] (selectedChanel) in
+            self.channelNameLbl.text = "#\(selectedChanel?.channelTitle ?? "")"
+            print("We are now on \(selectedChanel?.channelTitle as Any)")
         }
     }
     
@@ -46,6 +56,18 @@ class ChatVC: UIViewController {
     
     @objc func userDataDidChange(_ notification: Notification) {
         menuView.userDataChanged()
+        if AuthServiceClient.sharedInstance.isLoggedIn {
+            //get channels
+            onLoginMessages()
+        } else {
+            channelNameLbl.text = "Please Log In"
+        }
+    }
+    
+    func onLoginMessages() {
+        MessageServiceClient.instance.findAllChannels { (success, error) in
+            //
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

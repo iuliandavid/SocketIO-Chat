@@ -11,13 +11,17 @@ import SwiftyJSON
 
 /// Contains all the methods for communicating with SocketIO 
 class MessageServiceClient: MessageService {
-    
+
     static let instance = MessageServiceClient()
     
     var channels:Dynamic<[Channel]>
     
+    var selectedChannel: Dynamic<Channel?>
+    
     private init() {
         channels = Dynamic([])
+        selectedChannel = Dynamic(nil)
+        getChannels()
     }
     
     
@@ -63,5 +67,25 @@ class MessageServiceClient: MessageService {
         }
         
         channelArray.forEach { channels.value.append(Channel(from: $0)) }
+    }
+    
+    func clearChannels() {
+        channels.value.removeAll()
+    }
+}
+
+// MARK - WebSocket methods
+extension MessageServiceClient {
+    func getChannels() {
+        SocketService.instance.getChannels { (success, _) in
+            print("called")
+        }
+    }
+    
+    func addChannel(channelName: String, channelDescription: String, completion: @escaping CompletionHandler) {
+        SocketService.instance.addChannel(channelName: channelName, channelDescription: channelDescription) { (success, error) in
+            completion(true, nil)
+        }
+        
     }
 }

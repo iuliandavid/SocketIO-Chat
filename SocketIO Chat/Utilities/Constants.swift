@@ -51,4 +51,9 @@ struct Constants {
     }
     
     static let DEFAULT_PROFILE_IMAGE = "menuProfileIcon"
+    
+    struct Sockets {
+        static let NEW_CHANNEL = "newChannel"
+        static let CHANNEL_CREATED = "channelCreated"
+    }
 }

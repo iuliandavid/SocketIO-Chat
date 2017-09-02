@@ -21,12 +21,13 @@ class ChannelViewModel {
     
     public private(set) var bgColor:UIColor?
     
-    var channels: Dynamic<[Channel]> {
-        get {
-            return messageService.channels
+    public private(set) var channels: Dynamic<[Channel]> = Dynamic([])
+    
+    public var selectedChannel: Channel? {
+        didSet {
+            messageService.selectedChannel.value = selectedChannel
         }
     }
-    
     
     init(authService: AuthService? = AuthServiceClient.sharedInstance, messageService: MessageService? = MessageServiceClient.instance) {
         guard authService != nil, messageService != nil else {
@@ -35,6 +36,11 @@ class ChannelViewModel {
         
         self.authService = authService!
         self.messageService = messageService!
+        
+        messageService?.channels.bindAndFire(listener: { [unowned self] (channels) in
+            self.channels.value = channels
+        })
+        
     }
     
     func userDataChanged(completion: @escaping UserProfileInfoHandler) {

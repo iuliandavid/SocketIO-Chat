@@ -8,6 +8,7 @@
 
 import UIKit
 
+///Used for showing gradient backorund color for an UIView
 @IBDesignable
 class GradientView: UIView {
 

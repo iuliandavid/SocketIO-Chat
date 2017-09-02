@@ -101,6 +101,8 @@ class UserDataService {
         AuthServiceClient.sharedInstance.isLoggedIn = false
         AuthServiceClient.sharedInstance.userEmail = ""
         AuthServiceClient.sharedInstance.authToken = ""
+        
+        MessageServiceClient.instance.clearChannels()
     }
     
     func getUserInfo(completion: @escaping UserProfileInfoHandler) {

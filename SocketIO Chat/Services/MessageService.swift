@@ -13,11 +13,19 @@ protocol MessageService {
     //The list of user registered channels
     var channels:Dynamic<[Channel]> {get}
     
+    var selectedChannel: Dynamic<Channel?> {get set}
+    
     func findAllChannels(completion: @escaping CompletionHandler)
     
     func getAllChannelsURL(baseURL: String?) -> URL
     
     func getHeaders() -> [String: String]?
+    
+    func getChannels()
+    
+    func addChannel(channelName: String, channelDescription: String, completion: @escaping CompletionHandler)
+    
+    func clearChannels()
 }
 
 extension MessageService {

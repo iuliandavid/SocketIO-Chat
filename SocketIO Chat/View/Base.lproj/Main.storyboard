@@ -128,7 +128,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VkI-2d-p7L">
                                         <rect key="frame" x="12" y="47" width="24" height="18"/>
                                         <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="87k-8l-es3"/>
                                             <constraint firstAttribute="width" constant="24" id="DDj-Ik-Ne9"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="18" id="hpG-f4-q19"/>
                                             <constraint firstAttribute="height" constant="18" id="wSZ-R0-bAs"/>
                                         </constraints>
                                         <state key="normal" image="smackBurger"/>
@@ -136,19 +138,26 @@
                                             <action selector="menuPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xkE-Lx-RiH"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Chat APP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLb-rl-z5L">
-                                        <rect key="frame" x="132" y="33" width="112" height="33"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chat APP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLb-rl-z5L">
+                                        <rect key="frame" x="67" y="33" width="300" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="33" id="hfu-9y-S6X"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="bLb-rl-z5L" firstAttribute="trailing" secondItem="KIF-EF-c3D" secondAttribute="trailingMargin" id="FRa-53-isi"/>
                                     <constraint firstAttribute="height" constant="77" id="HZL-k0-42B"/>
+                                    <constraint firstAttribute="bottom" secondItem="VkI-2d-p7L" secondAttribute="bottom" constant="12" id="QQF-d1-MWL"/>
+                                    <constraint firstItem="bLb-rl-z5L" firstAttribute="leading" secondItem="VkI-2d-p7L" secondAttribute="trailing" constant="31" id="XST-z9-D6p"/>
                                     <constraint firstAttribute="bottom" secondItem="VkI-2d-p7L" secondAttribute="bottom" constant="12" id="YAY-48-UbU"/>
+                                    <constraint firstItem="VkI-2d-p7L" firstAttribute="leading" secondItem="KIF-EF-c3D" secondAttribute="leading" constant="12" id="bzT-rn-Iyp"/>
                                     <constraint firstItem="VkI-2d-p7L" firstAttribute="leading" secondItem="KIF-EF-c3D" secondAttribute="leading" constant="12" id="pGg-DX-PIv"/>
+                                    <constraint firstItem="bLb-rl-z5L" firstAttribute="top" secondItem="KIF-EF-c3D" secondAttribute="top" constant="33" id="v1y-Rp-953"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VbG-J3-rkb">
@@ -174,6 +183,7 @@
                     <navigationItem key="navigationItem" title="ChatVC" id="ir7-Hh-n3T"/>
                     <connections>
                         <outlet property="blurButton" destination="VbG-J3-rkb" id="RA4-pZ-8NV"/>
+                        <outlet property="channelNameLbl" destination="bLb-rl-z5L" id="iQM-GT-hSp"/>
                         <outlet property="menuView" destination="fDE-Uk-h36" id="jEY-LB-oZD"/>
                         <outlet property="menuViewLeadingConstraint" destination="Vcx-E2-pfZ" id="wcq-Hy-8de"/>
                         <segue destination="Plf-7E-o3s" kind="show" identifier="toLogin" id="m1l-3F-dYm"/>

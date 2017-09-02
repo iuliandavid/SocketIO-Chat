@@ -35,24 +35,21 @@ class MenuView: UIView {
     override func layoutSubviews() {
         if !hasInit {
             NotificationCenter.default.addObserver(self, selector: #selector(userDataChanged), name: Constants.NOTIF_DATA_DID_CHANGE, object: nil)
+            
             channelTable.dataSource = self
             channelTable.delegate = self
             hasInit = true
+            //Reacting to channel array updating
             channelViewModel.channels.bindAndFire(listener: { [unowned self](chanels) in
-                self.channelTable.reloadData()
+                self.lazyReloadTable()
             })
         }
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first
-        startPosition = touch?.location(in: self)
-        originalWidth = customViewWidth.constant
-    }
+
+
     
     @IBAction func loginPressed(_ sender: Any) {
         if channelViewModel.isLoggedIn() {
@@ -77,16 +74,22 @@ class MenuView: UIView {
         }
         
     }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first
-        let endPosition = touch?.location(in: self)
-        let difference = endPosition!.x - startPosition!.x
-        customViewWidth.constant = originalWidth + difference
-        UIView.animate(withDuration: 0.3) {
-            self.layoutSubviews()
-        }
-    }
+ 
+// looks slugish
+//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        let touch = touches.first
+//        let endPosition = touch?.location(in: self)
+//        let difference = endPosition!.x - startPosition!.x
+//        customViewWidth.constant = originalWidth + difference
+//        UIView.animate(withDuration: 0.3) {
+//            self.layoutSubviews()
+//        }
+//    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        let touch = touches.first
+//        startPosition = touch?.location(in: self)
+//        originalWidth = customViewWidth.constant
+//    }
     
     @objc func userDataChanged() {
         //wait for the data to be obtained
@@ -96,6 +99,18 @@ class MenuView: UIView {
             self?.profileImage.backgroundColor = bgColor
         }
         
+    }
+    
+    // MARK: - Slow Table Reload
+    ///Try to reload table slowly, especially when new data arrives fast
+    var timer: Timer?
+    fileprivate func lazyReloadTable() {
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.reloadChannelData), userInfo: nil, repeats: false)
+    }
+    
+    @objc func reloadChannelData() {
+        channelTable.reloadData()
     }
 }
 
@@ -117,4 +132,16 @@ extension MenuView: UITableViewDataSource {
 
 extension MenuView: UITableViewDelegate {
     
+    /// To get rid of
+    /// [Warning] Warning once only: Detected a case where constraints ambiguously suggest a height of zero for a tableview cell's content view.
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let channel = channelViewModel.channels.value[indexPath.row]
+//        MessageServiceClient.instance.selectedChannel.value = channel
+        channelViewModel.selectedChannel = channel
+        chatVC?.handleShowMenu()
+    }
 }
