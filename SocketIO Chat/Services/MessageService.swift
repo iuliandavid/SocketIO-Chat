@@ -11,7 +11,7 @@ import Foundation
 protocol MessageService {
     
     //The list of user registered channels
-    var channels:[Channel] {get}
+    var channels:Dynamic<[Channel]> {get}
     
     func findAllChannels(completion: @escaping CompletionHandler)
     

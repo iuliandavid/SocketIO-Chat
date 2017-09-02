@@ -42,6 +42,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NHs-dg-YTw">
                                         <rect key="frame" x="230" y="94" width="22" height="22"/>
                                         <state key="normal" image="addChannelButton"/>
+                                        <connections>
+                                            <action selector="addChannelPressed:" destination="fDE-Uk-h36" eventType="touchUpInside" id="dgT-VI-1jY"/>
+                                        </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menuProfileIcon" translatesAutoresizingMaskIntoConstraints="NO" id="iNU-yJ-hQV" customClass="CircleImage" customModule="SocketIO_Chat" customModuleProvider="target">
                                         <rect key="frame" x="8" y="564" width="75" height="75"/>

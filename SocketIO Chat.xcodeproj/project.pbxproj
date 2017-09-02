@@ -30,6 +30,9 @@
 		B8624B8C1F531EC900E8B5D6 /* CreateAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8624B8B1F531EC900E8B5D6 /* CreateAccountVC.swift */; };
 		B8624B8F1F53CCA700E8B5D6 /* AuthServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8624B8E1F53CCA700E8B5D6 /* AuthServiceClient.swift */; };
 		B8624B911F53CEE400E8B5D6 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8624B901F53CEE400E8B5D6 /* AuthService.swift */; };
+		B8869A551F5ACDF000D1911A /* AddChannelVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8869A531F5ACDF000D1911A /* AddChannelVC.swift */; };
+		B8869A561F5ACDF000D1911A /* AddChannelVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8869A541F5ACDF000D1911A /* AddChannelVC.xib */; };
+		B8869A581F5AF80100D1911A /* Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8869A571F5AF80100D1911A /* Dynamic.swift */; };
 		B895C3001F5A8B9400DF8EE5 /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B895C2FF1F5A8B9400DF8EE5 /* MessageService.swift */; };
 		B895C3021F5A8BBB00DF8EE5 /* MessageServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B895C3011F5A8BBB00DF8EE5 /* MessageServiceClient.swift */; };
 		B895C3051F5A8C5600DF8EE5 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B895C3041F5A8C5600DF8EE5 /* Channel.swift */; };
@@ -64,6 +67,9 @@
 		B8624B8B1F531EC900E8B5D6 /* CreateAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateAccountVC.swift; path = "SocketIO Chat/Controller/CreateAccountVC.swift"; sourceTree = SOURCE_ROOT; };
 		B8624B8E1F53CCA700E8B5D6 /* AuthServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceClient.swift; sourceTree = "<group>"; };
 		B8624B901F53CEE400E8B5D6 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		B8869A531F5ACDF000D1911A /* AddChannelVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChannelVC.swift; sourceTree = "<group>"; };
+		B8869A541F5ACDF000D1911A /* AddChannelVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddChannelVC.xib; sourceTree = "<group>"; };
+		B8869A571F5AF80100D1911A /* Dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dynamic.swift; sourceTree = "<group>"; };
 		B895C2FF1F5A8B9400DF8EE5 /* MessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
 		B895C3011F5A8BBB00DF8EE5 /* MessageServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageServiceClient.swift; sourceTree = "<group>"; };
 		B895C3041F5A8C5600DF8EE5 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
@@ -94,6 +100,7 @@
 		B8354BCE1F5986F700948ADD /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
+				B8869A541F5ACDF000D1911A /* AddChannelVC.xib */,
 				B8354BCB1F5986C600948ADD /* ProfileVC.xib */,
 			);
 			path = XIBs;
@@ -141,6 +148,7 @@
 				B8624B8B1F531EC900E8B5D6 /* CreateAccountVC.swift */,
 				B82349611F567DF30038C32D /* AvatarPickerVC.swift */,
 				B8354BCA1F5986C600948ADD /* ProfileVC.swift */,
+				B8869A531F5ACDF000D1911A /* AddChannelVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -203,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				B895C3041F5A8C5600DF8EE5 /* Channel.swift */,
+				B8869A571F5AF80100D1911A /* Dynamic.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -276,6 +285,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8869A561F5ACDF000D1911A /* AddChannelVC.xib in Resources */,
 				B8354BCD1F5986C600948ADD /* ProfileVC.xib in Resources */,
 				B83AEAC01F4FDF24003CDDD9 /* LaunchScreen.storyboard in Resources */,
 				B83AEABD1F4FDF24003CDDD9 /* Assets.xcassets in Resources */,
@@ -346,6 +356,7 @@
 				B84CD1F11F580B6C001D517D /* CreateAccountViewModel.swift in Sources */,
 				B82349621F567DF30038C32D /* AvatarPickerVC.swift in Sources */,
 				B84CD1EF1F57C880001D517D /* AvatarCell.swift in Sources */,
+				B8869A551F5ACDF000D1911A /* AddChannelVC.swift in Sources */,
 				B895C3051F5A8C5600DF8EE5 /* Channel.swift in Sources */,
 				B823495E1F551D1D0038C32D /* RoundedButton.swift in Sources */,
 				B813674C1F5158EF00289A5B /* ChatVC.swift in Sources */,
@@ -358,6 +369,7 @@
 				B8624B8C1F531EC900E8B5D6 /* CreateAccountVC.swift in Sources */,
 				B83AEAB61F4FDF24003CDDD9 /* AppDelegate.swift in Sources */,
 				B833231B1F51E8690079E26B /* GradientView.swift in Sources */,
+				B8869A581F5AF80100D1911A /* Dynamic.swift in Sources */,
 				B8624B8F1F53CCA700E8B5D6 /* AuthServiceClient.swift in Sources */,
 				B82349641F57C3E80038C32D /* AvatarsViewModel.swift in Sources */,
 			);

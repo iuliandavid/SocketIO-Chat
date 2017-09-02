@@ -22,7 +22,13 @@ struct Channel {
     private static let descString = "description"
     private static let idString = "_id"
     
+    init(channelTitle: String, channelDescription: String, id: String) {
+        self.channelTitle = channelTitle
+        self.channelDescription = channelDescription
+        self.id = id
+    }
     init(from item: JSON) {
+        
         channelTitle = item[Channel.titleString].stringValue
         channelDescription = item[Channel.descString].stringValue
         id = item[Channel.idString].stringValue

@@ -21,7 +21,7 @@ class ChannelViewModel {
     
     public private(set) var bgColor:UIColor?
     
-    var channels: [Channel] {
+    var channels: Dynamic<[Channel]> {
         get {
             return messageService.channels
         }

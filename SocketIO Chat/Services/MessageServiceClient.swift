@@ -14,10 +14,10 @@ class MessageServiceClient: MessageService {
     
     static let instance = MessageServiceClient()
     
-    var channels:[Channel]
+    var channels:Dynamic<[Channel]>
     
     private init() {
-        channels = []
+        channels = Dynamic([])
     }
     
     
@@ -62,6 +62,6 @@ class MessageServiceClient: MessageService {
             return
         }
         
-        channelArray.forEach { channels.append(Channel(from: $0)) }
+        channelArray.forEach { channels.value.append(Channel(from: $0)) }
     }
 }

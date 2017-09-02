@@ -25,14 +25,24 @@ class MenuView: UIView {
     
     var chatVC: ChatVC?
     
+    var hasInit = false
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        NotificationCenter.default.addObserver(self, selector: #selector(userDataChanged), name: Constants.NOTIF_DATA_DID_CHANGE, object: nil)
         
-        channelTable.delegate = self
-        channelTable.dataSource = self
     }
-    
+
+    override func layoutSubviews() {
+        if !hasInit {
+            NotificationCenter.default.addObserver(self, selector: #selector(userDataChanged), name: Constants.NOTIF_DATA_DID_CHANGE, object: nil)
+            channelTable.dataSource = self
+            channelTable.delegate = self
+            hasInit = true
+            channelViewModel.channels.bindAndFire(listener: { [unowned self](chanels) in
+                self.channelTable.reloadData()
+            })
+        }
+    }
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -54,6 +64,18 @@ class MenuView: UIView {
             chatVC?.performSegue(withIdentifier: Constants.Segues.TO_LOGIN, sender: nil)
         }
        
+    }
+    
+    @IBAction func addChannelPressed(_ sender: Any) {
+        if channelViewModel.isLoggedIn() {
+            // Show Add Channel View Controller
+            let profile = AddChannelVC()
+            profile.modalPresentationStyle = .custom
+            chatVC?.present(profile, animated: true, completion: nil)
+        } else {
+            chatVC?.performSegue(withIdentifier: Constants.Segues.TO_LOGIN, sender: nil)
+        }
+        
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -79,7 +101,7 @@ class MenuView: UIView {
 
 extension MenuView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return channelViewModel.channels.count
+        return channelViewModel.channels.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -87,7 +109,7 @@ extension MenuView: UITableViewDataSource {
             return ChannelCell()
         }
         
-        let channel = channelViewModel.channels[indexPath.row]
+        let channel = channelViewModel.channels.value[indexPath.row]
         cell.configureCell(channel: channel)
         return cell
     }
