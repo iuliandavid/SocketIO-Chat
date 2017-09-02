@@ -13,6 +13,7 @@ import UIKit
 class ChannelViewModel {
     
     private let authService:AuthService
+    private let messageService:MessageService
     
     public private(set) var loginTitle:String = ""
     
@@ -20,12 +21,20 @@ class ChannelViewModel {
     
     public private(set) var bgColor:UIColor?
     
-    init(authService: AuthService? = AuthServiceClient.sharedInstance ) {
-        guard authService != nil else {
+    var channels: [Channel] {
+        get {
+            return messageService.channels
+        }
+    }
+    
+    
+    init(authService: AuthService? = AuthServiceClient.sharedInstance, messageService: MessageService? = MessageServiceClient.instance) {
+        guard authService != nil, messageService != nil else {
             fatalError()
         }
         
         self.authService = authService!
+        self.messageService = messageService!
     }
     
     func userDataChanged(completion: @escaping UserProfileInfoHandler) {

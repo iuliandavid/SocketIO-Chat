@@ -42,10 +42,12 @@ struct Constants {
         static let LOGIN_ENDPOINT = "account/login"
         static let USER_ADD_ENDPOINT = "user/add"
         static let USER_BY_EMAIL_ENDPOINT = "user/byEmail/"
+        static let CHANNEL_LIST_ENDPOINT = "channel/"
     }
     
     struct CellIdentifiers {
         static let AVATAR_CELL_IDENTIFIER = "avatarCell"
+        static let CHANNEL_CELL_IDENTIFIER = "channelCell"
     }
     
     static let DEFAULT_PROFILE_IMAGE = "menuProfileIcon"

@@ -14,6 +14,7 @@ class MenuView: UIView {
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var profileImage: UIImageView!
     
+    @IBOutlet weak var channelTable: UITableView!
     //objects
     var startPosition: CGPoint?
     var originalWidth: CGFloat = 0
@@ -21,11 +22,15 @@ class MenuView: UIView {
 
     private var channelViewModel = ChannelViewModel()
     
+    
     var chatVC: ChatVC?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         NotificationCenter.default.addObserver(self, selector: #selector(userDataChanged), name: Constants.NOTIF_DATA_DID_CHANGE, object: nil)
+        
+        channelTable.delegate = self
+        channelTable.dataSource = self
     }
     
     deinit {
@@ -70,4 +75,24 @@ class MenuView: UIView {
         }
         
     }
+}
+
+extension MenuView: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return channelViewModel.channels.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifiers.CHANNEL_CELL_IDENTIFIER, for: indexPath) as? ChannelCell else {
+            return ChannelCell()
+        }
+        
+        let channel = channelViewModel.channels[indexPath.row]
+        cell.configureCell(channel: channel)
+        return cell
+    }
+}
+
+extension MenuView: UITableViewDelegate {
+    
 }

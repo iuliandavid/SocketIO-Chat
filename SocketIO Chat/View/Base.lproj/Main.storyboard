@@ -25,7 +25,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fDE-Uk-h36" customClass="MenuView" customModule="SocketIO_Chat" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="280" height="667"/>
+                                <rect key="frame" x="-280" y="0.0" width="280" height="667"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BZ1-cV-kXw">
                                         <rect key="frame" x="8" y="52" width="280" height="23"/>
@@ -54,7 +54,7 @@
                                         <rect key="frame" x="0.0" y="136" width="280" height="408"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="channel" id="JA3-eU-QGf">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="channelCell" id="JA3-eU-QGf" customClass="ChannelCell" customModule="SocketIO_Chat" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="280" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JA3-eU-QGf" id="8uC-Mj-8Tx">
@@ -75,6 +75,9 @@
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <connections>
+                                                    <outlet property="channelLbl" destination="SN7-xu-XeR" id="WxV-c5-ryS"/>
+                                                </connections>
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
@@ -111,12 +114,13 @@
                                     <constraint firstAttribute="trailingMargin" secondItem="NHs-dg-YTw" secondAttribute="trailing" constant="20" id="vdH-nL-7yS"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="channelTable" destination="mzw-Ao-etk" id="fEc-Bg-Muj"/>
                                     <outlet property="loginBtn" destination="hVB-Ro-Xpl" id="4rl-gZ-EBy"/>
                                     <outlet property="profileImage" destination="iNU-yJ-hQV" id="Ksd-ye-KXc"/>
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KIF-EF-c3D" customClass="GradientView" customModule="SocketIO_Chat" customModuleProvider="target">
-                                <rect key="frame" x="280" y="0.0" width="95" height="77"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="77"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VkI-2d-p7L">
                                         <rect key="frame" x="12" y="47" width="24" height="18"/>
@@ -145,7 +149,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VbG-J3-rkb">
-                                <rect key="frame" x="280" y="0.0" width="95" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </button>
                         </subviews>
