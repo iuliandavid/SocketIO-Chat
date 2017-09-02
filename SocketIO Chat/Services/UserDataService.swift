@@ -111,7 +111,7 @@ class UserDataService {
                 completion(strongSelf.name, strongSelf.avatarName, strongSelf.returnUIColor(components: strongSelf.avatarColor))
             })
         } else {
-            completion(strongSelf.name, strongSelf.avatarName, strongSelf.returnUIColor(components: strongSelf.avatarColor))
+            completion(name, avatarName, returnUIColor(components: avatarColor))
         }
     }
 }
