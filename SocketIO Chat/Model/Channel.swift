@@ -9,8 +9,13 @@
 import Foundation
 import SwiftyJSON
 
-
-///Describe the channel object retrieved from the API
+/// maps the Channel object from the socketio API
+/// ``` javascript
+/// const channelSchema = new Schema({
+/// name: String, default: "",
+/// description: String, default: ""
+/// });
+/// ```
 struct Channel {
     
     public private(set) var channelTitle: String!

@@ -43,6 +43,7 @@ struct Constants {
         static let USER_ADD_ENDPOINT = "user/add"
         static let USER_BY_EMAIL_ENDPOINT = "user/byEmail/"
         static let CHANNEL_LIST_ENDPOINT = "channel/"
+        static let MESSAGES_CHANNEL_ENDPOINT = "message/byChannel/"
     }
     
     struct CellIdentifiers {

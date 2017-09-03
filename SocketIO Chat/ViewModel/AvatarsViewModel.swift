@@ -13,7 +13,7 @@ enum AvatarType: String {
     case dark
 }
 
-///Model class for AvatarPickerVC
+/// Model class for AvatarPickerVC
 class AvatarsViewModel {
     
     public var type: AvatarType = .dark {

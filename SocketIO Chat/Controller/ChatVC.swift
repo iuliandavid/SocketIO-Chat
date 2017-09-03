@@ -24,6 +24,9 @@ class ChatVC: UIViewController {
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue){}
     
     
+    //objects
+    let messageClient: MessageService = MessageServiceClient.instance
+    let authClient: AuthService = AuthServiceClient.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,19 +35,21 @@ class ChatVC: UIViewController {
         menuView.customViewWidth = menuViewLeadingConstraint
         blurButton.addTarget(self, action: #selector(handleShowMenu), for: .touchUpInside)
         
+        
         NotificationCenter.default.addObserver(self, selector: #selector(userDataDidChange(_:)), name: Constants.NOTIF_DATA_DID_CHANGE, object: nil)
         
-        if AuthServiceClient.sharedInstance.isLoggedIn {
-            AuthServiceClient.sharedInstance.findUserByEmail(completion: { (success, err) in
+        // TODO - move outside controller
+        if authClient.isLoggedIn {
+            authClient.findUserByEmail(completion: { (success, err) in
                 if success {
                     NotificationCenter.default.post(name: Constants.NOTIF_DATA_DID_CHANGE, object: nil)
                 }
             })
         }
-        
-        MessageServiceClient.instance.selectedChannel.bind { [unowned self] (selectedChanel) in
+        // TODO - move outside controller
+        messageClient.selectedChannel.bind { [unowned self] (selectedChanel) in
             self.channelNameLbl.text = "#\(selectedChanel?.channelTitle ?? "")"
-            print("We are now on \(selectedChanel?.channelTitle as Any)")
+            self.getMessages(channelId: selectedChanel?.id)
         }
     }
     
@@ -56,7 +61,8 @@ class ChatVC: UIViewController {
     
     @objc func userDataDidChange(_ notification: Notification) {
         menuView.userDataChanged()
-        if AuthServiceClient.sharedInstance.isLoggedIn {
+        // TODO - move outside controller
+        if authClient.isLoggedIn {
             //get channels
             onLoginMessages()
         } else {
@@ -64,12 +70,28 @@ class ChatVC: UIViewController {
         }
     }
     
+    // TODO - move outside controller
     func onLoginMessages() {
-        MessageServiceClient.instance.findAllChannels { (success, error) in
-            //
+        messageClient.findAllChannels { [unowned self] (success, error) in
+            if success {
+                if self.messageClient.channels.value.count > 0 {
+                  self.messageClient.selectedChannel.value = self.messageClient.channels.value[0]
+                } else {
+                    self.channelNameLbl.text = "No channels yet"
+                }
+            }
         }
     }
     
+    fileprivate func getMessages(channelId: String?) {
+        guard let channelId = channelId else {
+            return
+        }
+        messageClient.findAllMessages(forChannelId: channelId) { (success, err) in
+            
+        }
+    }
+        
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }

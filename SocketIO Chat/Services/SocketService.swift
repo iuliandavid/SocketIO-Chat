@@ -24,17 +24,19 @@ class SocketService: NSObject {
         socket.connect()
     }
     
-    ///Connect
+    ///Disconnect
     func closeConnection() {
         socket.disconnect()
     }
     
     // MARK: - Endpoints
+    // MARK: - Channel Related
     func addChannel(channelName: String, channelDescription: String, completion: @escaping CompletionHandler) {
         socket.emit(Constants.Sockets.NEW_CHANNEL, channelName, channelDescription)
         completion(true, nil)
     }
     
+    /// Subscribes to channel creation events
     func getChannels(completion: @escaping CompletionHandler ) {
         socket.on(Constants.Sockets.CHANNEL_CREATED) { (dataArray, ack) in
             guard let channelName = dataArray[0] as? String,
@@ -44,9 +46,11 @@ class SocketService: NSObject {
             }
             let channel = Channel(channelTitle: channelName, channelDescription: channelDescription, id: channelId)
             MessageServiceClient.instance.channels.value.append(channel)
-            print("channel: \(channel)")
             completion(true, nil)
         }
     }
     
+    // MARK: - Messaging related
 }
+
+

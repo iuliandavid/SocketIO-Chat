@@ -30,6 +30,7 @@
 		B8624B8C1F531EC900E8B5D6 /* CreateAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8624B8B1F531EC900E8B5D6 /* CreateAccountVC.swift */; };
 		B8624B8F1F53CCA700E8B5D6 /* AuthServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8624B8E1F53CCA700E8B5D6 /* AuthServiceClient.swift */; };
 		B8624B911F53CEE400E8B5D6 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8624B901F53CEE400E8B5D6 /* AuthService.swift */; };
+		B86C89701F5B5337007ACB6F /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86C896F1F5B5337007ACB6F /* Message.swift */; };
 		B8869A551F5ACDF000D1911A /* AddChannelVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8869A531F5ACDF000D1911A /* AddChannelVC.swift */; };
 		B8869A561F5ACDF000D1911A /* AddChannelVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8869A541F5ACDF000D1911A /* AddChannelVC.xib */; };
 		B8869A581F5AF80100D1911A /* Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8869A571F5AF80100D1911A /* Dynamic.swift */; };
@@ -68,6 +69,7 @@
 		B8624B8B1F531EC900E8B5D6 /* CreateAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateAccountVC.swift; path = "SocketIO Chat/Controller/CreateAccountVC.swift"; sourceTree = SOURCE_ROOT; };
 		B8624B8E1F53CCA700E8B5D6 /* AuthServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceClient.swift; sourceTree = "<group>"; };
 		B8624B901F53CEE400E8B5D6 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		B86C896F1F5B5337007ACB6F /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		B8869A531F5ACDF000D1911A /* AddChannelVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChannelVC.swift; sourceTree = "<group>"; };
 		B8869A541F5ACDF000D1911A /* AddChannelVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddChannelVC.xib; sourceTree = "<group>"; };
 		B8869A571F5AF80100D1911A /* Dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dynamic.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 			children = (
 				B895C3041F5A8C5600DF8EE5 /* Channel.swift */,
 				B8869A571F5AF80100D1911A /* Dynamic.swift */,
+				B86C896F1F5B5337007ACB6F /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				B84CD1F11F580B6C001D517D /* CreateAccountViewModel.swift in Sources */,
 				B82349621F567DF30038C32D /* AvatarPickerVC.swift in Sources */,
 				B84CD1EF1F57C880001D517D /* AvatarCell.swift in Sources */,
+				B86C89701F5B5337007ACB6F /* Message.swift in Sources */,
 				B8869A551F5ACDF000D1911A /* AddChannelVC.swift in Sources */,
 				B895C3051F5A8C5600DF8EE5 /* Channel.swift in Sources */,
 				B823495E1F551D1D0038C32D /* RoundedButton.swift in Sources */,

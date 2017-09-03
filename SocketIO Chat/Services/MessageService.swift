@@ -26,6 +26,12 @@ protocol MessageService {
     func addChannel(channelName: String, channelDescription: String, completion: @escaping CompletionHandler)
     
     func clearChannels()
+    
+    func findAllMessages(forChannelId: String, completion: @escaping CompletionHandler)
+    
+    /// Returning all the messages for selected channel
+    /// javascript API endpoint  `/v1/message/byChannel/:channelId`
+    func getAllMessagesForChannelURL(channelId: String, baseURL: String?) -> URL
 }
 
 extension MessageService {
@@ -48,5 +54,13 @@ extension MessageService {
         ]
         Constants.UrlConstants.header.forEach { header[$0] = $1 }
         return header
+    }
+    
+    func getAllMessagesForChannelURL(channelId: String, baseURL: String? = Constants.UrlConstants.BASE_URL) -> URL {
+        guard let baseURL = baseURL, let url = URL(string: "\(baseURL)\(Constants.UrlConstants.MESSAGES_CHANNEL_ENDPOINT)\(channelId)") else {
+            fatalError()
+        }
+        
+        return url
     }
 }
