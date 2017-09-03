@@ -9,7 +9,7 @@
 import UIKit
 
 class ChatVC: UIViewController {
-
+    
     //MARK: - Outlets
     @IBOutlet weak var menuViewLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var menuView: MenuView!
@@ -18,6 +18,8 @@ class ChatVC: UIViewController {
     
     //a button to appear when the menu is shown
     @IBOutlet weak var blurButton: UIButton!
+    @IBOutlet weak var messageTxt: UITextField!
+    @IBOutlet weak var sendButton: UIButton!
     var menuShown = false
     
     //unwind segue
@@ -30,7 +32,10 @@ class ChatVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        setupKeyboardEvents()
+        
+        
         menuView.chatVC = self
         menuView.customViewWidth = menuViewLeadingConstraint
         blurButton.addTarget(self, action: #selector(handleShowMenu), for: .touchUpInside)
@@ -38,6 +43,8 @@ class ChatVC: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(userDataDidChange(_:)), name: Constants.NOTIF_DATA_DID_CHANGE, object: nil)
         
+        messageTxt.isHidden = true
+        sendButton.isHidden = true
         // TODO - move outside controller
         if authClient.isLoggedIn {
             authClient.findUserByEmail(completion: { (success, err) in
@@ -51,11 +58,29 @@ class ChatVC: UIViewController {
             self.channelNameLbl.text = "#\(selectedChanel?.channelTitle ?? "")"
             self.getMessages(channelId: selectedChanel?.id)
         }
+        
+        messageClient.messages.bindAndFire { (messageArray) in
+            
+        }
     }
     
     //MARK: - Actions
     @IBAction func menuPressed(_ sender: Any) {
         handleShowMenu()
+    }
+    
+    @IBAction func sendMessgPressed(_ sender: UIButton) {
+        guard let messageBody = messageTxt.text, messageBody != "",
+            let channelId = messageClient.selectedChannel.value?.id else {
+                return
+        }
+        
+        messageClient.sendMessage(messageBody: messageBody, channelId: channelId) {[weak self] (success, err) in
+            if success {
+                self?.messageTxt.text = ""
+                self?.messageTxt.resignFirstResponder()
+            }
+        }
     }
     
     
@@ -68,6 +93,9 @@ class ChatVC: UIViewController {
         } else {
             channelNameLbl.text = "Please Log In"
         }
+        
+        messageTxt.isHidden = !authClient.isLoggedIn
+        sendButton.isHidden = !authClient.isLoggedIn
     }
     
     // TODO - move outside controller
@@ -75,7 +103,7 @@ class ChatVC: UIViewController {
         messageClient.findAllChannels { [unowned self] (success, error) in
             if success {
                 if self.messageClient.channels.value.count > 0 {
-                  self.messageClient.selectedChannel.value = self.messageClient.channels.value[0]
+                    self.messageClient.selectedChannel.value = self.messageClient.channels.value[0]
                 } else {
                     self.channelNameLbl.text = "No channels yet"
                 }
@@ -87,11 +115,12 @@ class ChatVC: UIViewController {
         guard let channelId = channelId else {
             return
         }
-        messageClient.findAllMessages(forChannelId: channelId) { (success, err) in
-            
+        messageClient.findAllMessages(forChannelId: channelId) { [weak self] (success, err) in
+            self?.messageClient.getMessages()
         }
-    }
         
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
@@ -124,5 +153,20 @@ extension ChatVC {
             self?.view.layoutIfNeeded()
         })
         menuShown = !menuShown
+    }
+}
+
+// MARK: - Keyboard Events show/dismiss
+private extension ChatVC {
+    
+    func setupKeyboardEvents() {
+        view.bindToKeyboard()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapForUnbindToKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func handleTapForUnbindToKeyboard() {
+        view.endEditing(true)
     }
 }

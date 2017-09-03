@@ -39,6 +39,7 @@
 		B895C3021F5A8BBB00DF8EE5 /* MessageServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B895C3011F5A8BBB00DF8EE5 /* MessageServiceClient.swift */; };
 		B895C3051F5A8C5600DF8EE5 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B895C3041F5A8C5600DF8EE5 /* Channel.swift */; };
 		B895C3091F5AB05700DF8EE5 /* ChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B895C3081F5AB05700DF8EE5 /* ChannelCell.swift */; };
+		B8DD4AE21F5C3F6200923344 /* KeyboardBoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DD4AE11F5C3F6200923344 /* KeyboardBoundView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		B895C3011F5A8BBB00DF8EE5 /* MessageServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageServiceClient.swift; sourceTree = "<group>"; };
 		B895C3041F5A8C5600DF8EE5 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		B895C3081F5AB05700DF8EE5 /* ChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCell.swift; sourceTree = "<group>"; };
+		B8DD4AE11F5C3F6200923344 /* KeyboardBoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardBoundView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +181,7 @@
 				B84CD1EE1F57C880001D517D /* AvatarCell.swift */,
 				B84CD1F21F58448E001D517D /* CircleImage.swift */,
 				B895C3081F5AB05700DF8EE5 /* ChannelCell.swift */,
+				B8DD4AE11F5C3F6200923344 /* KeyboardBoundView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				B895C3001F5A8B9400DF8EE5 /* MessageService.swift in Sources */,
 				B895C3091F5AB05700DF8EE5 /* ChannelCell.swift in Sources */,
 				B84CD1F31F58448E001D517D /* CircleImage.swift in Sources */,
+				B8DD4AE21F5C3F6200923344 /* KeyboardBoundView.swift in Sources */,
 				B8869A5A1F5B009E00D1911A /* SocketService.swift in Sources */,
 				B84CD1F11F580B6C001D517D /* CreateAccountViewModel.swift in Sources */,
 				B82349621F567DF30038C32D /* AvatarPickerVC.swift in Sources */,

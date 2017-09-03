@@ -160,6 +160,23 @@
                                     <constraint firstItem="bLb-rl-z5L" firstAttribute="top" secondItem="KIF-EF-c3D" secondAttribute="top" constant="33" id="v1y-Rp-953"/>
                                 </constraints>
                             </view>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Message:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ogi-Qt-OB6">
+                                <rect key="frame" x="0.0" y="627" width="375" height="40"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="kSb-4g-0ca"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="adW-5Z-lq9" userLabel="sendButton">
+                                <rect key="frame" x="337" y="632" width="30" height="30"/>
+                                <state key="normal" image="send"/>
+                                <connections>
+                                    <action selector="sendMessgPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jov-X2-YOs"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VbG-J3-rkb">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -172,10 +189,15 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="VbG-J3-rkb" secondAttribute="trailing" id="E1a-u4-y4E"/>
                             <constraint firstAttribute="bottom" secondItem="fDE-Uk-h36" secondAttribute="bottom" id="Eu3-JX-2BR"/>
                             <constraint firstItem="KIF-EF-c3D" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="FQY-8G-Gl5"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="adW-5Z-lq9" secondAttribute="trailing" constant="8" id="IEK-3b-lWL"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ogi-Qt-OB6" secondAttribute="trailing" id="Ii6-rL-aHe"/>
                             <constraint firstItem="VbG-J3-rkb" firstAttribute="leading" secondItem="fDE-Uk-h36" secondAttribute="trailing" id="PsZ-Yi-fzm"/>
+                            <constraint firstItem="Ogi-Qt-OB6" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="RgH-yQ-HNF"/>
+                            <constraint firstItem="adW-5Z-lq9" firstAttribute="centerY" secondItem="Ogi-Qt-OB6" secondAttribute="centerY" id="U5C-fL-dT3"/>
                             <constraint firstItem="fDE-Uk-h36" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="-280" id="Vcx-E2-pfZ"/>
                             <constraint firstItem="fDE-Uk-h36" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="blL-6E-QrQ"/>
                             <constraint firstItem="KIF-EF-c3D" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="hvG-WZ-7UU"/>
+                            <constraint firstItem="Ogi-Qt-OB6" firstAttribute="leading" secondItem="fDE-Uk-h36" secondAttribute="trailing" id="oMg-FX-YPV"/>
                             <constraint firstItem="VbG-J3-rkb" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="z4w-Zl-TWK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -186,6 +208,8 @@
                         <outlet property="channelNameLbl" destination="bLb-rl-z5L" id="iQM-GT-hSp"/>
                         <outlet property="menuView" destination="fDE-Uk-h36" id="jEY-LB-oZD"/>
                         <outlet property="menuViewLeadingConstraint" destination="Vcx-E2-pfZ" id="wcq-Hy-8de"/>
+                        <outlet property="messageTxt" destination="Ogi-Qt-OB6" id="l4z-sE-i4Q"/>
+                        <outlet property="sendButton" destination="adW-5Z-lq9" id="c7B-Xe-A9K"/>
                         <segue destination="Plf-7E-o3s" kind="show" identifier="toLogin" id="m1l-3F-dYm"/>
                     </connections>
                 </viewController>
@@ -601,6 +625,7 @@
         <image name="closeButton" width="28" height="28"/>
         <image name="menuProfileIcon" width="99" height="99"/>
         <image name="profileDefault" width="192" height="192"/>
+        <image name="send" width="30" height="30"/>
         <image name="smackBack" width="28" height="28"/>
         <image name="smackBurger" width="40" height="40"/>
         <image name="smackLogo" width="48" height="40"/>

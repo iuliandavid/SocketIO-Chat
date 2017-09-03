@@ -37,11 +37,30 @@ struct Message {
         let channelId = item["channelId"].stringValue
         let userAvatar = item["userAvatar"].stringValue
         let userAvatarColor = item["userAvatarColor"].stringValue
-        let id = item["id"].stringValue
-        let timestamp = item["timestamp"].stringValue
+        let id = item["_id"].stringValue
+        let timestamp = item["timeStamp"].stringValue
         
         let newMessage = Message(message: message, userName: userName, channelId: channelId, userAvatar: userAvatar, userAvatarColor: userAvatarColor, id: id, timestamp: timestamp)
         
         return newMessage
+    }
+    
+    static func buildMessage(fromArray dataArr: [Any], completion: @escaping (Message?) -> ()) {
+//        msg.messageBody, msg.userId, msg.channelId, msg.userName, msg.userAvatar, msg.userAvatarColor, msg.id, msg.timeStamp
+        guard let messageBody = dataArr[0] as? String,
+              let channelId = dataArr[2] as? String,
+        let userName = dataArr[3] as? String,
+        let userAvatar = dataArr[4] as? String,
+        let userAvatarColor = dataArr[5] as? String,
+        let id = dataArr[6] as? String,
+        let timestamp = dataArr[7] as? String
+        else {
+            completion(nil)
+            return
+        }
+        let message = Message(message: messageBody, userName: userName, channelId: channelId, userAvatar: userAvatar, userAvatarColor: userAvatarColor, id: id, timestamp: timestamp)
+        print(message)
+        completion(message)
+        
     }
 }

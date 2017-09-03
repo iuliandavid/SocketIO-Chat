@@ -168,5 +168,34 @@ extension MessageServiceClient {
     
     
     // MARK: - Messages related
+    // MARK: - Channel related
+    /// Listener for realtime message creation
+    func getMessages() {
+        guard let channelId = selectedChannel.value?.id else {
+            return
+        }
+        SocketService.instance.getMessages(channelID: channelId) { (success, err) in
+            
+        }
+    }
     
+    /// Creates a new channel
+    ///
+    /// - parameter messageBody: The body of the message.
+    /// - parameter channelId: The channel on which the message is posted
+    /// - parameter completion: a handler returning the status of the message posting
+    ///
+    /// Calls
+    ///
+    ///     SocketService.instance.postMessage(messageBody: , userId: , channelId: , userName: , userAvatar: , userAvatarColor: , completion: )
+    /// The rest of the parameters are retrieved from UserDataService
+    func sendMessage(messageBody: String, channelId: String, completion: @escaping CompletionHandler) {
+        let userId = UserDataService.instance.id
+        let userName = UserDataService.instance.name
+        let userAvatar = UserDataService.instance.avatarName
+        let userAvatarColor = UserDataService.instance.avatarColor
+        SocketService.instance.postMessage(messageBody: messageBody, userId: userId, channelId: channelId, userName: userName, userAvatar: userAvatar, userAvatarColor: userAvatarColor) { (success, err) in
+            completion(success, err)
+        }
+    }
 }

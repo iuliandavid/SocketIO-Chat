@@ -13,7 +13,7 @@ class SocketService: NSObject {
     
     static let instance = SocketService()
     
-    private let socket = SocketIOClient(socketURL: URL(string: Constants.UrlConstants.BASE_URL)!)
+    private let socket = SocketIOClient(socketURL: URL(string: Constants.UrlConstants.BASE_URL)!, config: [.log(true), .compress])
     
     override init() {
         super.init()
@@ -51,6 +51,41 @@ class SocketService: NSObject {
     }
     
     // MARK: - Messaging related
+    ///```javascript
+    ///client.on('newMessage', function(messageBody, userId, channelId, userName, userAvatar, userAvatarColor)
+    ///```
+    func postMessage(messageBody: String, userId: String, channelId: String, userName: String, userAvatar: String, userAvatarColor: String, completion: @escaping CompletionHandler) {
+        socket.emit(Constants.Sockets.NEW_MESSAGE, messageBody, userId, channelId, userName, userAvatar, userAvatarColor)
+        completion(true, nil)
+    }
+    
+    /// Subscribes to channel creation events
+    ///
+    /// ```javascript
+    ///io.emit("messageCreated",  msg.messageBody, msg.userId, msg.channelId, msg.userName, msg.userAvatar, msg.userAvatarColor, msg.id, msg.timeStamp)
+    ///```
+    ///
+    /// - parameter channelID: The channel for which the messages should we listen
+    /// - parameter completion: The callback that will execute when this event is received.
+    ///
+    func getMessages(channelID: String, completion: @escaping CompletionHandler ) {
+        socket.off(Constants.Sockets.MESSAGE_CREATED)
+        socket.on(Constants.Sockets.MESSAGE_CREATED) { (dataArray, ack) in
+            guard let channelMessage = dataArray[2] as? String, channelMessage == channelID
+                else {
+                    return
+            }
+            Message.buildMessage(fromArray: dataArray) { (message) in
+                guard let message = message else {
+                    completion(false, "Invalid message")
+                    return
+                }
+                MessageServiceClient.instance.messages.value.append(message)
+                completion(true, nil)
+            }
+            
+        }
+    }
 }
 
 

@@ -15,6 +15,8 @@ protocol MessageService {
     
     var selectedChannel: Dynamic<Channel?> {get set}
     
+    var messages:Dynamic<[Message]> {get}
+    
     func findAllChannels(completion: @escaping CompletionHandler)
     
     func getAllChannelsURL(baseURL: String?) -> URL
@@ -32,6 +34,10 @@ protocol MessageService {
     /// Returning all the messages for selected channel
     /// javascript API endpoint  `/v1/message/byChannel/:channelId`
     func getAllMessagesForChannelURL(channelId: String, baseURL: String?) -> URL
+    
+    func getMessages()
+    
+    func sendMessage(messageBody: String, channelId: String, completion: @escaping CompletionHandler)
 }
 
 extension MessageService {

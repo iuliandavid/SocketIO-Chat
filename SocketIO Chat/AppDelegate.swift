@@ -23,11 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     @objc func appendChannels() {
-        let client = MessageServiceClient.instance
-//        for i in 1...10 {
-//            MessageServiceClient.instance.channels.value.append(Channel(channelTitle: "channel\(i)", channelDescription: "description", id: "\(i)"))
-//        }
-        client.selectedChannel.value = client.channels.value[2]
+
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {

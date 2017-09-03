@@ -56,5 +56,7 @@ struct Constants {
     struct Sockets {
         static let NEW_CHANNEL = "newChannel"
         static let CHANNEL_CREATED = "channelCreated"
+        static let NEW_MESSAGE = "newMessage"
+        static let MESSAGE_CREATED = "messageCreated"
     }
 }
