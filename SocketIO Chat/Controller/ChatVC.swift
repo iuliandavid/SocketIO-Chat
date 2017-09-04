@@ -34,7 +34,7 @@ class ChatVC: UIViewController {
     //objects
     let messageClient: MessageService = MessageServiceClient.instance
     let authClient: AuthService = AuthServiceClient.sharedInstance
-    
+    var isTyping = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,6 +87,12 @@ class ChatVC: UIViewController {
     @objc func reloadChannelData() {
         print("reloaded data")
         messageTable.reloadData()
+        //scroll to last
+        guard messageClient.messages.value.count > 0  else {
+            return
+        }
+        let endIndex = IndexPath(row: messageClient.messages.value.count - 1,section: 0)
+        messageTable.scrollToRow(at: endIndex, at: .bottom, animated: false)
     }
     //MARK: - Actions
     @IBAction func menuPressed(_ sender: Any) {
@@ -120,7 +126,7 @@ class ChatVC: UIViewController {
         }
         
         messageTxt.isHidden = !authClient.isLoggedIn
-        sendButton.isHidden = !authClient.isLoggedIn
+        
     }
     
     // TODO - move outside controller
@@ -159,6 +165,19 @@ class ChatVC: UIViewController {
         view.endEditing(true)
         UIView.animate(withDuration: 0.0) {
             self.mainViewBlurButton.alpha = 0.0
+        }
+    }
+    
+    @IBAction func messageEditing(_ sender: Any) {
+        if messageTxt.text == "" {
+            isTyping = false
+            sendButton.isHidden = true
+        } else {
+            if !isTyping{
+                sendButton.isHidden = false
+            }
+            isTyping = true
+            
         }
     }
 }

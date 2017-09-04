@@ -172,6 +172,9 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="messageEditing:" destination="BYZ-38-t0r" eventType="editingChanged" id="C20-i0-Let"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="adW-5Z-lq9" userLabel="sendButton">
                                         <rect key="frame" x="345" y="637" width="30" height="30"/>

@@ -32,6 +32,10 @@ class LoginVC: UIViewController {
     }
     
     @IBAction func loginPressed(_ sender: Any) {
+        //!Since we are using a keyboard listener
+        //we are force to set editing end
+        view.endEditing(true)
+        //!
         spinner.isHidden = false
         spinner.startAnimating()
         
@@ -44,9 +48,10 @@ class LoginVC: UIViewController {
                 AuthServiceClient.sharedInstance.findUserByEmail(completion: { (success, err) in
                     if success {
                         NotificationCenter.default.post(name: Constants.NOTIF_DATA_DID_CHANGE, object: nil)
-                        self.spinner.isHidden = true
+//                        self.spinner.isHidden = true
                         self.spinner.stopAnimating()
-                        self.dismiss(animated: true, completion: nil)
+                        self.dismiss(animated: false, completion: nil)
+//                        self.performSegue(withIdentifier: Constants.Segues.UNWIND, sender: nil)
                     }
                 })
                 
