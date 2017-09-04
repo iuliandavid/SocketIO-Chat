@@ -9,7 +9,7 @@
 import UIKit
 
 class MenuView: UIView {
-
+    
     //Outlets
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var profileImage: UIImageView!
@@ -19,7 +19,7 @@ class MenuView: UIView {
     var startPosition: CGPoint?
     var originalWidth: CGFloat = 0
     var customViewWidth: NSLayoutConstraint! 
-
+    
     private var channelViewModel = ChannelViewModel()
     
     
@@ -31,8 +31,21 @@ class MenuView: UIView {
         super.init(coder: aDecoder)
         
     }
-
+    
+    //MenuView should have inherited GradientView
+    //but Xcode fails compiling it
+    fileprivate func fixDesignableStoryBoardFailure() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [#colorLiteral(red: 0.3631127477, green: 0.4045833051, blue: 0.8775706887, alpha: 1).cgColor, #colorLiteral(red: 0.1725490196, green: 0.831372549, blue: 0.8470588235, alpha: 1).cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+        gradientLayer.frame = self.bounds
+        self.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
     override func layoutSubviews() {
+        fixDesignableStoryBoardFailure()
+        
         if !hasInit {
             NotificationCenter.default.addObserver(self, selector: #selector(userDataChanged), name: Constants.NOTIF_DATA_DID_CHANGE, object: nil)
             
@@ -48,8 +61,8 @@ class MenuView: UIView {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-
-
+    
+    
     
     @IBAction func loginPressed(_ sender: Any) {
         if channelViewModel.isLoggedIn() {
@@ -60,7 +73,7 @@ class MenuView: UIView {
         } else {
             chatVC?.performSegue(withIdentifier: Constants.Segues.TO_LOGIN, sender: nil)
         }
-       
+        
     }
     
     @IBAction func addChannelPressed(_ sender: Any) {
@@ -74,22 +87,22 @@ class MenuView: UIView {
         }
         
     }
- 
-// looks slugish
-//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        let touch = touches.first
-//        let endPosition = touch?.location(in: self)
-//        let difference = endPosition!.x - startPosition!.x
-//        customViewWidth.constant = originalWidth + difference
-//        UIView.animate(withDuration: 0.3) {
-//            self.layoutSubviews()
-//        }
-//    }
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        let touch = touches.first
-//        startPosition = touch?.location(in: self)
-//        originalWidth = customViewWidth.constant
-//    }
+    
+    // looks slugish
+    //    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    //        let touch = touches.first
+    //        let endPosition = touch?.location(in: self)
+    //        let difference = endPosition!.x - startPosition!.x
+    //        customViewWidth.constant = originalWidth + difference
+    //        UIView.animate(withDuration: 0.3) {
+    //            self.layoutSubviews()
+    //        }
+    //    }
+    //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    //        let touch = touches.first
+    //        startPosition = touch?.location(in: self)
+    //        originalWidth = customViewWidth.constant
+    //    }
     
     @objc func userDataChanged() {
         //wait for the data to be obtained
@@ -140,7 +153,7 @@ extension MenuView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let channel = channelViewModel.channels.value[indexPath.row]
-//        MessageServiceClient.instance.selectedChannel.value = channel
+        //        MessageServiceClient.instance.selectedChannel.value = channel
         channelViewModel.selectedChannel = channel
         chatVC?.handleShowMenu()
     }
