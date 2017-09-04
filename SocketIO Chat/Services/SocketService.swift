@@ -12,8 +12,10 @@ class SocketService: NSObject {
     
     
     static let instance = SocketService()
+//debug purposes
+//    private let socket = SocketIOClient(socketURL: URL(string: Constants.UrlConstants.BASE_URL)!, config: [.log(true), .compress])
     
-    private let socket = SocketIOClient(socketURL: URL(string: Constants.UrlConstants.BASE_URL)!, config: [.log(true), .compress])
+    private let socket = SocketIOClient(socketURL: URL(string: Constants.UrlConstants.BASE_URL)!)
     
     override init() {
         super.init()

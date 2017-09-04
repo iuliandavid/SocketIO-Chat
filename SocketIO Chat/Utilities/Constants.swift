@@ -49,6 +49,7 @@ struct Constants {
     struct CellIdentifiers {
         static let AVATAR_CELL_IDENTIFIER = "avatarCell"
         static let CHANNEL_CELL_IDENTIFIER = "channelCell"
+        static let MESSAGE_CELL_IDENTIFIER = "messageCell"
     }
     
     static let DEFAULT_PROFILE_IMAGE = "menuProfileIcon"

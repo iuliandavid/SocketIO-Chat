@@ -12,14 +12,19 @@ class ChatVC: UIViewController {
     
     //MARK: - Outlets
     @IBOutlet weak var menuViewLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var menuViewWidth: NSLayoutConstraint!
     @IBOutlet weak var menuView: MenuView!
     
     @IBOutlet weak var channelNameLbl: UILabel!
     
+    
     //a button to appear when the menu is shown
     @IBOutlet weak var blurButton: UIButton!
+    @IBOutlet weak var mainViewBlurButton: UIButton!
+    @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var messageTxt: UITextField!
     @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var messageTable: UITableView!
     var menuShown = false
     
     //unwind segue
@@ -30,11 +35,21 @@ class ChatVC: UIViewController {
     let messageClient: MessageService = MessageServiceClient.instance
     let authClient: AuthService = AuthServiceClient.sharedInstance
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapForUnbindToKeyboard))
+//        mainView.bindToKeyboard()
+//        mainView.addGestureRecognizer(tapGesture)
         setupKeyboardEvents()
         
+        
+        messageTable.dataSource = self
+        messageTable.delegate = self
+        
+        messageTable.estimatedRowHeight = 80
+        messageTable.rowHeight = UITableViewAutomaticDimension
         
         menuView.chatVC = self
         menuView.customViewWidth = menuViewLeadingConstraint
@@ -59,11 +74,23 @@ class ChatVC: UIViewController {
             self.getMessages(channelId: selectedChanel?.id)
         }
         
-        messageClient.messages.bindAndFire { (messageArray) in
-            
+        messageClient.messages.bindAndFire {[unowned self] (_) in
+            self.lazyReloadTable()
         }
     }
     
+    // MARK: - Slow Table Reload
+    ///Try to reload table slowly, especially when new data arrives fast
+    var timer: Timer?
+    fileprivate func lazyReloadTable() {
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.reloadChannelData), userInfo: nil, repeats: false)
+    }
+    
+    @objc func reloadChannelData() {
+        print("reloaded data")
+        messageTable.reloadData()
+    }
     //MARK: - Actions
     @IBAction func menuPressed(_ sender: Any) {
         handleShowMenu()
@@ -91,6 +118,7 @@ class ChatVC: UIViewController {
             //get channels
             onLoginMessages()
         } else {
+            messageClient.clearMessages()
             channelNameLbl.text = "Please Log In"
         }
         
@@ -129,6 +157,13 @@ class ChatVC: UIViewController {
         print("Deinit ChatVC")
         NotificationCenter.default.removeObserver(self)
     }
+    
+    @IBAction func dismissKeyboard(_ sender: Any) {
+        view.endEditing(true)
+        UIView.animate(withDuration: 0.0) {
+            self.mainViewBlurButton.alpha = 0.0
+        }
+    }
 }
 
 //MARK: - Slide Menu related methods
@@ -137,7 +172,6 @@ extension ChatVC {
         if menuShown {
             blurButton.alpha = 0
             menuViewLeadingConstraint.constant = -280
-            
         } else {
             blurButton.alpha = 0.1
             menuViewLeadingConstraint.constant = 0
@@ -159,14 +193,55 @@ extension ChatVC {
 // MARK: - Keyboard Events show/dismiss
 private extension ChatVC {
     
-    func setupKeyboardEvents() {
-        view.bindToKeyboard()
+    func bindToKeyboard(){
+        NotificationCenter.default.addObserver(self, selector: #selector(UIView.keyboardWillChange(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+    }
+    
+    
+    
+    @objc func keyboardWillChange(_ notification: NSNotification) {
+        let duration = notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! Double
+        let curve = notification.userInfo![UIKeyboardAnimationCurveUserInfoKey] as! UInt
+        let curFrame = (notification.userInfo![UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        let targetFrame = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let deltaY = targetFrame.origin.y - curFrame.origin.y
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapForUnbindToKeyboard))
-        view.addGestureRecognizer(tapGesture)
+        UIView.animateKeyframes(withDuration: duration, delay: 0.0, options: UIViewKeyframeAnimationOptions(rawValue: curve), animations: {
+            self.view.frame.origin.y += deltaY
+            self.mainViewBlurButton.alpha = 0.1
+        },completion: {(true) in
+            self.view.layoutIfNeeded()
+        })
+    }
+    func setupKeyboardEvents() {
+        
+        bindToKeyboard()
+        
+        
     }
     
     @objc func handleTapForUnbindToKeyboard() {
         view.endEditing(true)
+    }
+}
+
+// MARK: - UITableView delegate and datasource
+extension ChatVC: UITableViewDelegate {
+    
+}
+
+extension ChatVC: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return messageClient.messages.value.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifiers.MESSAGE_CELL_IDENTIFIER, for: indexPath) as? MessageCell else {
+            return UITableViewCell()
+        }
+        let message = messageClient.messages.value[indexPath.row]
+        cell.configureCell(for: message)
+        
+        return cell
     }
 }

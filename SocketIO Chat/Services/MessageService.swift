@@ -38,6 +38,8 @@ protocol MessageService {
     func getMessages()
     
     func sendMessage(messageBody: String, channelId: String, completion: @escaping CompletionHandler)
+    
+    func clearMessages()
 }
 
 extension MessageService {
