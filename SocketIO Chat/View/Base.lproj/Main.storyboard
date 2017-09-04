@@ -25,22 +25,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fDE-Uk-h36" customClass="MenuView" customModule="SocketIO_Chat" customModuleProvider="target">
-                                <rect key="frame" x="-280" y="0.0" width="280" height="667"/>
+                                <rect key="frame" x="-310" y="0.0" width="310" height="667"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BZ1-cV-kXw">
-                                        <rect key="frame" x="8" y="52" width="280" height="23"/>
+                                        <rect key="frame" x="8" y="52" width="310" height="23"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="19"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHANNELS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xN-R1-W2P">
-                                        <rect key="frame" x="8" y="95" width="280" height="20"/>
+                                        <rect key="frame" x="8" y="95" width="310" height="20"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NHs-dg-YTw">
-                                        <rect key="frame" x="230" y="94" width="22" height="22"/>
+                                        <rect key="frame" x="260" y="94" width="22" height="22"/>
                                         <state key="normal" image="addChannelButton"/>
                                         <connections>
                                             <action selector="addChannelPressed:" destination="fDE-Uk-h36" eventType="touchUpInside" id="dgT-VI-1jY"/>
@@ -54,14 +54,14 @@
                                         </constraints>
                                     </imageView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mzw-Ao-etk">
-                                        <rect key="frame" x="0.0" y="136" width="280" height="408"/>
+                                        <rect key="frame" x="0.0" y="136" width="310" height="408"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="channelCell" id="JA3-eU-QGf" customClass="ChannelCell" customModule="SocketIO_Chat" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="280" height="44"/>
+                                                <rect key="frame" x="0.0" y="28" width="310" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JA3-eU-QGf" id="8uC-Mj-8Tx">
-                                                    <rect key="frame" x="0.0" y="0.0" width="280" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="310" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#general" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SN7-xu-XeR">
@@ -85,7 +85,7 @@
                                         </prototypes>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hVB-Ro-Xpl">
-                                        <rect key="frame" x="103" y="585" width="46" height="33"/>
+                                        <rect key="frame" x="103" y="585" width="76" height="33"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                                         <state key="normal" title="Login">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -107,7 +107,7 @@
                                     <constraint firstAttribute="trailing" secondItem="hVB-Ro-Xpl" secondAttribute="trailing" constant="131" id="HhC-N1-ifA"/>
                                     <constraint firstItem="mzw-Ao-etk" firstAttribute="top" secondItem="NHs-dg-YTw" secondAttribute="bottom" constant="20" id="JCE-U9-eO0"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="iNU-yJ-hQV" secondAttribute="bottom" constant="20" id="LPd-BM-yFe"/>
-                                    <constraint firstAttribute="width" constant="280" id="Vb3-Dm-8E0"/>
+                                    <constraint firstAttribute="width" constant="310" id="Vb3-Dm-8E0"/>
                                     <constraint firstAttribute="trailing" secondItem="BZ1-cV-kXw" secondAttribute="trailingMargin" id="Z2r-X5-I8y"/>
                                     <constraint firstAttribute="trailing" secondItem="mzw-Ao-etk" secondAttribute="trailing" id="dcj-Mb-h58"/>
                                     <constraint firstItem="iNU-yJ-hQV" firstAttribute="top" secondItem="mzw-Ao-etk" secondAttribute="bottom" constant="20" id="fSO-7W-4SM"/>
@@ -288,7 +288,7 @@
                             <constraint firstItem="EWR-x1-n53" firstAttribute="leading" secondItem="fDE-Uk-h36" secondAttribute="trailing" id="Kg8-9c-eui"/>
                             <constraint firstItem="EWR-x1-n53" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Ne3-RD-F2A"/>
                             <constraint firstItem="VbG-J3-rkb" firstAttribute="leading" secondItem="fDE-Uk-h36" secondAttribute="trailing" id="PsZ-Yi-fzm"/>
-                            <constraint firstItem="fDE-Uk-h36" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="-280" id="Vcx-E2-pfZ"/>
+                            <constraint firstItem="fDE-Uk-h36" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="-310" id="Vcx-E2-pfZ"/>
                             <constraint firstItem="fDE-Uk-h36" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="blL-6E-QrQ"/>
                             <constraint firstItem="EWR-x1-n53" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="riS-Tv-Y9f"/>
                             <constraint firstItem="VbG-J3-rkb" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="z4w-Zl-TWK"/>

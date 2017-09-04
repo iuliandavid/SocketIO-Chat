@@ -39,9 +39,6 @@ class ChatVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapForUnbindToKeyboard))
-//        mainView.bindToKeyboard()
-//        mainView.addGestureRecognizer(tapGesture)
         setupKeyboardEvents()
         
         
@@ -171,12 +168,12 @@ extension ChatVC {
     @objc func handleShowMenu() {
         if menuShown {
             blurButton.alpha = 0
-            menuViewLeadingConstraint.constant = -280
+            menuViewLeadingConstraint.constant = -310
             mainViewTrailingConstant.constant = 0
         } else {
             blurButton.alpha = 0.1
             menuViewLeadingConstraint.constant = 0
-            mainViewTrailingConstant.constant = -280
+            mainViewTrailingConstant.constant = -310
             menuView.layer.shadowOpacity = 1
             menuView.layer.shadowOpacity = 10
             menuView.userDataChanged()
