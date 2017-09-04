@@ -11,8 +11,8 @@ import UIKit
 class ChatVC: UIViewController {
     
     //MARK: - Outlets
+    @IBOutlet weak var mainViewTrailingConstant: NSLayoutConstraint!
     @IBOutlet weak var menuViewLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var menuViewWidth: NSLayoutConstraint!
     @IBOutlet weak var menuView: MenuView!
     
     @IBOutlet weak var channelNameLbl: UILabel!
@@ -172,9 +172,11 @@ extension ChatVC {
         if menuShown {
             blurButton.alpha = 0
             menuViewLeadingConstraint.constant = -280
+            mainViewTrailingConstant.constant = 0
         } else {
             blurButton.alpha = 0.1
             menuViewLeadingConstraint.constant = 0
+            mainViewTrailingConstant.constant = -280
             menuView.layer.shadowOpacity = 1
             menuView.layer.shadowOpacity = 10
             menuView.userDataChanged()

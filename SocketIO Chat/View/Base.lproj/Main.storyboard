@@ -301,9 +301,9 @@
                         <outlet property="channelNameLbl" destination="bLb-rl-z5L" id="iQM-GT-hSp"/>
                         <outlet property="mainView" destination="EWR-x1-n53" id="9jb-SJ-B3s"/>
                         <outlet property="mainViewBlurButton" destination="1gK-Oi-XIw" id="okd-ut-TCJ"/>
+                        <outlet property="mainViewTrailingConstant" destination="CHI-iR-dys" id="gAY-l9-Ibj"/>
                         <outlet property="menuView" destination="fDE-Uk-h36" id="jEY-LB-oZD"/>
                         <outlet property="menuViewLeadingConstraint" destination="Vcx-E2-pfZ" id="wcq-Hy-8de"/>
-                        <outlet property="menuViewWidth" destination="Vb3-Dm-8E0" id="zvl-Bi-b0i"/>
                         <outlet property="messageTable" destination="ErN-3C-K5Z" id="Gsf-ch-vlY"/>
                         <outlet property="messageTxt" destination="Ogi-Qt-OB6" id="l4z-sE-i4Q"/>
                         <outlet property="sendButton" destination="adW-5Z-lq9" id="c7B-Xe-A9K"/>
