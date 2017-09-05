@@ -25,11 +25,44 @@ class MessageServiceClient: MessageService {
     /// All the messages in the `selectedChannel`
     var messages:Dynamic<[Message]>
     
+    /// Dictionary of user:channel that are currently typing
+    var typingUsers:Dynamic<[String: String]> = Dynamic([:])
+    
+    /// Text binding for `usersTyping` endpoint
+    var typingUsersText:Dynamic<String> = Dynamic("")
+    
     private init() {
         channels = Dynamic([])
         selectedChannel = Dynamic(nil)
         messages = Dynamic([])
         getChannels()
+        getMessages()
+        getUsersTyping()
+        
+        //let mmy = testDict.reduce("") {(ac: String, r: (String,String)) -> String in
+//        if r.1 == "1" {
+//            return ac == "" ? r.0 : ac + " and " + r.0
+//        } else {
+//            return ac
+//        }
+//    }
+        typingUsers.bindAndFire { (usersArray) in
+            let res : (Int,String) = (0,"" )
+            let (noOfUsersTyping, users) = usersArray.reduce(res) { (result, item: (String,String)) -> (Int,String) in
+                let (user, channel) = item
+                if user != UserDataService.instance.name && channel == self.selectedChannel.value?.id  {
+                    return result.0 == 0 ? (1, user) : (result.0 + 1, "\(result.1), \(user)")
+                } else {
+                    return result
+                }
+            }
+            switch noOfUsersTyping {
+            case 0 : self.typingUsersText.value = ""
+            case 1 : self.typingUsersText.value = "\(users) is typing"
+            default : self.typingUsersText.value = "\(users) are typing"
+            }
+            
+        }
         
     }
     
@@ -40,6 +73,9 @@ class MessageServiceClient: MessageService {
     
     func clearMessages() {
         messages.value.removeAll()
+    }
+    func clearUsersTyping() {
+        typingUsers.value.removeAll()
     }
 }
 
@@ -174,8 +210,10 @@ extension MessageServiceClient {
         guard let channelId = selectedChannel.value?.id else {
             return
         }
-        SocketService.instance.getMessages(channelID: channelId) { (success, err) in
-            
+        SocketService.instance.getMessages(channelID: channelId) { [unowned self] (success, err, message) in
+            if success {
+                self.messages.value.append(message!)
+            }
         }
     }
     
@@ -196,6 +234,22 @@ extension MessageServiceClient {
         let userAvatarColor = UserDataService.instance.avatarColor
         SocketService.instance.postMessage(messageBody: messageBody, userId: userId, channelId: channelId, userName: userName, userAvatar: userAvatar, userAvatarColor: userAvatarColor) { (success, err) in
             completion(success, err)
+        }
+    }
+    
+    // MARK: - Channel related
+    /// Listener for realtime channel creation
+    func getUsersTyping() {
+        SocketService.instance.getTypingUsers {[unowned self] (typingusers) in
+            self.typingUsers.value = typingusers
+        }
+    }
+    
+    /// Sets if the user is typing or finished typing
+    func setUserTyping(typing: Bool) {
+        let userName = UserDataService.instance.name
+        guard let channelId = selectedChannel.value?.id else { return }
+        SocketService.instance.setUserTyping(userName: userName, typing: typing, channelId: channelId) { (_, _) in
         }
     }
 }

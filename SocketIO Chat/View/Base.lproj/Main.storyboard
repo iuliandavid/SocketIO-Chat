@@ -248,6 +248,12 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q5i-4B-Q9n">
+                                        <rect key="frame" x="8" y="621" width="0.0" height="0.0"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1gK-Oi-XIw">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="627"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -259,6 +265,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="Ogi-Qt-OB6" firstAttribute="top" secondItem="Q5i-4B-Q9n" secondAttribute="bottom" constant="6" id="0CS-LC-DO2"/>
                                     <constraint firstAttribute="trailing" secondItem="ErN-3C-K5Z" secondAttribute="trailing" id="2GQ-JD-aQN"/>
                                     <constraint firstItem="Ogi-Qt-OB6" firstAttribute="top" secondItem="1gK-Oi-XIw" secondAttribute="bottom" id="4CB-a9-q46"/>
                                     <constraint firstAttribute="bottom" secondItem="Ogi-Qt-OB6" secondAttribute="bottom" id="5gy-DV-KTZ"/>
@@ -275,6 +282,7 @@
                                     <constraint firstItem="1gK-Oi-XIw" firstAttribute="leading" secondItem="EWR-x1-n53" secondAttribute="leading" id="gck-rI-hiX"/>
                                     <constraint firstItem="KIF-EF-c3D" firstAttribute="leading" secondItem="EWR-x1-n53" secondAttribute="leading" id="n3S-wT-th5"/>
                                     <constraint firstItem="Ogi-Qt-OB6" firstAttribute="leading" secondItem="EWR-x1-n53" secondAttribute="leading" id="oJE-fc-GOk"/>
+                                    <constraint firstItem="Q5i-4B-Q9n" firstAttribute="leading" secondItem="EWR-x1-n53" secondAttribute="leading" constant="8" id="xLN-YX-ke0"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VbG-J3-rkb">
@@ -310,6 +318,7 @@
                         <outlet property="messageTable" destination="ErN-3C-K5Z" id="Gsf-ch-vlY"/>
                         <outlet property="messageTxt" destination="Ogi-Qt-OB6" id="l4z-sE-i4Q"/>
                         <outlet property="sendButton" destination="adW-5Z-lq9" id="c7B-Xe-A9K"/>
+                        <outlet property="typingUsersLbl" destination="Q5i-4B-Q9n" id="yYd-oq-N6c"/>
                         <segue destination="Plf-7E-o3s" kind="show" identifier="toLogin" id="m1l-3F-dYm"/>
                     </connections>
                 </viewController>

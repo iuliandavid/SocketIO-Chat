@@ -17,6 +17,10 @@ protocol MessageService {
     
     var messages:Dynamic<[Message]> {get}
     
+    var typingUsers:Dynamic<[String: String]> {get}
+    
+    var typingUsersText:Dynamic<String> {get}
+    
     func findAllChannels(completion: @escaping CompletionHandler)
     
     func getAllChannelsURL(baseURL: String?) -> URL
@@ -40,6 +44,8 @@ protocol MessageService {
     func sendMessage(messageBody: String, channelId: String, completion: @escaping CompletionHandler)
     
     func clearMessages()
+    
+    func setUserTyping(typing: Bool)
 }
 
 extension MessageService {

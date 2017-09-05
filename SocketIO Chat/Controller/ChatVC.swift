@@ -25,6 +25,8 @@ class ChatVC: UIViewController {
     @IBOutlet weak var messageTxt: UITextField!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var messageTable: UITableView!
+    @IBOutlet weak var typingUsersLbl: UILabel!
+    
     var menuShown = false
     
     //unwind segue
@@ -44,6 +46,8 @@ class ChatVC: UIViewController {
         
         messageTable.dataSource = self
         messageTable.delegate = self
+        
+//        messageTxt.delegate = self
         
         messageTable.estimatedRowHeight = 80
         messageTable.rowHeight = UITableViewAutomaticDimension
@@ -73,6 +77,10 @@ class ChatVC: UIViewController {
         
         messageClient.messages.bindAndFire {[unowned self] (_) in
             self.lazyReloadTable()
+        }
+        
+        messageClient.typingUsersText.bindAndFire { [unowned self](message) in
+            self.typingUsersLbl.text = message
         }
     }
     
@@ -109,6 +117,7 @@ class ChatVC: UIViewController {
             if success {
                 self?.messageTxt.text = ""
                 self?.messageTxt.resignFirstResponder()
+                self?.userTyping()
             }
         }
     }
@@ -122,9 +131,10 @@ class ChatVC: UIViewController {
             onLoginMessages()
         } else {
             messageClient.clearMessages()
+            messageClient.setUserTyping(typing: false)
             channelNameLbl.text = "Please Log In"
         }
-        
+        messageTxt.text = ""
         messageTxt.isHidden = !authClient.isLoggedIn
         
     }
@@ -168,7 +178,8 @@ class ChatVC: UIViewController {
         }
     }
     
-    @IBAction func messageEditing(_ sender: Any) {
+    fileprivate func userTyping() {
+        let typingChanged = isTyping
         if messageTxt.text == "" {
             isTyping = false
             sendButton.isHidden = true
@@ -177,8 +188,14 @@ class ChatVC: UIViewController {
                 sendButton.isHidden = false
             }
             isTyping = true
-            
         }
+        if typingChanged != isTyping {
+            messageClient.setUserTyping(typing: isTyping)
+        }
+    }
+    
+    @IBAction func messageEditing(_ sender: Any) {
+        userTyping()
     }
 }
 
@@ -244,10 +261,6 @@ private extension ChatVC {
 }
 
 // MARK: - UITableView delegate and datasource
-extension ChatVC: UITableViewDelegate {
-    
-}
-
 extension ChatVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messageClient.messages.value.count
@@ -263,3 +276,7 @@ extension ChatVC: UITableViewDataSource {
         return cell
     }
 }
+
+extension ChatVC: UITableViewDelegate {}
+
+

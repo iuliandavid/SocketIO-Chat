@@ -59,5 +59,8 @@ struct Constants {
         static let CHANNEL_CREATED = "channelCreated"
         static let NEW_MESSAGE = "newMessage"
         static let MESSAGE_CREATED = "messageCreated"
+        static let TYPING_USERS = "userTypingUpdate"
+        static let START_TYPING = "startType"
+        static let STOP_TYPING = "stopType"
     }
 }

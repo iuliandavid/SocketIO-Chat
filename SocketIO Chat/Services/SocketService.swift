@@ -70,7 +70,7 @@ class SocketService: NSObject {
     /// - parameter channelID: The channel for which the messages should we listen
     /// - parameter completion: The callback that will execute when this event is received.
     ///
-    func getMessages(channelID: String, completion: @escaping CompletionHandler ) {
+    func getMessages(channelID: String, completion: @escaping (_ Success: Bool, _ errorMessage: String?, _ message: Message?) -> () ) {
         socket.off(Constants.Sockets.MESSAGE_CREATED)
         socket.on(Constants.Sockets.MESSAGE_CREATED) { (dataArray, ack) in
             guard let channelMessage = dataArray[2] as? String, channelMessage == channelID
@@ -79,14 +79,52 @@ class SocketService: NSObject {
             }
             Message.buildMessage(fromArray: dataArray) { (message) in
                 guard let message = message else {
-                    completion(false, "Invalid message")
+                    completion(false, "Invalid message", nil)
                     return
                 }
-                MessageServiceClient.instance.messages.value.append(message)
-                completion(true, nil)
+                
+                completion(true, nil, message)
             }
             
         }
+    }
+    ///
+    /// Subscribes to typing user events
+    ///
+    /// ```javascript
+    ///io.emit("userTypingUpdate", typingUsers, channelId)
+    ///```
+    ///
+    /// - parameter completion: The callback that will execute when this event is received containing a dictionary of user:channel pairs.
+    ///
+    func getTypingUsers(completion: @escaping (_ typingUsers: [String: String]) -> ()) {
+        socket.on(Constants.Sockets.TYPING_USERS) { (dataArray, ack) in
+            guard let typingUsers = dataArray[0] as? [String: String] else {
+                return
+            }
+            completion(typingUsers)
+        }
+    }
+    
+    ///
+    /// Emits an event if the user is typing or stopped typing
+    ///
+    /// ```javascript
+    ///client.on("startType", function(userName, channelId)
+    ///client.on("stopType", function(userName)
+    ///```
+    /// - parameter userName
+    /// - parameter typing - Based on this is set the endpoint to emit message
+    /// - parameter channel - The channel on which the user is typing
+    /// - parameter completion: The callback that will execute when this event is received
+    ///
+    func setUserTyping(userName: String, typing:Bool, channelId: String, completion: @escaping CompletionHandler) {
+        if typing {
+            socket.emit(Constants.Sockets.START_TYPING, userName, channelId)
+        } else {
+            socket.emit(Constants.Sockets.STOP_TYPING, userName)
+        }
+        completion(true, nil)
     }
 }
 

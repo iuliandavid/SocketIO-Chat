@@ -103,6 +103,7 @@ class UserDataService {
         AuthServiceClient.sharedInstance.authToken = ""
         
         MessageServiceClient.instance.clearChannels()
+        MessageServiceClient.instance.clearUsersTyping()
     }
     
     func getUserInfo(completion: @escaping UserProfileInfoHandler) {
