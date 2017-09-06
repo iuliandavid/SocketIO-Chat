@@ -21,6 +21,8 @@ protocol MessageService {
     
     var typingUsersText:Dynamic<String> {get}
     
+    var unreadChannels:Dynamic<[String]> {get}
+    
     func findAllChannels(completion: @escaping CompletionHandler)
     
     func getAllChannelsURL(baseURL: String?) -> URL

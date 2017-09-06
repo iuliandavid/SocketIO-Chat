@@ -23,9 +23,12 @@ class ChannelViewModel {
     
     public private(set) var channels: Dynamic<[Channel]> = Dynamic([])
     
+    public private(set) var unreadChannels: Dynamic<[String]> = Dynamic([])
+    
     public var selectedChannel: Channel? {
         didSet {
             messageService.selectedChannel.value = selectedChannel
+            updateUnreadChannels()
         }
     }
     
@@ -41,6 +44,9 @@ class ChannelViewModel {
             self.channels.value = channels
         })
         
+        messageService?.unreadChannels.bindAndFire(listener: { [unowned self] (unreadChannels) in
+            self.unreadChannels.value = unreadChannels
+        })
     }
     
     func userDataChanged(completion: @escaping UserProfileInfoHandler) {
@@ -64,5 +70,10 @@ class ChannelViewModel {
     
     func isLoggedIn() -> Bool {
         return authService.isLoggedIn
+    }
+    
+    func updateUnreadChannels() {
+        messageService.unreadChannels.value = messageService.unreadChannels.value.filter{ $0 != self.selectedChannel?.id
+        }
     }
 }

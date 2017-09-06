@@ -13,7 +13,7 @@ import SwiftyJSON
 /// The history results such as: all channels, all messages, etc are done with the REST methods
 /// Realtime results(happening when the app is running) are done with the Websockets methods
 class MessageServiceClient: MessageService {
-
+    
     static let instance = MessageServiceClient()
     
     /// ALL the channels for the logged user
@@ -31,21 +31,18 @@ class MessageServiceClient: MessageService {
     /// Text binding for `usersTyping` endpoint
     var typingUsersText:Dynamic<String> = Dynamic("")
     
+    /// Binding for channel ids that have unread messages
+    var unreadChannels: Dynamic<[String]>
+    
     private init() {
         channels = Dynamic([])
         selectedChannel = Dynamic(nil)
         messages = Dynamic([])
+        unreadChannels = Dynamic([])
         getChannels()
         getMessages()
         getUsersTyping()
         
-        //let mmy = testDict.reduce("") {(ac: String, r: (String,String)) -> String in
-//        if r.1 == "1" {
-//            return ac == "" ? r.0 : ac + " and " + r.0
-//        } else {
-//            return ac
-//        }
-//    }
         typingUsers.bindAndFire { (usersArray) in
             let res : (Int,String) = (0,"" )
             let (noOfUsersTyping, users) = usersArray.reduce(res) { (result, item: (String,String)) -> (Int,String) in
@@ -207,12 +204,16 @@ extension MessageServiceClient {
     // MARK: - Channel related
     /// Listener for realtime message creation
     func getMessages() {
+        
         guard let channelId = selectedChannel.value?.id else {
             return
         }
-        SocketService.instance.getMessages(channelID: channelId) { [unowned self] (success, err, message) in
-            if success {
-                self.messages.value.append(message!)
+        
+        SocketService.instance.getMessages(channelID: channelId) { [unowned self] (message) in
+            if message.channelId == channelId {
+                self.messages.value.append(message)
+            } else {
+                self.unreadChannels.value.append(message.channelId)
             }
         }
     }

@@ -67,25 +67,19 @@ class SocketService: NSObject {
     ///io.emit("messageCreated",  msg.messageBody, msg.userId, msg.channelId, msg.userName, msg.userAvatar, msg.userAvatarColor, msg.id, msg.timeStamp)
     ///```
     ///
-    /// - parameter channelID: The channel for which the messages should we listen
     /// - parameter completion: The callback that will execute when this event is received.
     ///
-    func getMessages(channelID: String, completion: @escaping (_ Success: Bool, _ errorMessage: String?, _ message: Message?) -> () ) {
+    func getMessages(channelID: String, completion: @escaping (_ message: Message) -> () ) {
         socket.off(Constants.Sockets.MESSAGE_CREATED)
         socket.on(Constants.Sockets.MESSAGE_CREATED) { (dataArray, ack) in
-            guard let channelMessage = dataArray[2] as? String, channelMessage == channelID
-                else {
-                    return
-            }
+            
             Message.buildMessage(fromArray: dataArray) { (message) in
                 guard let message = message else {
-                    completion(false, "Invalid message", nil)
                     return
                 }
                 
-                completion(true, nil, message)
-            }
-            
+                completion(message)
+            } 
         }
     }
     ///

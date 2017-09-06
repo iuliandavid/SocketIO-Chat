@@ -56,6 +56,9 @@ class MenuView: UIView {
             channelViewModel.channels.bindAndFire(listener: { [unowned self](chanels) in
                 self.lazyReloadTable()
             })
+            channelViewModel.unreadChannels.bindAndFire(listener: {[unowned self] (_) in
+                self.lazyReloadTable()
+            })
         }
     }
     deinit {
@@ -153,7 +156,7 @@ extension MenuView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let channel = channelViewModel.channels.value[indexPath.row]
-        //        MessageServiceClient.instance.selectedChannel.value = channel
+        
         channelViewModel.selectedChannel = channel
         chatVC?.handleShowMenu()
     }
