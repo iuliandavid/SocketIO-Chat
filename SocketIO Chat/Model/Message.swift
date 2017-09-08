@@ -45,8 +45,9 @@ struct Message {
         return newMessage
     }
     
+    //        msg.messageBody, msg.userId, msg.channelId, msg.userName, msg.userAvatar, msg.userAvatarColor, msg.id, msg.timeStamp
     static func buildMessage(fromArray dataArr: [Any], completion: @escaping (Message?) -> ()) {
-//        msg.messageBody, msg.userId, msg.channelId, msg.userName, msg.userAvatar, msg.userAvatarColor, msg.id, msg.timeStamp
+
         guard let messageBody = dataArr[0] as? String,
               let channelId = dataArr[2] as? String,
         let userName = dataArr[3] as? String,

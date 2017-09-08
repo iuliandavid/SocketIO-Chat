@@ -27,16 +27,13 @@ struct Channel {
     private static let descString = "description"
     private static let idString = "_id"
     
-    init(channelTitle: String, channelDescription: String, id: String) {
-        self.channelTitle = channelTitle
-        self.channelDescription = channelDescription
-        self.id = id
-    }
-    init(from item: JSON) {
+    
+    public static func buildChannel(from item: JSON) -> Channel {
         
-        channelTitle = item[Channel.titleString].stringValue
-        channelDescription = item[Channel.descString].stringValue
-        id = item[Channel.idString].stringValue
+        let channelTitle = item[titleString].stringValue
+        let channelDescription = item[descString].stringValue
+        let id = item[idString].stringValue
+        return Channel(channelTitle: channelTitle, channelDescription: channelDescription, id: id)
     }
     
     public static func buildChannelJSON(title: String, description: String?) -> [String: Any] {

@@ -40,6 +40,7 @@
 		B895C3021F5A8BBB00DF8EE5 /* MessageServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B895C3011F5A8BBB00DF8EE5 /* MessageServiceClient.swift */; };
 		B895C3051F5A8C5600DF8EE5 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B895C3041F5A8C5600DF8EE5 /* Channel.swift */; };
 		B895C3091F5AB05700DF8EE5 /* ChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B895C3081F5AB05700DF8EE5 /* ChannelCell.swift */; };
+		B8A20BE81F5FB5B2008DB14E /* StringToCustomNSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A20BE71F5FB5B2008DB14E /* StringToCustomNSAttributedString.swift */; };
 		B8DD4AE21F5C3F6200923344 /* KeyboardBoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DD4AE11F5C3F6200923344 /* KeyboardBoundView.swift */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,7 @@
 		B895C3011F5A8BBB00DF8EE5 /* MessageServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageServiceClient.swift; sourceTree = "<group>"; };
 		B895C3041F5A8C5600DF8EE5 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		B895C3081F5AB05700DF8EE5 /* ChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCell.swift; sourceTree = "<group>"; };
+		B8A20BE71F5FB5B2008DB14E /* StringToCustomNSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringToCustomNSAttributedString.swift; sourceTree = "<group>"; };
 		B8DD4AE11F5C3F6200923344 /* KeyboardBoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardBoundView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -135,6 +137,7 @@
 		B83AEAB41F4FDF24003CDDD9 /* SocketIO Chat */ = {
 			isa = PBXGroup;
 			children = (
+				B8A20BE61F5FB57B008DB14E /* Extensions */,
 				B8624B8D1F53CC9300E8B5D6 /* Services */,
 				B8624B861F5317B700E8B5D6 /* Utilities */,
 				B83AEAC91F51579A003CDDD9 /* View */,
@@ -183,7 +186,6 @@
 				B84CD1EE1F57C880001D517D /* AvatarCell.swift */,
 				B84CD1F21F58448E001D517D /* CircleImage.swift */,
 				B895C3081F5AB05700DF8EE5 /* ChannelCell.swift */,
-				B8DD4AE11F5C3F6200923344 /* KeyboardBoundView.swift */,
 				B84D3F341F5C4AAE00E461B3 /* MessageCell.swift */,
 			);
 			path = View;
@@ -226,6 +228,15 @@
 				B86C896F1F5B5337007ACB6F /* Message.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		B8A20BE61F5FB57B008DB14E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B8DD4AE11F5C3F6200923344 /* KeyboardBoundView.swift */,
+				B8A20BE71F5FB5B2008DB14E /* StringToCustomNSAttributedString.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		D0EEC99381FC5CA829A5C41A /* Frameworks */ = {
@@ -377,6 +388,7 @@
 				B823495E1F551D1D0038C32D /* RoundedButton.swift in Sources */,
 				B813674C1F5158EF00289A5B /* ChatVC.swift in Sources */,
 				B82349601F552AE90038C32D /* UserDataService.swift in Sources */,
+				B8A20BE81F5FB5B2008DB14E /* StringToCustomNSAttributedString.swift in Sources */,
 				B895C3021F5A8BBB00DF8EE5 /* MessageServiceClient.swift in Sources */,
 				B8624B8A1F531D3800E8B5D6 /* LoginVC.swift in Sources */,
 				B8624B911F53CEE400E8B5D6 /* AuthService.swift in Sources */,

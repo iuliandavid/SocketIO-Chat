@@ -126,11 +126,3 @@ extension CreateAccountVC {
     }
 }
 
-//MARK - String extension for returning custom color NSAttributedString
-extension String {
-    func getCustomAttributedText(foregroundColor: UIColor? = Constants.textPlaceholderColor) -> NSAttributedString {
-        let attrs = [NSAttributedStringKey.foregroundColor: foregroundColor as Any] as [NSAttributedStringKey : Any]
-        
-        return NSAttributedString(string: self, attributes: attrs)
-    }
-}

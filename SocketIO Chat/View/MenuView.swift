@@ -141,7 +141,8 @@ extension MenuView: UITableViewDataSource {
         }
         
         let channel = channelViewModel.channels.value[indexPath.row]
-        cell.configureCell(channel: channel)
+        let hasUnreadMessages = channelViewModel.hasUnreadMessages(channel: channel)
+        cell.configureCell(channel: channel, hasUnreadMessages: hasUnreadMessages)
         return cell
     }
 }

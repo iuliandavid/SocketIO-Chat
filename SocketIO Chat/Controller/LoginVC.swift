@@ -43,15 +43,14 @@ class LoginVC: UIViewController {
             let password = passwordTxt.text, passwordTxt.text != "" else {
                 return
         }
+        
         AuthServiceClient.sharedInstance.loginUser(email: email, password: password, completion: { (success, error) in
             if success {
                 AuthServiceClient.sharedInstance.findUserByEmail(completion: { (success, err) in
                     if success {
                         NotificationCenter.default.post(name: Constants.NOTIF_DATA_DID_CHANGE, object: nil)
-//                        self.spinner.isHidden = true
                         self.spinner.stopAnimating()
                         self.dismiss(animated: false, completion: nil)
-//                        self.performSegue(withIdentifier: Constants.Segues.UNWIND, sender: nil)
                     }
                 })
                 

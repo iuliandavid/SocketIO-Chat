@@ -124,7 +124,7 @@ extension MessageServiceClient {
             return
         }
         
-        channelArray.forEach { channels.value.append(Channel(from: $0)) }
+        channelArray.forEach { channels.value.append(Channel.buildChannel(from: $0)) }
     }
     
     

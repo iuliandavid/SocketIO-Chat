@@ -7,6 +7,9 @@
 //
 
 import Foundation
+
+///React type
+///used especially in the binding of UI to data changes
 class Dynamic<T> {
     typealias Listener = (T) -> Void
     var listener: Listener?

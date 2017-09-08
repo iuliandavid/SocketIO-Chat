@@ -76,4 +76,9 @@ class ChannelViewModel {
         messageService.unreadChannels.value = messageService.unreadChannels.value.filter{ $0 != self.selectedChannel?.id
         }
     }
+    
+    func hasUnreadMessages(channel: Channel) -> Bool {
+        guard let _ = unreadChannels.value.first(where: { $0 == channel.id} )  else { return false }
+        return true
+    }
 }
