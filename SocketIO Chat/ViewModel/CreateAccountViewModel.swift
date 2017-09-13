@@ -45,7 +45,7 @@ class CreateAccountViewModel {
                             //announce that user was created
                             NotificationCenter.default.post(name: Constants.notifDataDidChange, object: nil)
                             completion(success, errorMessage)
-                            
+                                                            
                         })
                     } else {
                         completion(success, error)
@@ -85,7 +85,7 @@ extension CreateAccountViewModel {
     
     func getBackgroundColor() -> UIColor {
         if bgColor == nil {
-            if avatarName.contains("light") {
+            if avatarName.contains(AvatarType.light.rawValue) {
                 return .lightGray
             } else {
                 return .white

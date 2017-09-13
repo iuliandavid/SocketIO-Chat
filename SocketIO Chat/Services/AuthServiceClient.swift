@@ -15,8 +15,7 @@ final class AuthServiceClient: AuthService {
 //    var instance: AuthService {
 //        return AuthServiceClient.sharedInstance
 //    }
-    
-    
+
     static let sharedInstance = AuthServiceClient()
     
     private init() {

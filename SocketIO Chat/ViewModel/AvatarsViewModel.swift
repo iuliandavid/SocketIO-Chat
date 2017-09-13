@@ -30,8 +30,8 @@ class AvatarsViewModel {
     
     init() {
         for i in 0...27 {
-            darkAvatars.append("dark\(i)")
-            lightAvatars.append("light\(i)")
+            darkAvatars.append("\(AvatarType.dark.rawValue)\(i)")
+            lightAvatars.append("\(AvatarType.light.rawValue)\(i)")
         }
         avatars = darkAvatars
     }
