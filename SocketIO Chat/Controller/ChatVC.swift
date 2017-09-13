@@ -10,13 +10,12 @@ import UIKit
 
 class ChatVC: UIViewController {
     
-    //MARK: - Outlets
+    // MARK: - Outlets
     @IBOutlet weak var mainViewTrailingConstant: NSLayoutConstraint!
     @IBOutlet weak var menuViewLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var menuView: MenuView!
     
     @IBOutlet weak var channelNameLbl: UILabel!
-    
     
     //a button to appear when the menu is shown
     @IBOutlet weak var blurButton: UIButton!
@@ -30,8 +29,7 @@ class ChatVC: UIViewController {
     var menuShown = false
     
     //unwind segue
-    @IBAction func prepareForUnwind(segue: UIStoryboardSegue){}
-    
+    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) { }
     
     //objects
     let messageClient: MessageService = MessageServiceClient.instance
@@ -43,11 +41,8 @@ class ChatVC: UIViewController {
         
         setupKeyboardEvents()
         
-        
         messageTable.dataSource = self
         messageTable.delegate = self
-        
-//        messageTxt.delegate = self
         
         messageTable.estimatedRowHeight = 80
         messageTable.rowHeight = UITableViewAutomaticDimension
@@ -56,23 +51,22 @@ class ChatVC: UIViewController {
         menuView.customViewWidth = menuViewLeadingConstraint
         blurButton.addTarget(self, action: #selector(handleShowMenu), for: .touchUpInside)
         
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(userDataDidChange(_:)), name: Constants.NOTIF_DATA_DID_CHANGE, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(userDataDidChange(_:)), name: Constants.notifDataDidChange, object: nil)
         
         messageTxt.isHidden = true
         sendButton.isHidden = true
         // TODO - move outside controller
         if authClient.isLoggedIn {
-            authClient.findUserByEmail(completion: { (success, err) in
+            authClient.findUserByEmail(completion: { (success, _) in
                 if success {
-                    NotificationCenter.default.post(name: Constants.NOTIF_DATA_DID_CHANGE, object: nil)
+                    NotificationCenter.default.post(name: Constants.notifDataDidChange, object: nil)
                 }
             })
         }
         // TODO - move outside controller
         messageClient.selectedChannel.bind { [unowned self] (selectedChanel) in
             self.channelNameLbl.text = "#\(selectedChanel?.channelTitle ?? "")"
-            self.getMessages(channelId: selectedChanel?.id)
+            self.getMessages(channelId: selectedChanel?.channelId)
         }
         
         messageClient.messages.bindAndFire {[unowned self] (_) in
@@ -102,18 +96,18 @@ class ChatVC: UIViewController {
         let endIndex = IndexPath(row: messageClient.messages.value.count - 1,section: 0)
         messageTable.scrollToRow(at: endIndex, at: .bottom, animated: false)
     }
-    //MARK: - Actions
+    // MARK: - Actions
     @IBAction func menuPressed(_ sender: Any) {
         handleShowMenu()
     }
     
     @IBAction func sendMessgPressed(_ sender: UIButton) {
         guard let messageBody = messageTxt.text, messageBody != "",
-            let channelId = messageClient.selectedChannel.value?.id else {
+            let channelId = messageClient.selectedChannel.value?.channelId else {
                 return
         }
         
-        messageClient.sendMessage(messageBody: messageBody, channelId: channelId) {[weak self] (success, err) in
+        messageClient.sendMessage(messageBody: messageBody, channelId: channelId) {[weak self] (success, _) in
             if success {
                 self?.messageTxt.text = ""
                 self?.messageTxt.resignFirstResponder()
@@ -121,8 +115,7 @@ class ChatVC: UIViewController {
             }
         }
     }
-    
-    
+
     @objc func userDataDidChange(_ notification: Notification) {
         menuView.userDataChanged()
         // TODO - move outside controller
@@ -141,7 +134,7 @@ class ChatVC: UIViewController {
     
     // TODO - move outside controller
     func onLoginMessages() {
-        messageClient.findAllChannels { [unowned self] (success, error) in
+        messageClient.findAllChannels { [unowned self] (success, _) in
             if success {
                 if self.messageClient.channels.value.count > 0 {
                     self.messageClient.selectedChannel.value = self.messageClient.channels.value[0]
@@ -156,7 +149,7 @@ class ChatVC: UIViewController {
         guard let channelId = channelId else {
             return
         }
-        messageClient.findAllMessages(forChannelId: channelId) { [weak self] (success, err) in
+        messageClient.findAllMessages(forChannelId: channelId) { [weak self] (_, _) in
             self?.messageClient.getMessages()
         }
         
@@ -184,7 +177,7 @@ class ChatVC: UIViewController {
             isTyping = false
             sendButton.isHidden = true
         } else {
-            if !isTyping{
+            if !isTyping {
                 sendButton.isHidden = false
             }
             isTyping = true
@@ -199,7 +192,7 @@ class ChatVC: UIViewController {
     }
 }
 
-//MARK: - Slide Menu related methods
+// MARK: - Slide Menu related methods
 extension ChatVC {
     @objc func handleShowMenu() {
         if menuShown {
@@ -228,30 +221,33 @@ extension ChatVC {
 // MARK: - Keyboard Events show/dismiss
 private extension ChatVC {
     
-    func bindToKeyboard(){
-        NotificationCenter.default.addObserver(self, selector: #selector(UIView.keyboardWillChange(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+    func bindToKeyboard() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(UIView.keyboardWillChange(_:)),
+            name: NSNotification.Name.UIKeyboardWillChangeFrame,
+            object: nil)
     }
     
-    
-    
     @objc func keyboardWillChange(_ notification: NSNotification) {
-        let duration = notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! Double
-        let curve = notification.userInfo![UIKeyboardAnimationCurveUserInfoKey] as! UInt
-        let curFrame = (notification.userInfo![UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-        let targetFrame = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        guard let duration = notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as? Double,
+            let curve = notification.userInfo![UIKeyboardAnimationCurveUserInfoKey] as? UInt,
+            let curFrame = (notification.userInfo![UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue,
+            let targetFrame = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+                return
+        }
         let deltaY = targetFrame.origin.y - curFrame.origin.y
         
         UIView.animateKeyframes(withDuration: duration, delay: 0.0, options: UIViewKeyframeAnimationOptions(rawValue: curve), animations: {
             self.view.frame.origin.y += deltaY
             self.mainViewBlurButton.alpha = 0.1
-        },completion: {(true) in
+        },completion: {(_) in
             self.view.layoutIfNeeded()
         })
     }
     func setupKeyboardEvents() {
         
         bindToKeyboard()
-        
         
     }
     
@@ -267,7 +263,7 @@ extension ChatVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifiers.MESSAGE_CELL_IDENTIFIER, for: indexPath) as? MessageCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifiers.messageCellIdentifier, for: indexPath) as? MessageCell else {
             return UITableViewCell()
         }
         let message = messageClient.messages.value[indexPath.row]
@@ -278,5 +274,3 @@ extension ChatVC: UITableViewDataSource {
 }
 
 extension ChatVC: UITableViewDelegate {}
-
-

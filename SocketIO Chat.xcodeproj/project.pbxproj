@@ -260,6 +260,7 @@
 				B83AEAB01F4FDF24003CDDD9 /* Resources */,
 				C2227C4A21344E3AE6A83638 /* [CP] Embed Pods Frameworks */,
 				6B1389CDE569F88A38609577 /* [CP] Copy Pods Resources */,
+				B873C4381F68D5D000ECF7FC /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -348,6 +349,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SocketIO Chat/Pods-SocketIO Chat-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		B873C4381F68D5D000ECF7FC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 		C2227C4A21344E3AE6A83638 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -29,7 +29,6 @@ class MessageCell: UITableViewCell {
         timestampLbl.sizeToFit()
         messageLbl.sizeToFit()
     }
-
     
     /// Transforms the ISO timestamp into a custom String
     /// 2017-09-01 02:22:34.340Z

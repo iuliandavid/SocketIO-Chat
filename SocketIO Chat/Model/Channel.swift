@@ -20,20 +20,19 @@ struct Channel {
     
     public private(set) var channelTitle: String!
     public private(set) var channelDescription: String!
-    public private(set) var id: String!
+    public private(set) var channelId: String!
     
     //JSON mapping
     private static let titleString = "name"
     private static let descString = "description"
     private static let idString = "_id"
     
-    
     public static func buildChannel(from item: JSON) -> Channel {
         
         let channelTitle = item[titleString].stringValue
         let channelDescription = item[descString].stringValue
         let id = item[idString].stringValue
-        return Channel(channelTitle: channelTitle, channelDescription: channelDescription, id: id)
+        return Channel(channelTitle: channelTitle, channelDescription: channelDescription, channelId: id)
     }
     
     public static func buildChannelJSON(title: String, description: String?) -> [String: Any] {

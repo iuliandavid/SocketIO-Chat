@@ -27,7 +27,7 @@ struct Message {
     public private(set) var channelId: String!
     public private(set) var userAvatar: String!
     public private(set) var userAvatarColor: String!
-    public private(set) var id: String!
+    public private(set) var messageId: String!
     public private(set) var timestamp: String!
     
     static func buildMessage(fromJson item: JSON) -> Message {
@@ -40,13 +40,20 @@ struct Message {
         let id = item["_id"].stringValue
         let timestamp = item["timeStamp"].stringValue
         
-        let newMessage = Message(message: message, userName: userName, channelId: channelId, userAvatar: userAvatar, userAvatarColor: userAvatarColor, id: id, timestamp: timestamp)
+        let newMessage = Message(
+            message: message,
+            userName: userName,
+            channelId: channelId,
+            userAvatar: userAvatar,
+            userAvatarColor: userAvatarColor,
+            messageId: id,
+            timestamp: timestamp)
         
         return newMessage
     }
     
     //        msg.messageBody, msg.userId, msg.channelId, msg.userName, msg.userAvatar, msg.userAvatarColor, msg.id, msg.timeStamp
-    static func buildMessage(fromArray dataArr: [Any], completion: @escaping (Message?) -> ()) {
+    static func buildMessage(fromArray dataArr: [Any], completion: @escaping (Message?) -> Void) {
 
         guard let messageBody = dataArr[0] as? String,
               let channelId = dataArr[2] as? String,
@@ -59,7 +66,14 @@ struct Message {
             completion(nil)
             return
         }
-        let message = Message(message: messageBody, userName: userName, channelId: channelId, userAvatar: userAvatar, userAvatarColor: userAvatarColor, id: id, timestamp: timestamp)
+        let message = Message(
+            message: messageBody,
+            userName: userName,
+            channelId: channelId,
+            userAvatar: userAvatar,
+            userAvatarColor: userAvatarColor,
+            messageId: id,
+            timestamp: timestamp)
         print(message)
         completion(message)
         

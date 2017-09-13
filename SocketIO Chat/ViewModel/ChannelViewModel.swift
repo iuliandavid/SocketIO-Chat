@@ -1,4 +1,3 @@
-
 //
 //  ChannelViewModel.swift
 //  SocketIO Chat
@@ -17,7 +16,7 @@ class ChannelViewModel {
     
     public private(set) var loginTitle:String = ""
     
-    public private(set) var imageName = Constants.DEFAULT_PROFILE_IMAGE
+    public private(set) var imageName = Constants.defaultProfileImage
     
     public private(set) var bgColor:UIColor?
     
@@ -61,7 +60,7 @@ class ChannelViewModel {
             })
         } else {
             loginTitle = "Login"
-            imageName = Constants.DEFAULT_PROFILE_IMAGE
+            imageName = Constants.defaultProfileImage
             bgColor = UserDataService.instance.returnUIColor(components: UserDataService.instance.avatarColor)
             completion(loginTitle, imageName, bgColor)
         }
@@ -73,12 +72,12 @@ class ChannelViewModel {
     }
     
     func updateUnreadChannels() {
-        messageService.unreadChannels.value = messageService.unreadChannels.value.filter{ $0 != self.selectedChannel?.id
+        messageService.unreadChannels.value = messageService.unreadChannels.value.filter { $0 != self.selectedChannel?.channelId
         }
     }
     
     func hasUnreadMessages(channel: Channel) -> Bool {
-        guard let _ = unreadChannels.value.first(where: { $0 == channel.id} )  else { return false }
+        guard (unreadChannels.value.first(where: {$0 == channel.channelId})) != nil  else { return false }
         return true
     }
 }

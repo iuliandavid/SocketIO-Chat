@@ -51,8 +51,8 @@ protocol MessageService {
 }
 
 extension MessageService {
-    func getAllChannelsURL(baseURL: String? = Constants.UrlConstants.BASE_URL) -> URL {
-        guard let baseURL = baseURL, let url = URL(string: "\(baseURL)\(Constants.UrlConstants.CHANNEL_LIST_ENDPOINT)") else {
+    func getAllChannelsURL(baseURL: String? = Constants.UrlConstants.baseUrl) -> URL {
+        guard let baseURL = baseURL, let url = URL(string: "\(baseURL)\(Constants.UrlConstants.channels)") else {
             fatalError()
         }
         
@@ -64,7 +64,6 @@ extension MessageService {
             return nil
         }
         
-        
         var header:[String: String] = [
             "Authorization": "Bearer \(authToken)"
         ]
@@ -72,8 +71,8 @@ extension MessageService {
         return header
     }
     
-    func getAllMessagesForChannelURL(channelId: String, baseURL: String? = Constants.UrlConstants.BASE_URL) -> URL {
-        guard let baseURL = baseURL, let url = URL(string: "\(baseURL)\(Constants.UrlConstants.MESSAGES_CHANNEL_ENDPOINT)\(channelId)") else {
+    func getAllMessagesForChannelURL(channelId: String, baseURL: String? = Constants.UrlConstants.baseUrl) -> URL {
+        guard let baseURL = baseURL, let url = URL(string: "\(baseURL)\(Constants.UrlConstants.findMessagesByChannel)\(channelId)") else {
             fatalError()
         }
         

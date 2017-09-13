@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class ProfileVC: UIViewController {
 
     @IBOutlet weak var profileImg: UIImageView!
@@ -38,10 +37,9 @@ class ProfileVC: UIViewController {
         setupView()
     }
 
-    
     @IBAction func logoutPressed(_ sender: Any) {
         userDataService.logoutUser()
-        NotificationCenter.default.post(name: Constants.NOTIF_DATA_DID_CHANGE, object: nil)
+        NotificationCenter.default.post(name: Constants.notifDataDidChange, object: nil)
         dismiss(animated: true, completion: nil)
     }
     
@@ -49,5 +47,4 @@ class ProfileVC: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-
 }

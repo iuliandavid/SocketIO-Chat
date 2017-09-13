@@ -28,7 +28,6 @@ class AvatarsViewModel {
     
     public private(set) var avatars: [String] = []
     
-    
     init() {
         for i in 0...27 {
             darkAvatars.append("dark\(i)")

@@ -109,7 +109,7 @@ class UserDataService {
     func getUserInfo(completion: @escaping UserProfileInfoHandler) {
         // if data is not yet available
         if name == "" {
-            AuthServiceClient.sharedInstance.findUserByEmail(completion: { [weak self] (success, error) in
+            AuthServiceClient.sharedInstance.findUserByEmail(completion: { [weak self] (_, _) in
                 guard let strongSelf = self else { fatalError()}
                 completion(strongSelf.name, strongSelf.avatarName, strongSelf.returnUIColor(components: strongSelf.avatarColor))
             })

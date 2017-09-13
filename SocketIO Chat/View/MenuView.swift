@@ -22,7 +22,6 @@ class MenuView: UIView {
     
     private var channelViewModel = ChannelViewModel()
     
-    
     var chatVC: ChatVC?
     
     var hasInit = false
@@ -47,13 +46,13 @@ class MenuView: UIView {
         fixDesignableStoryBoardFailure()
         
         if !hasInit {
-            NotificationCenter.default.addObserver(self, selector: #selector(userDataChanged), name: Constants.NOTIF_DATA_DID_CHANGE, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(userDataChanged), name: Constants.notifDataDidChange, object: nil)
             
             channelTable.dataSource = self
             channelTable.delegate = self
             hasInit = true
             //Reacting to channel array updating
-            channelViewModel.channels.bindAndFire(listener: { [unowned self](chanels) in
+            channelViewModel.channels.bindAndFire(listener: { [unowned self](_) in
                 self.lazyReloadTable()
             })
             channelViewModel.unreadChannels.bindAndFire(listener: {[unowned self] (_) in
@@ -65,8 +64,6 @@ class MenuView: UIView {
         NotificationCenter.default.removeObserver(self)
     }
     
-    
-    
     @IBAction func loginPressed(_ sender: Any) {
         if channelViewModel.isLoggedIn() {
             // Show Profile Page
@@ -74,7 +71,7 @@ class MenuView: UIView {
             profile.modalPresentationStyle = .custom
             chatVC?.present(profile, animated: true, completion: nil)
         } else {
-            chatVC?.performSegue(withIdentifier: Constants.Segues.TO_LOGIN, sender: nil)
+            chatVC?.performSegue(withIdentifier: Constants.Segues.toLogin, sender: nil)
         }
         
     }
@@ -86,7 +83,7 @@ class MenuView: UIView {
             profile.modalPresentationStyle = .custom
             chatVC?.present(profile, animated: true, completion: nil)
         } else {
-            chatVC?.performSegue(withIdentifier: Constants.Segues.TO_LOGIN, sender: nil)
+            chatVC?.performSegue(withIdentifier: Constants.Segues.toLogin, sender: nil)
         }
         
     }
@@ -106,7 +103,6 @@ class MenuView: UIView {
     //        startPosition = touch?.location(in: self)
     //        originalWidth = customViewWidth.constant
     //    }
-    
     @objc func userDataChanged() {
         //wait for the data to be obtained
         channelViewModel.userDataChanged {[weak self] (loginTitle, imageName, bgColor) in
@@ -114,9 +110,7 @@ class MenuView: UIView {
             self?.profileImage.image = UIImage(named: imageName)
             self?.profileImage.backgroundColor = bgColor
         }
-        
     }
-    
     // MARK: - Slow Table Reload
     ///Try to reload table slowly, especially when new data arrives fast
     var timer: Timer?
@@ -136,7 +130,7 @@ extension MenuView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifiers.CHANNEL_CELL_IDENTIFIER, for: indexPath) as? ChannelCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifiers.channelCellIdentifier, for: indexPath) as? ChannelCell else {
             return ChannelCell()
         }
         

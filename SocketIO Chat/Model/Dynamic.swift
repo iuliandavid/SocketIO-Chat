@@ -29,7 +29,7 @@ class Dynamic<T> {
         }
     }
     
-    init(_ v: T) {
-        value = v
+    init(_ val: T) {
+        value = val
     }
 }

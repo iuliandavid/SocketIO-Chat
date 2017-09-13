@@ -10,12 +10,11 @@ import SocketIO
 
 class SocketService: NSObject {
     
-    
     static let instance = SocketService()
 //debug purposes
 //    private let socket = SocketIOClient(socketURL: URL(string: Constants.UrlConstants.BASE_URL)!, config: [.log(true), .compress])
     
-    private let socket = SocketIOClient(socketURL: URL(string: Constants.UrlConstants.BASE_URL)!)
+    private let socket = SocketIOClient(socketURL: URL(string: Constants.UrlConstants.baseUrl)!)
     
     override init() {
         super.init()
@@ -34,19 +33,19 @@ class SocketService: NSObject {
     // MARK: - Endpoints
     // MARK: - Channel Related
     func addChannel(channelName: String, channelDescription: String, completion: @escaping CompletionHandler) {
-        socket.emit(Constants.Sockets.NEW_CHANNEL, channelName, channelDescription)
+        socket.emit(Constants.Sockets.newChannel, channelName, channelDescription)
         completion(true, nil)
     }
     
     /// Subscribes to channel creation events
     func getChannels(completion: @escaping CompletionHandler ) {
-        socket.on(Constants.Sockets.CHANNEL_CREATED) { (dataArray, ack) in
+        socket.on(Constants.Sockets.channelCreated) { (dataArray, _) in
             guard let channelName = dataArray[0] as? String,
                 let channelDescription = dataArray[1] as? String,
                 let channelId = dataArray[2] as? String else {
                     return
             }
-            let channel = Channel(channelTitle: channelName, channelDescription: channelDescription, id: channelId)
+            let channel = Channel(channelTitle: channelName, channelDescription: channelDescription, channelId: channelId)
             MessageServiceClient.instance.channels.value.append(channel)
             completion(true, nil)
         }
@@ -57,7 +56,7 @@ class SocketService: NSObject {
     ///client.on('newMessage', function(messageBody, userId, channelId, userName, userAvatar, userAvatarColor)
     ///```
     func postMessage(messageBody: String, userId: String, channelId: String, userName: String, userAvatar: String, userAvatarColor: String, completion: @escaping CompletionHandler) {
-        socket.emit(Constants.Sockets.NEW_MESSAGE, messageBody, userId, channelId, userName, userAvatar, userAvatarColor)
+        socket.emit(Constants.Sockets.newMessage, messageBody, userId, channelId, userName, userAvatar, userAvatarColor)
         completion(true, nil)
     }
     
@@ -69,9 +68,9 @@ class SocketService: NSObject {
     ///
     /// - parameter completion: The callback that will execute when this event is received.
     ///
-    func getMessages(channelID: String, completion: @escaping (_ message: Message) -> () ) {
-        socket.off(Constants.Sockets.MESSAGE_CREATED)
-        socket.on(Constants.Sockets.MESSAGE_CREATED) { (dataArray, ack) in
+    func getMessages(channelID: String, completion: @escaping (_ message: Message) -> Void ) {
+        socket.off(Constants.Sockets.messageCreated)
+        socket.on(Constants.Sockets.messageCreated) { (dataArray, _) in
             
             Message.buildMessage(fromArray: dataArray) { (message) in
                 guard let message = message else {
@@ -91,8 +90,8 @@ class SocketService: NSObject {
     ///
     /// - parameter completion: The callback that will execute when this event is received containing a dictionary of user:channel pairs.
     ///
-    func getTypingUsers(completion: @escaping (_ typingUsers: [String: String]) -> ()) {
-        socket.on(Constants.Sockets.TYPING_USERS) { (dataArray, ack) in
+    func getTypingUsers(completion: @escaping (_ typingUsers: [String: String]) -> Void) {
+        socket.on(Constants.Sockets.typingUsers) { (dataArray, _) in
             guard let typingUsers = dataArray[0] as? [String: String] else {
                 return
             }
@@ -114,12 +113,10 @@ class SocketService: NSObject {
     ///
     func setUserTyping(userName: String, typing:Bool, channelId: String, completion: @escaping CompletionHandler) {
         if typing {
-            socket.emit(Constants.Sockets.START_TYPING, userName, channelId)
+            socket.emit(Constants.Sockets.startTyping, userName, channelId)
         } else {
-            socket.emit(Constants.Sockets.STOP_TYPING, userName)
+            socket.emit(Constants.Sockets.stopTyping, userName)
         }
         completion(true, nil)
     }
 }
-
-

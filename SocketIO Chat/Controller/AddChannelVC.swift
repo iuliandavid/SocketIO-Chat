@@ -23,11 +23,9 @@ class AddChannelVC: UIViewController {
         setupView()
     }
     
-    
     fileprivate func setupView() {
         nameTxt.attributedPlaceholder = "Name".getCustomAttributedText()
         descriptionTxt.attributedPlaceholder = "Description".getCustomAttributedText()
-        
         
         let closeTap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         bgView.addGestureRecognizer(closeTap)
@@ -46,7 +44,7 @@ class AddChannelVC: UIViewController {
             let description = descriptionTxt.text else {
                 return
         }
-        messageService.addChannel(channelName: name, channelDescription: description) { [weak self] (success, error) in
+        messageService.addChannel(channelName: name, channelDescription: description) { [weak self] (success, _) in
             if success {
                 self?.dismiss(animated: true, completion: nil)
             }

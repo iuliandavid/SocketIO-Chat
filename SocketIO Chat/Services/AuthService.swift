@@ -18,7 +18,6 @@ protocol AuthService {
     
     var userEmail: String? {get set}
     
-    
     func registerUser(email: String, password: String, completion: @escaping CompletionHandler)
     
     func getRegistrationUrl(_ baseURL: String?) -> URL
@@ -36,32 +35,32 @@ protocol AuthService {
 }
 
 extension AuthService {
-    func getRegistrationUrl(_ baseURL: String? = Constants.UrlConstants.BASE_URL) -> URL {
-        guard let baseURL = baseURL, let url = URL(string: "\(baseURL)\(Constants.UrlConstants.REGISTER_ENDPOINT)") else {
+    func getRegistrationUrl(_ baseURL: String? = Constants.UrlConstants.baseUrl) -> URL {
+        guard let baseURL = baseURL, let url = URL(string: "\(baseURL)\(Constants.UrlConstants.register)") else {
            fatalError()
         }
         
         return url
     }
     
-    func getLoginUrl(_ baseURL: String? = Constants.UrlConstants.BASE_URL) -> URL {
-        guard let baseURL = baseURL, let url = URL(string: "\(baseURL)\(Constants.UrlConstants.LOGIN_ENDPOINT)") else {
+    func getLoginUrl(_ baseURL: String? = Constants.UrlConstants.baseUrl) -> URL {
+        guard let baseURL = baseURL, let url = URL(string: "\(baseURL)\(Constants.UrlConstants.login)") else {
             fatalError()
         }
         
         return url
     }
     
-    func getAddUserUrl(_ baseURL: String? = Constants.UrlConstants.BASE_URL) -> URL {
-        guard let baseURL = baseURL, let url = URL(string: "\(baseURL)\(Constants.UrlConstants.USER_ADD_ENDPOINT)") else {
+    func getAddUserUrl(_ baseURL: String? = Constants.UrlConstants.baseUrl) -> URL {
+        guard let baseURL = baseURL, let url = URL(string: "\(baseURL)\(Constants.UrlConstants.addUser)") else {
             fatalError()
         }
         
         return url
     }
     
-    func getUserByEmailUrl(_ baseURL: String? = Constants.UrlConstants.BASE_URL, userEmail: String) -> URL {
-        guard let baseURL = baseURL, let url = URL(string: "\(baseURL)\(Constants.UrlConstants.USER_BY_EMAIL_ENDPOINT)\(userEmail)") else {
+    func getUserByEmailUrl(_ baseURL: String? = Constants.UrlConstants.baseUrl, userEmail: String) -> URL {
+        guard let baseURL = baseURL, let url = URL(string: "\(baseURL)\(Constants.UrlConstants.findUserByEmail)\(userEmail)") else {
             fatalError()
         }
         

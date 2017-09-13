@@ -15,20 +15,18 @@ class LoginVC: UIViewController {
     @IBOutlet weak var emailTxt: UITextField!
     @IBOutlet weak var passwordTxt: UITextField!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
     }
     
-    
     @IBAction func closeBtnPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func createAccount(_ sender: Any) {
-        performSegue(withIdentifier: Constants.Segues.TO_CREATE_ACCOUNT, sender: nil)
+        performSegue(withIdentifier: Constants.Segues.toCreateAccount, sender: nil)
     }
     
     @IBAction func loginPressed(_ sender: Any) {
@@ -44,11 +42,11 @@ class LoginVC: UIViewController {
                 return
         }
         
-        AuthServiceClient.sharedInstance.loginUser(email: email, password: password, completion: { (success, error) in
+        AuthServiceClient.sharedInstance.loginUser(email: email, password: password, completion: { (success, _) in
             if success {
-                AuthServiceClient.sharedInstance.findUserByEmail(completion: { (success, err) in
+                AuthServiceClient.sharedInstance.findUserByEmail(completion: { (success, _) in
                     if success {
-                        NotificationCenter.default.post(name: Constants.NOTIF_DATA_DID_CHANGE, object: nil)
+                        NotificationCenter.default.post(name: Constants.notifDataDidChange, object: nil)
                         self.spinner.stopAnimating()
                         self.dismiss(animated: false, completion: nil)
                     }
@@ -57,7 +55,6 @@ class LoginVC: UIViewController {
             }
         })
     }
-    
     
     func setupView() {
         spinner.isHidden = true

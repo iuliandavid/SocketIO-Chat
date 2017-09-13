@@ -11,7 +11,7 @@ import UIKit
 class AvatarCell: UICollectionViewCell {
     @IBOutlet weak var avatarImageView: UIImageView!
     
-    var imageStringAndColor: (imageString: String,type: AvatarType)? {
+    var imageStringAndColor: (imageString: String, type: AvatarType)? {
         didSet {
             updateCell()
         }

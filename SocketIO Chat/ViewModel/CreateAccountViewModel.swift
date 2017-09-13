@@ -9,9 +9,7 @@
 import Foundation
 import UIKit
 
-
 class CreateAccountViewModel {
-    
     //variables
     var avatarName:String {
         guard !UserDataService.instance.avatarName.isEmpty else {
@@ -26,8 +24,8 @@ class CreateAccountViewModel {
     public private(set) var email:String?
     
     private var bgColor: UIColor?
-    
-    private let authService:AuthService = AuthServiceClient.sharedInstance
+    // injectable AuthService
+    private let authService: AuthService = AuthServiceClient.sharedInstance
     
     func registerUser(completion: @escaping CompletionHandler) {
         guard let email = email, !email.isEmpty,
@@ -45,7 +43,7 @@ class CreateAccountViewModel {
                         guard let strongSelf = self else { return }
                         strongSelf.authService.createUser(name: name, email: email, avatarColor: strongSelf.avatarColor, avatarName: strongSelf.avatarName, completion: { (success, errorMessage) in
                             //announce that user was created
-                            NotificationCenter.default.post(name: Constants.NOTIF_DATA_DID_CHANGE, object: nil)
+                            NotificationCenter.default.post(name: Constants.notifDataDidChange, object: nil)
                             completion(success, errorMessage)
                             
                         })

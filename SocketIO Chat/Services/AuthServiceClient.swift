@@ -12,8 +12,6 @@ import SwiftyJSON
 
 final class AuthServiceClient: AuthService {
     
-    
-    
 //    var instance: AuthService {
 //        return AuthServiceClient.sharedInstance
 //    }
@@ -30,28 +28,28 @@ final class AuthServiceClient: AuthService {
     
     var isLoggedIn : Bool {
         get {
-            return defaults.bool(forKey: Constants.Authentication.LOGGED_IN_KEY)
+            return defaults.bool(forKey: Constants.Authentication.loggedInKey)
         }
         set {
-            defaults.set(newValue, forKey: Constants.Authentication.LOGGED_IN_KEY)
+            defaults.set(newValue, forKey: Constants.Authentication.loggedInKey)
         }
     }
     
     var authToken: String? {
         get {
-            return defaults.string(forKey: Constants.Authentication.TOKEN_KEY)
+            return defaults.string(forKey: Constants.Authentication.tokenKey)
         }
         set {
-            defaults.set(newValue, forKey: Constants.Authentication.TOKEN_KEY)
+            defaults.set(newValue, forKey: Constants.Authentication.tokenKey)
         }
     }
     
     var userEmail: String? {
         get {
-            return defaults.string(forKey: Constants.Authentication.USER_EMAIL)
+            return defaults.string(forKey: Constants.Authentication.userEmail)
         }
         set {
-            defaults.set(newValue, forKey: Constants.Authentication.USER_EMAIL)
+            defaults.set(newValue, forKey: Constants.Authentication.userEmail)
         }
     }
     
@@ -70,7 +68,7 @@ final class AuthServiceClient: AuthService {
                 completion(false, "cannot connect to server")
                 return
             }
-            if response.result.error == nil && (200..<300).contains(resultCode)   {
+            if response.result.error == nil && (200..<300).contains(resultCode) {
                 debugPrint(response.result.value as Any)
                 completion(true, nil)
             } else {
@@ -101,7 +99,7 @@ final class AuthServiceClient: AuthService {
                 completion(false, "cannot connect to server")
                 return
             }
-            if response.result.error == nil && (200..<300).contains(resultCode)   {
+            if response.result.error == nil && (200..<300).contains(resultCode) {
                 //Standard way
 //                if let json = response.result.value as? Dictionary<String, Any> {
 //                    if let email = json["user"] as? String {
@@ -132,7 +130,7 @@ final class AuthServiceClient: AuthService {
         }
     }
     
-    func createUser(name: String, email: String, avatarColor: String, avatarName: String, completion: @escaping CompletionHandler)  {
+    func createUser(name: String, email: String, avatarColor: String, avatarName: String, completion: @escaping CompletionHandler) {
         
         guard let authToken = AuthServiceClient.sharedInstance.authToken else {
             return
@@ -140,7 +138,6 @@ final class AuthServiceClient: AuthService {
         
         let body = UserDataService.instance.buildUserData(email: email, name: name, avatarName: avatarName, color: avatarColor)
 
-        
         var header:[String: String] = [
             "Authorization": "Bearer \(authToken)"
         ]
@@ -152,7 +149,7 @@ final class AuthServiceClient: AuthService {
                 return
             }
             
-            if response.result.error == nil && (200..<300).contains(resultCode)   {
+            if response.result.error == nil && (200..<300).contains(resultCode) {
                 
                 //SwiftyJSON
                 guard let data = response.data else {
@@ -204,7 +201,6 @@ final class AuthServiceClient: AuthService {
             completion(false, "invalid credentials")
             return [:]
         }
-        
         
         var header:[String: String] = [
             "Authorization": "Bearer \(authToken)"

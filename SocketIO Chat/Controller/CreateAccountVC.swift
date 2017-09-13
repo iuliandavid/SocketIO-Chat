@@ -38,9 +38,8 @@ class CreateAccountVC: UIViewController {
     }
     
     @IBAction func closeBtnPressed(_ sender: Any) {
-        performSegue(withIdentifier: Constants.Segues.UNWIND, sender: nil)
+        performSegue(withIdentifier: Constants.Segues.unwindToChannel, sender: nil)
     }
-    
     
     @IBAction func createAccountPressed(_ sender: Any) {
         UIView.animate(withDuration: 0.3) { [weak self] in
@@ -54,7 +53,7 @@ class CreateAccountVC: UIViewController {
                 self?.spinner.stopAnimating()
             })
             if success {
-                self?.performSegue(withIdentifier: Constants.Segues.UNWIND, sender: nil)
+                self?.performSegue(withIdentifier: Constants.Segues.unwindToChannel, sender: nil)
             } else {
                 let errMessage = error!
                 self?.showErrorMessage(errMessage)
@@ -63,7 +62,7 @@ class CreateAccountVC: UIViewController {
     }
     
     @IBAction func pickAvatarPressed(_ sender: Any) {
-        performSegue(withIdentifier: Constants.Segues.TO_AVATAR_PICKER, sender: nil)
+        performSegue(withIdentifier: Constants.Segues.toAvatarPicker, sender: nil)
     }
     
     @IBAction func pickBGColorPressed(_ sender: Any) {
@@ -72,7 +71,6 @@ class CreateAccountVC: UIViewController {
         }
         
     }
-    
     
     fileprivate func showErrorMessage(_ errMessage: String) {
         let alert = UIAlertController(title: "Error", message: errMessage, preferredStyle: .alert)
@@ -83,7 +81,8 @@ class CreateAccountVC: UIViewController {
 }
 
 extension CreateAccountVC: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
         guard let newString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) else {
             return true
         }
@@ -125,4 +124,3 @@ extension CreateAccountVC {
         return NSAttributedString(string: text, attributes: attrs)
     }
 }
-

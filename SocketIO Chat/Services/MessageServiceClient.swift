@@ -47,7 +47,7 @@ class MessageServiceClient: MessageService {
             let res : (Int,String) = (0,"" )
             let (noOfUsersTyping, users) = usersArray.reduce(res) { (result, item: (String,String)) -> (Int,String) in
                 let (user, channel) = item
-                if user != UserDataService.instance.name && channel == self.selectedChannel.value?.id  {
+                if user != UserDataService.instance.name && channel == self.selectedChannel.value?.channelId {
                     return result.0 == 0 ? (1, user) : (result.0 + 1, "\(result.1), \(user)")
                 } else {
                     return result
@@ -62,7 +62,6 @@ class MessageServiceClient: MessageService {
         }
         
     }
-    
     
     func clearChannels() {
         channels.value.removeAll()
@@ -97,7 +96,7 @@ extension MessageServiceClient {
                 return
             }
             
-            if response.result.error == nil && (200..<300).contains(resultCode)   {
+            if response.result.error == nil && (200..<300).contains(resultCode) {
                 
                 //SwiftyJSON
                 guard let data = response.data else {
@@ -127,7 +126,6 @@ extension MessageServiceClient {
         channelArray.forEach { channels.value.append(Channel.buildChannel(from: $0)) }
     }
     
-    
     // MARK: - Messages related
     func findAllMessages(forChannelId channelId: String, completion: @escaping CompletionHandler) {
         guard let header = getHeaders() else {
@@ -143,7 +141,7 @@ extension MessageServiceClient {
                 return
             }
             
-            if response.result.error == nil && (200..<300).contains(resultCode)   {
+            if response.result.error == nil && (200..<300).contains(resultCode) {
                 
                 //SwiftyJSON
                 guard let data = response.data else {
@@ -193,19 +191,18 @@ extension MessageServiceClient {
     /// - parameter channelDescription: The description of the channel
     /// - parameter completion: a handler returning the status of the channel creation
     func addChannel(channelName: String, channelDescription: String, completion: @escaping CompletionHandler) {
-        SocketService.instance.addChannel(channelName: channelName, channelDescription: channelDescription) { (success, error) in
+        SocketService.instance.addChannel(channelName: channelName, channelDescription: channelDescription) { (_, _) in
             completion(true, nil)
         }
         
     }
-    
     
     // MARK: - Messages related
     // MARK: - Channel related
     /// Listener for realtime message creation
     func getMessages() {
         
-        guard let channelId = selectedChannel.value?.id else {
+        guard let channelId = selectedChannel.value?.channelId else {
             return
         }
         
@@ -233,7 +230,13 @@ extension MessageServiceClient {
         let userName = UserDataService.instance.name
         let userAvatar = UserDataService.instance.avatarName
         let userAvatarColor = UserDataService.instance.avatarColor
-        SocketService.instance.postMessage(messageBody: messageBody, userId: userId, channelId: channelId, userName: userName, userAvatar: userAvatar, userAvatarColor: userAvatarColor) { (success, err) in
+        SocketService.instance.postMessage(
+        messageBody: messageBody,
+        userId: userId,
+        channelId: channelId,
+        userName: userName,
+        userAvatar: userAvatar,
+        userAvatarColor: userAvatarColor) { (success, err) in
             completion(success, err)
         }
     }
@@ -249,7 +252,7 @@ extension MessageServiceClient {
     /// Sets if the user is typing or finished typing
     func setUserTyping(typing: Bool) {
         let userName = UserDataService.instance.name
-        guard let channelId = selectedChannel.value?.id else { return }
+        guard let channelId = selectedChannel.value?.channelId else { return }
         SocketService.instance.setUserTyping(userName: userName, typing: typing, channelId: channelId) { (_, _) in
         }
     }
