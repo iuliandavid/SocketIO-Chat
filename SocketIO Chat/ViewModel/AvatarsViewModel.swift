@@ -29,9 +29,9 @@ class AvatarsViewModel {
     public private(set) var avatars: [String] = []
     
     init() {
-        for i in 0...27 {
-            darkAvatars.append("\(AvatarType.dark.rawValue)\(i)")
-            lightAvatars.append("\(AvatarType.light.rawValue)\(i)")
+        for iter in 0...27 {
+            darkAvatars.append("\(AvatarType.dark.rawValue)\(iter)")
+            lightAvatars.append("\(AvatarType.light.rawValue)\(iter)")
         }
         avatars = darkAvatars
     }

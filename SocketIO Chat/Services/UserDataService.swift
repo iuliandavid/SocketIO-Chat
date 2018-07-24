@@ -70,16 +70,16 @@ class UserDataService {
         let comma = CharacterSet(charactersIn: ",")
         scaner.charactersToBeSkipped = skipped
         
-        var r, g, b, a : NSString?
+        var red, green, blue, alpha : NSString?
         
-        scaner.scanUpToCharacters(from: comma, into: &r)
-        scaner.scanUpToCharacters(from: comma, into: &g)
-        scaner.scanUpToCharacters(from: comma, into: &b)
-        scaner.scanUpToCharacters(from: comma, into: &a)
+        scaner.scanUpToCharacters(from: comma, into: &red)
+        scaner.scanUpToCharacters(from: comma, into: &green)
+        scaner.scanUpToCharacters(from: comma, into: &blue)
+        scaner.scanUpToCharacters(from: comma, into: &alpha)
         
         let defaultColor = UIColor.lightGray
-        guard let rUnwrapped = r, let gUnwrapped = g,
-            let bUnwrapped = b, let aUnwrapped = a
+        guard let rUnwrapped = red, let gUnwrapped = green,
+            let bUnwrapped = blue, let aUnwrapped = alpha
             else {
                 return defaultColor
         }
